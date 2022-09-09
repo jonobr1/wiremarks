@@ -1,0 +1,50 @@
+{
+  "name": "wiremarks",
+  "version": "1.0.0",
+  "description": "Generate animated SVG wireframes from text remarks",
+  "main": "src/index.js",
+  "types": "types.d.ts",
+  "scripts": {
+    "less": "less-watch-compiler src public main.less --source-map",
+    "serve": "esbuild --bundle src/index.js --sourcemap --loader:.js=jsx --external:./images/* --outfile=public/main.js --servedir=public --serve=8080",
+    "dev": "concurrently --kill-others \"npm run less\" \"npm run serve\"",
+    "build": "node ./utils/build",
+    "deploy": "./deploy.sh",
+    "lint": "eslint . --fix",
+    "types": "tsc --outFile types.d.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonobr1/wiremarks.git"
+  },
+  "keywords": [
+    "wireframe",
+    "markdown",
+    "text",
+    "visualization",
+    "two.js",
+    "flow",
+    "diagram",
+    "tool"
+  ],
+  "author": "@jonobr1",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonobr1/wiremarks/issues"
+  },
+  "devDependencies": {
+    "concurrently": "^6.4.0",
+    "esbuild": "^0.14.3",
+    "eslint": "^8.18.0",
+    "less": "^4.1.2",
+    "less-watch-compiler": "^1.16.3",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "@tweenjs/tween.js": "^18.6.4",
+    "gsap": "^3.11.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "two.js": "^0.8.10"
+  }
+}
