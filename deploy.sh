@@ -16,6 +16,6 @@ git init
 git add -A
 git commit -m 'deploy'
 
-git push -f git@github.com:jonobr1/wireframes.git master:gh-pages
+git push -f git@github.com:jonobr1/wiremarks.git master:gh-pages
 
 cd -
