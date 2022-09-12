@@ -15,9 +15,20 @@ class Connection extends Two.Path {
 
   name = 'connection';
 
-  constructor(producer, consumer, name) {
+  constructor(source, target, name) {
 
-    super([producer.position, consumer.position]);
+    const points = [
+      new Two.Anchor(),
+      new Two.Anchor(),
+      new Two.Anchor(),
+      new Two.Anchor()
+    ];
+
+    super(points);
+
+    this.update = update;
+    this.source = source;
+    this.target = target;
 
     this.curved = true;
     this.linewidth = 3;
@@ -28,15 +39,35 @@ class Connection extends Two.Path {
       this.name = name;
     }
 
+    source.position.bind(Two.Events.change, update);
+    target.position.bind(Two.Events.change, update);
+    requestAnimationFrame(update);
+
+    function update() {
+      points[0].copy(source.position);
+      points[1].copy(source.position);
+      points[1].x += source.width * 0.5;
+      points[2].copy(target.position);
+      points[2].x -= target.width * 0.5;
+      points[3].copy(target.position);
+    }
+
+  }
+
+  dispose() {
+    const { source, target, update } = this;
+    source.position.unbind(Two.Events.change, update);
+    target.position.unbind(Two.Events.change, update);
+    return this;
   }
 
 }
 
 class Entity extends Two.Group {
 
-  outputs = [];
+  connections = [];
 
-  constructor(name, shapeType) {
+  constructor(name) {
 
     super();
 
@@ -44,10 +75,17 @@ class Entity extends Two.Group {
     const text = new Two.Text(name, 0, 0, textStyles);
 
     shape.noStroke();
+
+    const alpha = 0.66;
     const r = Math.random() * 255;
     const g = Math.random() * 255;
     const b = Math.random() * 255;
-    shape.fill = `rgb(${dilute(r, 0.66)}, ${dilute(g, 0.66)}, ${dilute(b, 0.66)})`;
+
+    const dr = dilute(r, alpha);
+    const dg = dilute(g, alpha);
+    const db = dilute(b, alpha);
+
+    shape.fill = `rgb(${dr}, ${dg}, ${db})`;
     shape.stroke = `rgb(${r}, ${g}, ${b})`;
     shape.linewidth = 3;
 
@@ -89,9 +127,9 @@ class Entity extends Two.Group {
 
     if (target) {
       let isConnected = false;
-      for (let i = 0; i < this.outputs.length; i++) {
-        const c = this.outputs[i];
-        if (c.id === target.id) {
+      for (let i = 0; i < this.connections.length; i++) {
+        const c = this.connections[i];
+        if (c.target.id === target.id) {
           isConnected = true;
           break;
         }
@@ -100,7 +138,7 @@ class Entity extends Two.Group {
         const connection = new Connection(this, target, means);
         const { connections } = this.parent;
         connections.add(connection);
-        this.outputs.push(target);
+        this.connections.push(connection);
       }
     } else {
       console.warn('Entity: no target found.');
@@ -112,11 +150,19 @@ class Entity extends Two.Group {
 
   remove() {
     super.remove.apply(this, arguments);
+    for (let i = 0; i < this.connections.length; i++) {
+      const c = this.connections[i];
+      c.remove().dispose();
+    }
     const index = Entity.getInstanceIndex(this);
     if (index >= 0) {
       Entity.Instances.splice(index, 1);
     }
     return this;
+  }
+
+  dispose() {
+
   }
 
   get width() {
@@ -198,6 +244,7 @@ class Wiremark extends Two.Group {
 
     }
 
+    let isDeleting = false;
     let k = 0;
     while (k < this.children.length) {
       const child = this.children[k];
@@ -205,17 +252,32 @@ class Wiremark extends Two.Group {
       if (name in state) {
         child.visible = true;
         child.position.x = k * (child.width + 50);
-        child.position.y = (k % 2) * child.height - child.height / 2 + 300;
+        child.position.y = 2 * (k % 2) * child.height + child.height;
         k++;
         continue;
       } else if (!child.name.includes('connection')) {
-        child.remove();
+        child.remove().dispose();
+        delete entities[name];
+        isDeleting = true;
       } else {
         k++;
       }
     }
 
+    if (isDeleting) {
+      for (let i = 0; i < this.connections.children.length; i++) {
+        const c = this.connections.children[i];
+        if (!c.source.parent || !c.target.parent) {
+          c.remove().dispose();
+        }
+      }
+    }
+
     return this;
+
+  }
+
+  dispose() {
 
   }
 
@@ -243,6 +305,7 @@ function Component(props) {
   function mount() {
 
     const two = new Two({
+      type: Two.Types.canvas,
       autostart: true
     }).appendTo(domElement.current);
 
@@ -265,7 +328,7 @@ function Component(props) {
           domElement.removeEventListener(name, handler, false);
         }
       }
-      wiremark.remove();
+      wiremark.remove().dispose();
     }
 
     function addZUI(stage) {
