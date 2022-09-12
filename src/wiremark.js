@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Two from 'two.js';
 import { ZUI } from 'two.js/extras/jsm/zui.js';
+import { dilute } from './utils/color.js';
 
 const emptyMatch = ['', ''];
 const textStyles = {
@@ -10,33 +11,119 @@ const textStyles = {
   fill: 'white'
 };
 
+class Connection extends Two.Path {
+
+  name = 'connection';
+
+  constructor(producer, consumer, name) {
+
+    super([producer.position, consumer.position]);
+
+    this.curved = true;
+    this.linewidth = 3;
+    this.noFill();
+    this.stroke = 'black';
+
+    if (typeof name === 'string' && name.length > 0) {
+      this.name = name;
+    }
+
+  }
+
+}
+
 class Entity extends Two.Group {
 
-  constructor(name) {
+  outputs = [];
+
+  constructor(name, shapeType) {
 
     super();
 
-    const rect = new Two.RoundedRectangle(0, 0, 350, 200, 8);
+    const shape = new Two.RoundedRectangle(0, 0, 300, 200, 8);
     const text = new Two.Text(name, 0, 0, textStyles);
 
-    rect.noStroke();
+    shape.noStroke();
     const r = Math.random() * 255;
     const g = Math.random() * 255;
     const b = Math.random() * 255;
-    rect.fill = `rgba(${r}, ${g}, ${b}, 0.66)`;
-    rect.stroke = `rgb(${r}, ${g}, ${b})`;
-    rect.linewidth = 3;
+    shape.fill = `rgb(${dilute(r, 0.66)}, ${dilute(g, 0.66)}, ${dilute(b, 0.66)})`;
+    shape.stroke = `rgb(${r}, ${g}, ${b})`;
+    shape.linewidth = 3;
 
-    if ((r + g + b) / 3 >= 255 * 0.5) {
+    if ((r + g + b) / 3 >= 255 * 0.4) {
       text.fill = 'black';
     }
 
-    this.add(rect, text);
+    this.add(shape, text);
 
+    Entity.Instances.push(this);
+
+  }
+
+  static Instances = [];
+
+  static getEntityByName(name) {
+    for (let i = 0; i < Entity.Instances.length; i++) {
+      const entity = Entity.Instances[i];
+      if (entity.name === name) {
+        return entity;
+      }
+    }
+    return null;
+  }
+
+  static getInstanceIndex(entity) {
+    for (let i = 0; i < Entity.Instances.length; i++) {
+      const e = Entity.Instances[i];
+      if (e.id === entity.id) {
+        return i;
+      }
+    }
+    return - 1;
+  }
+
+  connect(name, means) {
+
+    const target = Entity.getEntityByName(name);
+
+    if (target) {
+      let isConnected = false;
+      for (let i = 0; i < this.outputs.length; i++) {
+        const c = this.outputs[i];
+        if (c.id === target.id) {
+          isConnected = true;
+          break;
+        }
+      }
+      if (!isConnected) {
+        const connection = new Connection(this, target, means);
+        const { connections } = this.parent;
+        connections.add(connection);
+        this.outputs.push(target);
+      }
+    } else {
+      console.warn('Entity: no target found.');
+    };
+
+    return this;
+
+  }
+
+  remove() {
+    super.remove.apply(this, arguments);
+    const index = Entity.getInstanceIndex(this);
+    if (index >= 0) {
+      Entity.Instances.splice(index, 1);
+    }
+    return this;
   }
 
   get width() {
     return this.children[0].width;
+  }
+  get height() {
+    return this.children[0].height;
   }
   get name() {
     return this.children[1].value;
@@ -54,6 +141,10 @@ class Wiremark extends Two.Group {
     super();
 
     this.instructions = instructions;
+    this.connections = new Two.Group();
+    this.connections.name = 'connections';
+
+    this.add(this.connections);
 
   }
 
@@ -82,6 +173,10 @@ class Wiremark extends Two.Group {
       const currency = (line.match(/\[([^\]]+)\]/) || emptyMatch)[1].trim();
       const consumer = (line.match(/\-\>(.+)$/) || emptyMatch)[1].trim();
 
+      const producerExists = producer.length > 0;
+      const currencyExists = currency.length > 0;
+      const consumerExists = consumer.length > 0;
+
       if (!(producer in entities)) {
         const entity = entities[producer] = new Entity(producer);
         entity.visible = false;
@@ -93,9 +188,13 @@ class Wiremark extends Two.Group {
         this.add(entity);
       }
 
-      if (producer.length > 0) state[producer] = true;
-      if (currency.length > 0) state[currency] = true;
-      if (consumer.length > 0) state[consumer] = true;
+      if (producerExists && consumerExists) {
+        entities[producer].connect(consumer, currency);
+      }
+
+      if (producerExists) state[producer] = true;
+      if (currencyExists) state[currency] = true;
+      if (consumerExists) state[consumer] = true;
 
     }
 
@@ -106,10 +205,14 @@ class Wiremark extends Two.Group {
       if (name in state) {
         child.visible = true;
         child.position.x = k * (child.width + 50);
+        child.position.y = (k % 2) * child.height - child.height / 2 + 300;
         k++;
         continue;
+      } else if (!child.name.includes('connection')) {
+        child.remove();
+      } else {
+        k++;
       }
-      child.remove();
     }
 
     return this;
@@ -334,4 +437,4 @@ function Component(props) {
 
 }
 
-export { Wiremark, Component }
+export { Entity, Wiremark, Component, Connection }
