@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/wiremarks.js"],
+  "sourcesContent": ["class Wiremarks {\n\n  _instructions = null;\n\n  constructor(instructions) {\n\n    this.instructions = instructions;\n\n  }\n\n  get instructions() {\n    return this._instructions;\n  }\n  set instructions(instructions) {\n    this._instructions = instructions;\n  }\n\n}\n\nexport { Wiremarks }"],
+  "mappings": "AAAA,MAAM,UAAU;AAAA,EAEd,gBAAgB;AAAA,EAEhB,YAAY,cAAc;AAExB,SAAK,eAAe;AAAA,EAEtB;AAAA,EAEA,IAAI,eAAe;AACjB,WAAO,KAAK;AAAA,EACd;AAAA,EACA,IAAI,aAAa,cAAc;AAC7B,SAAK,gBAAgB;AAAA,EACvB;AAEF;AAEA,SAAS;",
+  "names": []
+}
