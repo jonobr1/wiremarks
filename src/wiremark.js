@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Two from 'two.js';
 import { ZUI } from 'two.js/extras/jsm/zui.js';
-import { dilute } from './utils/color.js';
+import { dilute, stringToColor } from './utils/color.js';
 
 const emptyMatch = ['', ''];
 const textStyles = {
@@ -13,7 +13,7 @@ const textStyles = {
 
 class Connection extends Two.Path {
 
-  name = 'connection';
+  _name = 'connection';
 
   constructor(source, target, name) {
 
@@ -59,6 +59,14 @@ class Connection extends Two.Path {
     source.position.unbind(Two.Events.change, update);
     target.position.unbind(Two.Events.change, update);
     return this;
+  }
+
+  get name() {
+    return this._name;
+  }
+  set name(name) {
+    this._name = name;
+    this.stroke = stringToColor(name);
   }
 
 }
@@ -236,6 +244,14 @@ class Wiremark extends Two.Group {
 
       if (producerExists && consumerExists) {
         entities[producer].connect(consumer, currency);
+      }
+      if (currencyExists) {
+        for (let j = 0; j < entities[producer].connections.length; j++) {
+          const c = entities[producer].connections[j];
+          if (c.target.name === consumer) {
+            c.name = currency;
+          }
+        }
       }
 
       if (producerExists) state[producer] = true;
