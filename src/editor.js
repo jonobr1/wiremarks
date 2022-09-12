@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Component as Wiremark } from './wiremark.js';
+import { Component as Wiremark } from './component.js';
 
 export default function Editor(props) {
 
