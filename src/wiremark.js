@@ -7,8 +7,8 @@ const unit = 200;
 const emptyMatch = ['', ''];
 const textStyles = {
   family: '"Inter", sans-serif',
-  size: unit * 0.085,
-  leading: unit * 0.1,
+  size: unit * 0.1,
+  leading: unit * 0.12,
   fill: 'white'
 };
 
@@ -32,9 +32,12 @@ class Connection extends Two.Path {
     this.target = target;
 
     this.curved = true;
-    this.linewidth = 3;
+    this.linewidth = unit * 0.015;
     this.noFill();
     this.stroke = 'black';
+    this.dashes = [this.linewidth * 2, this.linewidth * 3];
+    this.join = 'round';
+    this.cap = 'round';
 
     if (typeof name === 'string' && name.length > 0) {
       this.name = name;
@@ -96,7 +99,7 @@ class Entity extends Two.Group {
 
     shape.fill = `rgb(${dr}, ${dg}, ${db})`;
     shape.stroke = `rgb(${r}, ${g}, ${b})`;
-    shape.linewidth = 3;
+    shape.linewidth = unit * 0.015;
 
     if ((r + g + b) / 3 >= 255 * 0.4) {
       text.fill = 'black';
@@ -294,6 +297,17 @@ class Wiremark extends Two.Group {
 
   }
 
+  update(timeDelta) {
+
+    for (let i = 0; i < this.connections.children.length; i++) {
+      let child = this.connections.children[i];
+      child.dashes.offset -= timeDelta / 10;
+    }
+
+    return this;
+
+  }
+
   dispose() {
 
   }
@@ -336,7 +350,13 @@ function Component(props) {
     refs.current.zui = zui;
     refs.current.wiremark = wiremark;
 
+    two.bind('update', update);
+
     return unmount;
+
+    function update(frameCount, timeDelta) {
+      wiremark.update(timeDelta);
+    }
 
     function unmount() {
       for (let i = 0; i < events.length; i++) {
@@ -347,6 +367,7 @@ function Component(props) {
         }
       }
       wiremark.remove().dispose();
+      two.pause();
     }
 
     function addZUI(stage) {
