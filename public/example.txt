@@ -1,0 +1,20 @@
+Customer -[money]-> Airbnb
+Airbnb -[money]-> Host
+Host -[house]-> Airbnb
+Airbnb -[house]-> Customer
+
+Rider -[money]-> Uber
+Uber -[money]-> Driver
+Driver -[ride]-> Uber
+Uber -[ride]-> Rider
+
+Collector -[money]-> OpenSea
+OpenSea -[money]-> Creator
+Creator -[artwork]-> OpenSea
+OpenSea -[artwork]-> Collector
+OpenSea -[money]-> Collector
+
+Maintainer -[money]-> Github
+Maintainer -[code]-> Github
+Github -[code]-> Developer
+Developer -[feedback]-> Maintainer
