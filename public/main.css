@@ -29,6 +29,10 @@ div#react div.editor div.stage .grabbing svg,
 div#react div.editor div.stage .grabbing canvas {
   cursor: grabbing;
 }
+div#react div.editor div.stage .dragging svg,
+div#react div.editor div.stage .dragging canvas {
+  cursor: move;
+}
 div#react div.editor div.ui {
   position: absolute;
   top: 0;

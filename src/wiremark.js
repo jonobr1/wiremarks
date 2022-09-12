@@ -15,6 +15,7 @@ const textStyles = {
 class Connection extends Two.Path {
 
   _name = 'connection';
+  offset = new Two.Vector();
 
   constructor(source, target, name) {
 
@@ -27,6 +28,7 @@ class Connection extends Two.Path {
 
     super(points);
 
+    const scope = this;
     this.update = update;
     this.source = source;
     this.target = target;
@@ -43,13 +45,15 @@ class Connection extends Two.Path {
       this.name = name;
     }
 
-    source.position.bind(Two.Events.change, update);
-    target.position.bind(Two.Events.change, update);
+    this.offset.bind('change', update);
+    source.position.bind('change', update);
+    target.position.bind('change', update);
+
     requestAnimationFrame(update);
 
     function update() {
-      points[0].copy(source.position);
-      points[1].copy(source.position);
+      points[0].copy(source.position).add(scope.offset);
+      points[1].copy(source.position).add(scope.offset);
       points[1].x += source.width * 0.5;
       points[2].copy(target.position);
       points[2].x -= target.width * 0.5;
@@ -60,8 +64,8 @@ class Connection extends Two.Path {
 
   dispose() {
     const { source, target, update } = this;
-    source.position.unbind(Two.Events.change, update);
-    target.position.unbind(Two.Events.change, update);
+    source.position.unbind('change', update);
+    target.position.unbind('change', update);
     return this;
   }
 
@@ -137,11 +141,15 @@ class Entity extends Two.Group {
 
     const target = Entity.getEntityByName(name);
 
+    if (!means) {
+      means = 'connection';
+    }
+
     if (target) {
       let isConnected = false;
       for (let i = 0; i < this.connections.length; i++) {
         const c = this.connections[i];
-        if (c.target.id === target.id) {
+        if (c.target.id === target.id && means === c.name) {
           isConnected = true;
           break;
         }
@@ -151,6 +159,12 @@ class Entity extends Two.Group {
         const { connections } = this.parent;
         connections.add(connection);
         this.connections.push(connection);
+        for (let i = 0; i < this.connections.length; i++) {
+          const c = this.connections[i];
+          const pct = (i + 0.5) / this.connections.length;
+          const y = pct * this.height - this.height * 0.5;
+          c.offset.y = y;
+        }
       }
     } else {
       console.warn('Entity: no target found.');
@@ -248,14 +262,6 @@ class Wiremark extends Two.Group {
 
       if (producerExists && consumerExists) {
         entities[producer].connect(consumer, currency);
-      }
-      if (currencyExists) {
-        for (let j = 0; j < entities[producer].connections.length; j++) {
-          const c = entities[producer].connections[j];
-          if (c.target.name === consumer) {
-            c.name = currency;
-          }
-        }
       }
 
       if (producerExists) state[producer] = true;
@@ -376,6 +382,7 @@ function Component(props) {
       const zui = new ZUI(stage);
       const mouse = new Two.Vector();
       let touches = {};
+      let moving = null;
       let distance = 0;
   
       zui.addLimits(0.06, 8);
@@ -424,6 +431,16 @@ function Component(props) {
         setGrabbing('grabbing');
         mouse.x = e.clientX;
         mouse.y = e.clientY;
+        for (let name in wiremark.entities) {
+          const child = wiremark.entities[name];
+          const rect = child.getBoundingClientRect();
+          if (mouse.x > rect.left && mouse.x < rect.right
+            && mouse.y > rect.top && mouse.y < rect.bottom) {
+              moving = child;
+              setGrabbing('dragging');
+              break;
+          }
+        }
         window.addEventListener('mousemove', mousemove, false);
         window.addEventListener('mouseup', mouseup, false);
       }
@@ -431,12 +448,18 @@ function Component(props) {
       function mousemove(e) {
         var dx = e.clientX - mouse.x;
         var dy = e.clientY - mouse.y;
-        zui.translateSurface(dx, dy);
+        if (moving) {
+          moving.position.x += dx / zui.scale;
+          moving.position.y += dy / zui.scale;
+        } else {
+          zui.translateSurface(dx, dy);
+        }
         mouse.set(e.clientX, e.clientY);
       }
   
       function mouseup(e) {
         setGrabbing('');
+        moving = null;
         window.removeEventListener('mousemove', mousemove, false);
         window.removeEventListener('mouseup', mouseup, false);
       }
@@ -470,6 +493,7 @@ function Component(props) {
   
       function touchend(e) {
         setGrabbing('');
+        moving = null;
         touches = {};
         var touch = e.touches[ 0 ];
         if (touch) {  // Pass through for panning after pinching
@@ -482,6 +506,16 @@ function Component(props) {
         var touch = e.touches[ 0 ];
         mouse.x = touch.clientX;
         mouse.y = touch.clientY;
+        for (let name in wiremark.entities) {
+          const child = wiremark.entities[name];
+          const rect = child.getBoundingClientRect();
+          if (mouse.x > rect.left && mouse.x < rect.right
+            && mouse.y > rect.top && mouse.y < rect.bottom) {
+              moving = child;
+              setGrabbing('dragging');
+              break;
+          }
+        }
         setGrabbing('grabbing');
       }
   
@@ -489,7 +523,12 @@ function Component(props) {
         var touch = e.touches[ 0 ];
         var dx = touch.clientX - mouse.x;
         var dy = touch.clientY - mouse.y;
-        zui.translateSurface(dx, dy);
+        if (moving) {
+          moving.position.x += dx / zui.scale;
+          moving.position.y += dy / zui.scale;
+        } else {
+          zui.translateSurface(dx, dy);
+        }
         mouse.set(touch.clientX, touch.clientY);
       }
   

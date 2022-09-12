@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Component as Wiremark } from './wiremark.js';
 
 export default function Editor(props) {
@@ -9,6 +9,23 @@ export default function Editor(props) {
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(setup, []);
+
+  function setup() {
+    resize();
+    window.addEventListener('resize', resize, false);
+    return unmount;
+  }
+
+  function resize() {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  }
+
+  function unmount() {
+    window.removeEventListener('resize', resize, false);
+  }
 
   function update(e) {
     const value = e.target.value;
