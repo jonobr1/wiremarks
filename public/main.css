@@ -21,6 +21,14 @@ div#react div.editor div.stage {
   width: 100%;
   height: 100%;
 }
+div#react div.editor div.stage svg,
+div#react div.editor div.stage canvas {
+  cursor: grab;
+}
+div#react div.editor div.stage .grabbing svg,
+div#react div.editor div.stage .grabbing canvas {
+  cursor: grabbing;
+}
 div#react div.editor div.ui {
   position: absolute;
   top: 0;

@@ -1,13 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Two from 'two.js';
 import { ZUI } from 'two.js/extras/jsm/zui.js';
 import { dilute, stringToColor } from './utils/color.js';
 
+const unit = 200;
 const emptyMatch = ['', ''];
 const textStyles = {
-  family: 'Inter, sans-serif',
-  size: 17,
-  leading: 20,
+  family: '"Inter", sans-serif',
+  size: unit * 0.085,
+  leading: unit * 0.1,
   fill: 'white'
 };
 
@@ -79,7 +80,7 @@ class Entity extends Two.Group {
 
     super();
 
-    const shape = new Two.RoundedRectangle(0, 0, 300, 200, 8);
+    const shape = new Two.RoundedRectangle(0, 0, unit * 1.5, unit, 8);
     const text = new Two.Text(name, 0, 0, textStyles);
 
     shape.noStroke();
@@ -267,7 +268,7 @@ class Wiremark extends Two.Group {
       const name = child.name;
       if (name in state) {
         child.visible = true;
-        child.position.x = k * (child.width + 50);
+        child.position.x = k * (child.width + unit * 0.25);
         child.position.y = 2 * (k % 2) * child.height + child.height;
         k++;
         continue;
@@ -313,6 +314,7 @@ function Component(props) {
 
   const refs = useRef({});
   const domElement = useRef();
+  const [grabbing, setGrabbing] = useState('');
 
   useEffect(mount, []);
   useEffect(update, [props.instructions]);
@@ -398,6 +400,7 @@ function Component(props) {
       };
 
       function mousedown(e) {
+        setGrabbing('grabbing');
         mouse.x = e.clientX;
         mouse.y = e.clientY;
         window.addEventListener('mousemove', mousemove, false);
@@ -412,6 +415,7 @@ function Component(props) {
       }
   
       function mouseup(e) {
+        setGrabbing('');
         window.removeEventListener('mousemove', mousemove, false);
         window.removeEventListener('mouseup', mouseup, false);
       }
@@ -444,6 +448,7 @@ function Component(props) {
       }
   
       function touchend(e) {
+        setGrabbing('');
         touches = {};
         var touch = e.touches[ 0 ];
         if (touch) {  // Pass through for panning after pinching
@@ -456,6 +461,7 @@ function Component(props) {
         var touch = e.touches[ 0 ];
         mouse.x = touch.clientX;
         mouse.y = touch.clientY;
+        setGrabbing('grabbing');
       }
   
       function panmove(e) {
@@ -512,7 +518,9 @@ function Component(props) {
     two.renderer.setSize(props.width, props.height);
   }
 
-  return <div ref={ domElement } className="wireframe" />;
+  return (
+    <div ref={ domElement } className={ ['wireframe', grabbing].join(' ') } />
+  );
 
 }
 
