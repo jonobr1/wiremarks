@@ -1,14 +1,7 @@
 import Two from 'two.js';
 import { Connection } from './connection.js';
 import { dilute } from './utils/color.js';
-import { unit } from './constants.js';
-
-const textStyles = {
-  family: '"Inter", sans-serif',
-  size: unit * 0.1,
-  leading: unit * 0.12,
-  fill: 'white'
-};
+import { unit, textStyles } from './constants.js';
 
 export class Entity extends Two.Group {
 
