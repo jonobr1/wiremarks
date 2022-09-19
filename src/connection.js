@@ -1,6 +1,6 @@
 import Two from 'two.js';
 import { stringToColor } from './utils/color.js';
-import { unit } from './constants.js';
+import { unit, dashes } from './constants.js';
 
 export class Connection extends Two.Path {
 
@@ -27,7 +27,7 @@ export class Connection extends Two.Path {
     this.linewidth = unit * 0.015;
     this.noFill();
     this.stroke = 'black';
-    this.dashes = [this.linewidth * 2, this.linewidth * 3];
+    this.dashes = dashes;
     this.join = 'round';
     this.cap = 'round';
 

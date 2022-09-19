@@ -1,6 +1,6 @@
 import Two from 'two.js';
 import { Entity } from './entity.js';
-import { unit } from './constants.js';
+import { unit, dashes } from './constants.js';
 
 const emptyMatch = ['', ''];
 
@@ -106,10 +106,7 @@ export class Wiremark extends Two.Group {
 
   update(timeDelta) {
 
-    for (let i = 0; i < this.connections.children.length; i++) {
-      let child = this.connections.children[i];
-      child.dashes.offset -= timeDelta / 10;
-    }
+    dashes.offset -= timeDelta / 10;
 
     return this;
 
