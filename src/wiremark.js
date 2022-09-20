@@ -7,17 +7,22 @@ const emptyMatch = ['', ''];
 export class Wiremark extends Two.Group {
 
   _instructions = null;
-  entities = {};
 
   constructor(instructions) {
 
     super();
 
+    this.isWiremark = true;
     this.instructions = instructions;
+
     this.connections = new Two.Group();
     this.connections.name = 'connections';
 
-    this.add(this.connections);
+    this.entities = new Two.Group();
+    this.entities.name = 'entities';
+    this.entities.registry = {};
+
+    this.add(this.connections, this.entities);
 
   }
 
@@ -34,7 +39,7 @@ export class Wiremark extends Two.Group {
       return;
     }
 
-    const state = {};
+    const state = { entities: [], connections: {} };
     const lines = instructions.split(/\n/i);
 
     for (let i = 0; i < lines.length; i++) {
@@ -50,53 +55,72 @@ export class Wiremark extends Two.Group {
       const currencyExists = currency.length > 0;
       const consumerExists = consumer.length > 0;
 
-      if (!(producer in entities)) {
-        const entity = entities[producer] = new Entity(producer);
-        entity.visible = false;
-        this.add(entity);
+      if (producerExists) {
+        if (state.entities.indexOf(producer) < 0) {
+          state.entities.push(producer);
+        }
       }
-      if (!(consumer in entities)) {
-        const entity = entities[consumer] = new Entity(consumer);
-        entity.visible = false;
-        this.add(entity);
+      if (consumerExists) {
+        if (state.entities.indexOf(consumer) < 0) {
+          state.entities.push(consumer);
+        }
       }
 
       if (producerExists && consumerExists) {
-        entities[producer].connect(consumer, currency);
-      }
-
-      if (producerExists) state[producer] = true;
-      if (currencyExists) state[currency] = true;
-      if (consumerExists) state[consumer] = true;
-
-    }
-
-    let isDeleting = false;
-    let k = 0;
-    while (k < this.children.length) {
-      const child = this.children[k];
-      const name = child.name;
-      if (name in state) {
-        child.visible = true;
-        child.position.x = k * (child.width + unit * 0.25);
-        child.position.y = 2 * (k % 2) * child.height + child.height;
-        k++;
-        continue;
-      } else if (!child.name.includes('connection')) {
-        child.remove().dispose();
-        delete entities[name];
-        isDeleting = true;
-      } else {
-        k++;
-      }
-    }
-
-    if (isDeleting) {
-      for (let i = 0; i < this.connections.children.length; i++) {
-        const c = this.connections.children[i];
-        if (!c.source.parent || !c.target.parent) {
-          c.remove().dispose();
+        if (!(producer in state.connections)) {
+          state.connections[producer] = [];
         }
+        state.connections[producer].push({
+          name: currencyExists ? currency : 'connection',
+          target: consumer
+        });
+      }
+
+    }
+
+    const length = Math.max(entities.children.length,
+      state.entities.length);
+
+    for (let i = 0; i < length; i++) {
+
+      const name = state.entities[i];
+      let entity = entities.children[i];
+
+      if (entity) {
+        if (state.entities.indexOf(entity.name) < 0) {
+          if (typeof name === 'undefined') {
+            // Too many entities, delete the extras!
+            delete entities.registry[entity.name];
+            entity.remove().dispose();
+            entity = null;
+          } else {
+            entity.name = name;
+            entities.registry[name] = entity;
+          }
+        }
+      } else if (typeof name !== 'undefined') {
+        entity = new Entity(name);
+        entity.position.x = i * entity.width + unit * 0.25;
+        entity.position.y = 2 * (i % 2) * entity.height + entity.height;
+        entities.add(entity);
+        entities.registry[name] = entity;
+      }
+
+    }
+
+    for (let i = 0; i < entities.children.length; i++) {
+
+      const entity = entities.children[i];
+      const connections = state.connections[entity.name];
+
+      entity.reset();
+
+      if (typeof connections !== 'undefined' && connections.length > 0) {
+        for (let j = 0; j < connections.length; j++) {
+          const { name, target } = connections[j];
+          entity.connect(target, name);
+        }
+
       }
     }
 

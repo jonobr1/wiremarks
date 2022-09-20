@@ -61,6 +61,13 @@ export class Entity extends Two.Group {
     return - 1;
   }
 
+  static getRoot(item) {
+    while (item.parent && !item.isWiremark) {
+      item = item.parent;
+    }
+    return item;
+  }
+
   connect(name, means) {
 
     const target = Entity.getEntityByName(name);
@@ -80,7 +87,7 @@ export class Entity extends Two.Group {
       }
       if (!isConnected) {
         const connection = new Connection(this, target, means);
-        const { connections } = this.parent;
+        const { connections } = Entity.getRoot(this);
         connections.add(connection);
         this.connections.push(connection);
         for (let i = 0; i < this.connections.length; i++) {
@@ -93,6 +100,18 @@ export class Entity extends Two.Group {
     } else {
       console.warn('Entity: no target found.');
     };
+
+    return this;
+
+  }
+
+  reset() {
+
+    for (let i = 0; i < this.connections.length; i++) {
+      this.connections[i].remove().dispose();
+    }
+
+    this.connections.length = 0;
 
     return this;
 
@@ -123,6 +142,9 @@ export class Entity extends Two.Group {
   }
   get name() {
     return this.children[1].value;
+  }
+  set name(name) {
+    this.children[1].value = name;
   }
 
 }

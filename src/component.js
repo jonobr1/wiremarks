@@ -104,8 +104,9 @@ export function Component(props) {
         setGrabbing('grabbing');
         mouse.x = e.clientX;
         mouse.y = e.clientY;
-        for (let name in wiremark.entities) {
-          const child = wiremark.entities[name];
+        const { registry } = wiremark.entities;
+        for (let name in registry) {
+          const child = registry[name];
           const rect = child.getBoundingClientRect();
           if (mouse.x > rect.left && mouse.x < rect.right
             && mouse.y > rect.top && mouse.y < rect.bottom) {
@@ -179,8 +180,9 @@ export function Component(props) {
         var touch = e.touches[ 0 ];
         mouse.x = touch.clientX;
         mouse.y = touch.clientY;
-        for (let name in wiremark.entities) {
-          const child = wiremark.entities[name];
+        const { registry } = wiremark.entities;
+        for (let name in registry) {
+          const child = registry[name];
           const rect = child.getBoundingClientRect();
           if (mouse.x > rect.left && mouse.x < rect.right
             && mouse.y > rect.top && mouse.y < rect.bottom) {
