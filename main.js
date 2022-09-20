@@ -38266,13 +38266,16 @@
         let moving = null;
         let distance = 0;
         zui2.addLimits(0.06, 8);
-        domElement3.addEventListener("mousedown", mousedown, false);
-        domElement3.addEventListener("mousewheel", mousewheel, false);
-        domElement3.addEventListener("wheel", mousewheel, false);
-        domElement3.addEventListener("touchstart", touchstart, { passive: false });
-        domElement3.addEventListener("touchmove", touchmove, { passive: false });
-        domElement3.addEventListener("touchend", touchend, { passive: false });
-        domElement3.addEventListener("touchcancel", touchend, { passive: false });
+        if (window.navigator.maxTouchPoints <= 0) {
+          domElement3.addEventListener("mousedown", mousedown, false);
+          domElement3.addEventListener("mousewheel", mousewheel, false);
+          domElement3.addEventListener("wheel", mousewheel, false);
+        } else {
+          domElement3.addEventListener("touchstart", touchstart, { passive: false });
+          domElement3.addEventListener("touchmove", touchmove, { passive: false });
+          domElement3.addEventListener("touchend", touchend, { passive: false });
+          domElement3.addEventListener("touchcancel", touchend, { passive: false });
+        }
         return {
           zui: zui2,
           events: [

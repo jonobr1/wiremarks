@@ -17541,13 +17541,16 @@ function Component(props) {
       let moving = null;
       let distance = 0;
       zui2.addLimits(0.06, 8);
-      domElement2.addEventListener("mousedown", mousedown, false);
-      domElement2.addEventListener("mousewheel", mousewheel, false);
-      domElement2.addEventListener("wheel", mousewheel, false);
-      domElement2.addEventListener("touchstart", touchstart, { passive: false });
-      domElement2.addEventListener("touchmove", touchmove, { passive: false });
-      domElement2.addEventListener("touchend", touchend, { passive: false });
-      domElement2.addEventListener("touchcancel", touchend, { passive: false });
+      if (window.navigator.maxTouchPoints <= 0) {
+        domElement2.addEventListener("mousedown", mousedown, false);
+        domElement2.addEventListener("mousewheel", mousewheel, false);
+        domElement2.addEventListener("wheel", mousewheel, false);
+      } else {
+        domElement2.addEventListener("touchstart", touchstart, { passive: false });
+        domElement2.addEventListener("touchmove", touchmove, { passive: false });
+        domElement2.addEventListener("touchend", touchend, { passive: false });
+        domElement2.addEventListener("touchcancel", touchend, { passive: false });
+      }
       return {
         zui: zui2,
         events: [
