@@ -55,7 +55,7 @@ export default function Editor(props) {
           Open Instructions
         </div>
         <div className="panel">
-          <div className="close button" onClick={ close }>✖️</div>
+          <div className="close button" onClick={ close }>✕</div>
           <textarea onChange={ update } />
         </div>
       </div>
