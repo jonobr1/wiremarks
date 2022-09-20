@@ -82,7 +82,8 @@ div#react {
           outline: none;
           width: 100%;
           height: 100%;
-          margin: @line-height;
+          padding: @line-height;
+          box-sizing: border-box;
 
         }
         .close {
@@ -96,6 +97,7 @@ div#react {
       }
     }
     .button {
+      display: inline-block;
       cursor: pointer;
     }
 
