@@ -36,9 +36,19 @@ function stringToColor(str) {
 
 // src/constants.js
 var unit = 200;
+var dashes = [unit * 0.03, unit * 0.045];
+dashes.offset = 0;
+var textStyles = {
+  family: '"Inter", sans-serif',
+  size: unit * 0.1,
+  leading: unit * 0.12,
+  fill: "white"
+};
 
 // src/connection.js
-var Connection = class extends Two.Path {
+import { Path } from "two.js/src/path";
+var HALF_PI = Math.PI * 0.5;
+var Connection = class extends Two.Group {
   _name = "connection";
   offset = new Two.Vector();
   constructor(source, target, name) {
@@ -48,24 +58,30 @@ var Connection = class extends Two.Path {
       new Two.Anchor(),
       new Two.Anchor()
     ];
-    super(points);
+    super();
     const scope = this;
     this.update = update;
     this.source = source;
     this.target = target;
-    this.curved = true;
-    this.linewidth = unit * 0.015;
-    this.noFill();
-    this.stroke = "black";
-    this.dashes = [this.linewidth * 2, this.linewidth * 3];
-    this.join = "round";
-    this.cap = "round";
+    let label;
+    const path = this.path = new Path(points);
+    path.curved = true;
+    path.linewidth = unit * 0.015;
+    path.noFill();
+    path.stroke = "black";
+    path.dashes = dashes;
+    path.join = "round";
+    path.cap = "round";
     if (typeof name === "string" && name.length > 0) {
+      label = this.label = new Two.Text(name, 0, 0, textStyles);
+      label.size *= 0.75;
       this.name = name;
+      this.add(label);
     }
     this.offset.bind("change", update);
     source.position.bind("change", update);
     target.position.bind("change", update);
+    this.add(path);
     requestAnimationFrame(update);
     function update() {
       points[0].copy(source.position).add(scope.offset);
@@ -74,6 +90,16 @@ var Connection = class extends Two.Path {
       points[2].copy(target.position);
       points[2].x -= target.width * 0.5;
       points[3].copy(target.position);
+      if (label) {
+        const a = path.getPointAt(0.45);
+        const b = path.getPointAt(0.55);
+        const angle = Two.Vector.angleBetween(b, a);
+        const ox = label.size * Math.cos(angle - HALF_PI);
+        const oy = label.size * Math.sin(angle - HALF_PI);
+        label.position.x = 0.5 * (b.x - a.x) + a.x + ox;
+        label.position.y = 0.5 * (b.y - a.y) + a.y + oy;
+        label.rotation = angle;
+      }
     }
   }
   dispose() {
@@ -87,17 +113,12 @@ var Connection = class extends Two.Path {
   }
   set name(name) {
     this._name = name;
-    this.stroke = stringToColor(name);
+    const color = stringToColor(name);
+    this.label.fill = this.path.stroke = color;
   }
 };
 
 // src/entity.js
-var textStyles = {
-  family: '"Inter", sans-serif',
-  size: unit * 0.1,
-  leading: unit * 0.12,
-  fill: "white"
-};
 var _Entity = class extends Two2.Group {
   connections = [];
   constructor(name) {
@@ -139,6 +160,12 @@ var _Entity = class extends Two2.Group {
     }
     return -1;
   }
+  static getRoot(item) {
+    while (item.parent && !item.isWiremark) {
+      item = item.parent;
+    }
+    return item;
+  }
   connect(name, means) {
     const target = _Entity.getEntityByName(name);
     if (!means) {
@@ -155,7 +182,7 @@ var _Entity = class extends Two2.Group {
       }
       if (!isConnected) {
         const connection = new Connection(this, target, means);
-        const { connections } = this.parent;
+        const { connections } = _Entity.getRoot(this);
         connections.add(connection);
         this.connections.push(connection);
         for (let i = 0; i < this.connections.length; i++) {
@@ -169,6 +196,13 @@ var _Entity = class extends Two2.Group {
       console.warn("Entity: no target found.");
     }
     ;
+    return this;
+  }
+  reset() {
+    for (let i = 0; i < this.connections.length; i++) {
+      this.connections[i].remove().dispose();
+    }
+    this.connections.length = 0;
     return this;
   }
   remove() {
@@ -194,6 +228,9 @@ var _Entity = class extends Two2.Group {
   get name() {
     return this.children[1].value;
   }
+  set name(name) {
+    this.children[1].value = name;
+  }
 };
 var Entity = _Entity;
 __publicField(Entity, "Instances", []);
@@ -202,20 +239,23 @@ __publicField(Entity, "Instances", []);
 var emptyMatch = ["", ""];
 var Wiremark = class extends Two3.Group {
   _instructions = null;
-  entities = {};
   constructor(instructions) {
     super();
+    this.isWiremark = true;
     this.instructions = instructions;
     this.connections = new Two3.Group();
     this.connections.name = "connections";
-    this.add(this.connections);
+    this.entities = new Two3.Group();
+    this.entities.name = "entities";
+    this.entities.registry = {};
+    this.add(this.connections, this.entities);
   }
   layout() {
     const { entities, instructions } = this;
     if (typeof instructions !== "string") {
       return;
     }
-    const state = {};
+    const state = { entities: [], connections: {} };
     const lines = instructions.split(/\n/i);
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
@@ -228,60 +268,67 @@ var Wiremark = class extends Two3.Group {
       const producerExists = producer.length > 0;
       const currencyExists = currency.length > 0;
       const consumerExists = consumer.length > 0;
-      if (!(producer in entities)) {
-        const entity = entities[producer] = new Entity(producer);
-        entity.visible = false;
-        this.add(entity);
+      if (producerExists) {
+        if (state.entities.indexOf(producer) < 0) {
+          state.entities.push(producer);
+        }
       }
-      if (!(consumer in entities)) {
-        const entity = entities[consumer] = new Entity(consumer);
-        entity.visible = false;
-        this.add(entity);
+      if (consumerExists) {
+        if (state.entities.indexOf(consumer) < 0) {
+          state.entities.push(consumer);
+        }
       }
       if (producerExists && consumerExists) {
-        entities[producer].connect(consumer, currency);
-      }
-      if (producerExists)
-        state[producer] = true;
-      if (currencyExists)
-        state[currency] = true;
-      if (consumerExists)
-        state[consumer] = true;
-    }
-    let isDeleting = false;
-    let k = 0;
-    while (k < this.children.length) {
-      const child = this.children[k];
-      const name = child.name;
-      if (name in state) {
-        child.visible = true;
-        child.position.x = k * (child.width + unit * 0.25);
-        child.position.y = 2 * (k % 2) * child.height + child.height;
-        k++;
-        continue;
-      } else if (!child.name.includes("connection")) {
-        child.remove().dispose();
-        delete entities[name];
-        isDeleting = true;
-      } else {
-        k++;
+        if (!(producer in state.connections)) {
+          state.connections[producer] = [];
+        }
+        state.connections[producer].push({
+          name: currencyExists ? currency : "connection",
+          target: consumer
+        });
       }
     }
-    if (isDeleting) {
-      for (let i = 0; i < this.connections.children.length; i++) {
-        const c = this.connections.children[i];
-        if (!c.source.parent || !c.target.parent) {
-          c.remove().dispose();
+    const length = Math.max(
+      entities.children.length,
+      state.entities.length
+    );
+    for (let i = 0; i < length; i++) {
+      const name = state.entities[i];
+      let entity = entities.children[i];
+      if (entity) {
+        if (state.entities.indexOf(entity.name) < 0) {
+          if (typeof name === "undefined") {
+            delete entities.registry[entity.name];
+            entity.remove().dispose();
+            entity = null;
+          } else {
+            entity.name = name;
+            entities.registry[name] = entity;
+          }
+        }
+      } else if (typeof name !== "undefined") {
+        entity = new Entity(name);
+        entity.position.x = i * entity.width + unit * 0.25;
+        entity.position.y = 2 * (i % 2) * entity.height + entity.height;
+        entities.add(entity);
+        entities.registry[name] = entity;
+      }
+    }
+    for (let i = 0; i < entities.children.length; i++) {
+      const entity = entities.children[i];
+      const connections = state.connections[entity.name];
+      entity.reset();
+      if (typeof connections !== "undefined" && connections.length > 0) {
+        for (let j = 0; j < connections.length; j++) {
+          const { name, target } = connections[j];
+          entity.connect(target, name);
         }
       }
     }
     return this;
   }
   update(timeDelta) {
-    for (let i = 0; i < this.connections.children.length; i++) {
-      let child = this.connections.children[i];
-      child.dashes.offset -= timeDelta / 10;
-    }
+    dashes.offset -= timeDelta / 10;
     return this;
   }
   dispose() {
@@ -382,8 +429,9 @@ function Component(props) {
         setGrabbing("grabbing");
         mouse.x = e.clientX;
         mouse.y = e.clientY;
-        for (let name in wiremark.entities) {
-          const child = wiremark.entities[name];
+        const { registry } = wiremark.entities;
+        for (let name in registry) {
+          const child = registry[name];
           const rect = child.getBoundingClientRect();
           if (mouse.x > rect.left && mouse.x < rect.right && mouse.y > rect.top && mouse.y < rect.bottom) {
             moving = child;
@@ -449,8 +497,9 @@ function Component(props) {
         var touch = e.touches[0];
         mouse.x = touch.clientX;
         mouse.y = touch.clientY;
-        for (let name in wiremark.entities) {
-          const child = wiremark.entities[name];
+        const { registry } = wiremark.entities;
+        for (let name in registry) {
+          const child = registry[name];
           const rect = child.getBoundingClientRect();
           if (mouse.x > rect.left && mouse.x < rect.right && mouse.y > rect.top && mouse.y < rect.bottom) {
             moving = child;

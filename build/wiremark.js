@@ -6,8 +6,8 @@
   var __getProtoOf = Object.getPrototypeOf;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
   var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-  var __commonJS = (cb, mod2) => function __require() {
-    return mod2 || (0, cb[__getOwnPropNames(cb)[0]])((mod2 = { exports: {} }).exports, mod2), mod2.exports;
+  var __commonJS = (cb, mod3) => function __require() {
+    return mod3 || (0, cb[__getOwnPropNames(cb)[0]])((mod3 = { exports: {} }).exports, mod3), mod3.exports;
   };
   var __copyProps = (to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
@@ -17,9 +17,9 @@
     }
     return to;
   };
-  var __toESM = (mod2, isNodeMode, target) => (target = mod2 != null ? __create(__getProtoOf(mod2)) : {}, __copyProps(
-    isNodeMode || !mod2 || !mod2.__esModule ? __defProp(target, "default", { value: mod2, enumerable: true }) : target,
-    mod2
+  var __toESM = (mod3, isNodeMode, target) => (target = mod3 != null ? __create(__getProtoOf(mod3)) : {}, __copyProps(
+    isNodeMode || !mod3 || !mod3.__esModule ? __defProp(target, "default", { value: mod3, enumerable: true }) : target,
+    mod3
   ));
   var __publicField = (obj, key, value) => {
     __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -690,9 +690,9 @@
               return children;
             }
             var result = [];
-            var count2 = 0;
+            var count3 = 0;
             mapIntoArray(children, result, "", "", function(child) {
-              return func.call(context, child, count2++);
+              return func.call(context, child, count3++);
             });
             return result;
           }
@@ -1767,14 +1767,14 @@
           var createElement$1 = createElementWithValidation;
           var cloneElement$1 = cloneElementWithValidation;
           var createFactory = createFactoryWithValidation;
-          var Children2 = {
+          var Children3 = {
             map: mapChildren,
             forEach: forEachChildren,
             count: countChildren,
             toArray,
             only: onlyChild
           };
-          exports.Children = Children2;
+          exports.Children = Children3;
           exports.Component = Component2;
           exports.Fragment = REACT_FRAGMENT_TYPE;
           exports.Profiler = REACT_PROFILER_TYPE;
@@ -1871,17 +1871,17 @@
   var Matrix;
   var TWO_PI = Math.PI * 2;
   var HALF_PI = Math.PI * 0.5;
-  function decomposeMatrix(matrix3, b, c, d, e, f) {
+  function decomposeMatrix(matrix32, b, c, d, e, f) {
     let a;
     if (arguments.length <= 1) {
-      a = matrix3.a;
-      b = matrix3.b;
-      c = matrix3.c;
-      d = matrix3.d;
-      e = matrix3.e;
-      f = matrix3.f;
+      a = matrix32.a;
+      b = matrix32.b;
+      c = matrix32.c;
+      d = matrix32.d;
+      e = matrix32.e;
+      f = matrix32.f;
     } else {
-      a = matrix3;
+      a = matrix32;
     }
     return {
       translateX: e,
@@ -1891,11 +1891,11 @@
       rotation: 180 * Math.atan2(b, a) / Math.PI
     };
   }
-  function setMatrix(matrix3) {
-    Matrix = matrix3;
+  function setMatrix(matrix32) {
+    Matrix = matrix32;
   }
-  function getComputedMatrix(object, matrix3) {
-    matrix3 = matrix3 && matrix3.identity() || new Matrix();
+  function getComputedMatrix(object, matrix32) {
+    matrix32 = matrix32 && matrix32.identity() || new Matrix();
     let parent = object;
     const matrices = [];
     while (parent && parent._matrix) {
@@ -1906,9 +1906,9 @@
     for (let i = 0; i < matrices.length; i++) {
       const m = matrices[i];
       const e = m.elements;
-      matrix3.multiply(e[0], e[1], e[2], e[3], e[4], e[5], e[6], e[7], e[8], e[9]);
+      matrix32.multiply(e[0], e[1], e[2], e[3], e[4], e[5], e[6], e[7], e[8], e[9]);
     }
-    return matrix3;
+    return matrix32;
   }
   function lerp(a, b, t) {
     return t * (b - a) + a;
@@ -2709,9 +2709,9 @@
       const theta = pct * td + ts;
       const x = rx * Math.cos(theta);
       const y = ry * Math.sin(theta);
-      const anchor2 = new Anchor(x, y);
-      anchor2.command = Commands.line;
-      anchors.push(anchor2);
+      const anchor22 = new Anchor(x, y);
+      anchor22.command = Commands.line;
+      anchors.push(anchor22);
     }
   }
   var devicePixelRatio = root.devicePixelRatio || 1;
@@ -3655,14 +3655,14 @@
       return this;
     }
     getBoundingClientRect(shallow) {
-      let rect, matrix3, a, b, c, d, tc, lc, rc, bc;
+      let rect, matrix32, a, b, c, d, tc, lc, rc, bc;
       this._update(true);
       let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
-      const regex3 = /texture|gradient/i;
-      matrix3 = shallow ? this._matrix : getComputedMatrix(this);
+      const regex32 = /texture|gradient/i;
+      matrix32 = shallow ? this._matrix : getComputedMatrix(this);
       for (let i = 0; i < this.children.length; i++) {
         const child = this.children[i];
-        if (!child.visible || regex3.test(child._renderer.type)) {
+        if (!child.visible || regex32.test(child._renderer.type)) {
           continue;
         }
         rect = child.getBoundingClientRect(shallow);
@@ -3679,10 +3679,10 @@
         bottom = max(rect.bottom, bottom);
       }
       if (shallow) {
-        a = matrix3.multiply(left, top, 1);
-        b = matrix3.multiply(left, bottom, 1);
-        c = matrix3.multiply(right, top, 1);
-        d = matrix3.multiply(right, bottom, 1);
+        a = matrix32.multiply(left, top, 1);
+        b = matrix32.multiply(left, bottom, 1);
+        c = matrix32.multiply(right, top, 1);
+        d = matrix32.multiply(right, bottom, 1);
         top = min(a.y, b.y, c.y, d.y);
         left = min(a.x, b.x, c.x, d.x);
         right = max(a.x, b.x, c.x, d.x);
@@ -4078,11 +4078,11 @@
           return this;
         }
         this._update();
-        const matrix3 = this._matrix.elements;
+        const matrix32 = this._matrix.elements;
         const parent = this.parent;
         this._renderer.opacity = this._opacity * (parent && parent._renderer ? parent._renderer.opacity : 1);
         const mask = this._mask;
-        const defaultMatrix = isDefaultMatrix(matrix3);
+        const defaultMatrix = isDefaultMatrix(matrix32);
         const shouldIsolate = !defaultMatrix || !!mask;
         if (!this._renderer.context) {
           this._renderer.context = {};
@@ -4091,7 +4091,7 @@
         if (shouldIsolate) {
           ctx.save();
           if (!defaultMatrix) {
-            ctx.transform(matrix3[0], matrix3[3], matrix3[1], matrix3[4], matrix3[2], matrix3[5]);
+            ctx.transform(matrix32[0], matrix32[3], matrix32[1], matrix32[4], matrix32[2], matrix32[5]);
           }
         }
         if (mask) {
@@ -4111,7 +4111,7 @@
     },
     path: {
       render: function(ctx, forced, parentClipped) {
-        let matrix3, stroke, linewidth, fill, opacity, visible, cap, join, miter, closed2, commands, length, last, prev, a, b, c, d, ux, uy, vx, vy, ar, bl, br, cl, x, y, mask, clip, defaultMatrix, isOffset, dashes, po;
+        let matrix32, stroke, linewidth, fill, opacity, visible, cap, join, miter, closed2, commands, length, last, prev, a, b, c, d, ux, uy, vx, vy, ar, bl, br, cl, x, y, mask, clip, defaultMatrix, isOffset, dashes2, po;
         po = this.parent && this.parent._renderer ? this.parent._renderer.opacity : 1;
         mask = this._mask;
         clip = this._clip;
@@ -4121,7 +4121,7 @@
           return this;
         }
         this._update();
-        matrix3 = this._matrix.elements;
+        matrix32 = this._matrix.elements;
         stroke = this._stroke;
         linewidth = this._linewidth;
         fill = this._fill;
@@ -4132,11 +4132,11 @@
         commands = this._renderer.vertices;
         length = commands.length;
         last = length - 1;
-        defaultMatrix = isDefaultMatrix(matrix3);
-        dashes = this.dashes;
+        defaultMatrix = isDefaultMatrix(matrix32);
+        dashes2 = this.dashes;
         if (!defaultMatrix) {
           ctx.save();
-          ctx.transform(matrix3[0], matrix3[3], matrix3[1], matrix3[4], matrix3[2], matrix3[5]);
+          ctx.transform(matrix32[0], matrix32[3], matrix32[1], matrix32[4], matrix32[2], matrix32[5]);
         }
         if (mask) {
           canvas[mask._renderer.type].render.call(mask, ctx, true);
@@ -4172,9 +4172,9 @@
         if (typeof opacity === "number") {
           ctx.globalAlpha = opacity;
         }
-        if (dashes && dashes.length > 0) {
-          ctx.lineDashOffset = dashes.offset || 0;
-          ctx.setLineDash(dashes);
+        if (dashes2 && dashes2.length > 0) {
+          ctx.lineDashOffset = dashes2.offset || 0;
+          ctx.setLineDash(dashes2);
         }
         ctx.beginPath();
         let rx, ry, xAxisRotation, largeArcFlag, sweepFlag, ax, ay;
@@ -4286,7 +4286,7 @@
         if (clip && !parentClipped) {
           ctx.clip();
         }
-        if (dashes && dashes.length > 0) {
+        if (dashes2 && dashes2.length > 0) {
           ctx.setLineDash(emptyArray);
         }
         return this.flagReset();
@@ -4294,7 +4294,7 @@
     },
     points: {
       render: function(ctx, forced, parentClipped) {
-        let me, stroke, linewidth, fill, opacity, visible, size, commands, length, b, x, y, defaultMatrix, isOffset, dashes, po;
+        let me, stroke, linewidth, fill, opacity, visible, size, commands, length, b, x, y, defaultMatrix, isOffset, dashes2, po;
         po = this.parent && this.parent._renderer ? this.parent._renderer.opacity : 1;
         opacity = this._opacity * (po || 1);
         visible = this._visible;
@@ -4309,7 +4309,7 @@
         commands = this._renderer.collection;
         length = commands.length;
         defaultMatrix = isDefaultMatrix(me);
-        dashes = this.dashes;
+        dashes2 = this.dashes;
         size = this._size;
         if (!defaultMatrix) {
           ctx.save();
@@ -4337,9 +4337,9 @@
         if (typeof opacity === "number") {
           ctx.globalAlpha = opacity;
         }
-        if (dashes && dashes.length > 0) {
-          ctx.lineDashOffset = dashes.offset || 0;
-          ctx.setLineDash(dashes);
+        if (dashes2 && dashes2.length > 0) {
+          ctx.lineDashOffset = dashes2.offset || 0;
+          ctx.setLineDash(dashes2);
         }
         ctx.beginPath();
         let radius = size * 0.5, m;
@@ -4386,7 +4386,7 @@
         if (!defaultMatrix) {
           ctx.restore();
         }
-        if (dashes && dashes.length > 0) {
+        if (dashes2 && dashes2.length > 0) {
           ctx.setLineDash(emptyArray);
         }
         return this.flagReset();
@@ -4403,20 +4403,20 @@
           return this;
         }
         this._update();
-        const matrix3 = this._matrix.elements;
+        const matrix32 = this._matrix.elements;
         const stroke = this._stroke;
         const linewidth = this._linewidth;
         const fill = this._fill;
         const decoration = this._decoration;
-        const defaultMatrix = isDefaultMatrix(matrix3);
+        const defaultMatrix = isDefaultMatrix(matrix32);
         const isOffset = fill._renderer && fill._renderer.offset && stroke._renderer && stroke._renderer.offset;
-        const dashes = this.dashes;
+        const dashes2 = this.dashes;
         const alignment = canvas.alignments[this._alignment] || this._alignment;
         const baseline = this._baseline;
         let a, b, c, d, e, sx, sy, x1, y1, x2, y2;
         if (!defaultMatrix) {
           ctx.save();
-          ctx.transform(matrix3[0], matrix3[3], matrix3[1], matrix3[4], matrix3[2], matrix3[5]);
+          ctx.transform(matrix32[0], matrix32[3], matrix32[1], matrix32[4], matrix32[2], matrix32[5]);
         }
         if (mask) {
           canvas[mask._renderer.type].render.call(mask, ctx, true);
@@ -4448,9 +4448,9 @@
         if (typeof opacity === "number") {
           ctx.globalAlpha = opacity;
         }
-        if (dashes && dashes.length > 0) {
-          ctx.lineDashOffset = dashes.offset || 0;
-          ctx.setLineDash(dashes);
+        if (dashes2 && dashes2.length > 0) {
+          ctx.lineDashOffset = dashes2.offset || 0;
+          ctx.setLineDash(dashes2);
         }
         if (!clip && !parentClipped) {
           if (!canvas.isHidden.test(fill)) {
@@ -4557,7 +4557,7 @@
         if (clip && !parentClipped) {
           ctx.clip();
         }
-        if (dashes && dashes.length > 0) {
+        if (dashes2 && dashes2.length > 0) {
           ctx.setLineDash(emptyArray);
         }
         return this.flagReset();
@@ -4789,13 +4789,13 @@
   var CanvasShim = {
     Image: null,
     isHeadless: false,
-    shim: function(canvas2, Image) {
-      Renderer.Utils.shim(canvas2);
+    shim: function(canvas22, Image) {
+      Renderer.Utils.shim(canvas22);
       if (typeof Image !== "undefined") {
         CanvasShim.Image = Image;
       }
       CanvasShim.isHeadless = true;
-      return canvas2;
+      return canvas22;
     }
   };
   var dom = {
@@ -5855,10 +5855,10 @@
       return this;
     }
     getBoundingClientRect(shallow) {
-      let matrix3, border, l, i, v0, v1, c0x, c0y, c1x, c1y, a, b, c, d;
+      let matrix32, border, l, i, v0, v1, c0x, c0y, c1x, c1y, a, b, c, d;
       let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
       this._update(true);
-      matrix3 = shallow ? this._matrix : getComputedMatrix(this);
+      matrix32 = shallow ? this._matrix : getComputedMatrix(this);
       border = (this.linewidth || 0) / 2;
       l = this._renderer.vertices.length;
       if (l <= 0) {
@@ -5901,10 +5901,10 @@
           bottom = max3(v1.y + border, bottom);
         }
       }
-      a = matrix3.multiply(left, top, 1);
-      b = matrix3.multiply(left, bottom, 1);
-      c = matrix3.multiply(right, top, 1);
-      d = matrix3.multiply(right, bottom, 1);
+      a = matrix32.multiply(left, top, 1);
+      b = matrix32.multiply(left, bottom, 1);
+      c = matrix32.multiply(right, top, 1);
+      d = matrix32.multiply(right, bottom, 1);
       top = min3(a.y, b.y, c.y, d.y);
       left = min3(a.x, b.x, c.x, d.x);
       right = max3(a.x, b.x, c.x, d.x);
@@ -7359,10 +7359,10 @@
       return this;
     }
     getBoundingClientRect(shallow) {
-      let matrix3, a, b, c, d;
+      let matrix32, a, b, c, d;
       let left, right, top, bottom;
       this._update(true);
-      matrix3 = shallow ? this._matrix : getComputedMatrix(this);
+      matrix32 = shallow ? this._matrix : getComputedMatrix(this);
       const height = this.leading;
       const width = this.value.length * this.size * _Text.Ratio;
       const border = (this._linewidth || 0) / 2;
@@ -7392,10 +7392,10 @@
           top = -(height / 2 + border);
           bottom = height / 2 + border;
       }
-      a = matrix3.multiply(left, top, 1);
-      b = matrix3.multiply(left, bottom, 1);
-      c = matrix3.multiply(right, top, 1);
-      d = matrix3.multiply(right, bottom, 1);
+      a = matrix32.multiply(left, top, 1);
+      b = matrix32.multiply(left, bottom, 1);
+      c = matrix32.multiply(right, top, 1);
+      d = matrix32.multiply(right, bottom, 1);
       top = min4(a.y, b.y, c.y, d.y);
       left = min4(a.x, b.x, c.x, d.x);
       right = max4(a.x, b.x, c.x, d.x);
@@ -7640,8 +7640,8 @@
   };
   var reservedAttributesToRemove = ["id", "class", "transform", "xmlns", "viewBox"];
   var overwriteAttrs = ["x", "y", "width", "height", "href", "xlink:href"];
-  function getAlignment(anchor2) {
-    return alignments[anchor2];
+  function getAlignment(anchor22) {
+    return alignments[anchor22];
   }
   function getBaseline(node) {
     const a = node.getAttribute("dominant-baseline");
@@ -7651,15 +7651,15 @@
   function getTagName(tag) {
     return tag.replace(/svg:/ig, "").toLowerCase();
   }
-  function applyTransformsToVector(transforms, vector2) {
-    vector2.x += transforms.translateX;
-    vector2.y += transforms.translateY;
-    vector2.x *= transforms.scaleX;
-    vector2.y *= transforms.scaleY;
+  function applyTransformsToVector(transforms, vector22) {
+    vector22.x += transforms.translateX;
+    vector22.y += transforms.translateY;
+    vector22.x *= transforms.scaleX;
+    vector22.y *= transforms.scaleY;
     if (transforms.rotation !== 0) {
-      const l = vector2.length();
-      vector2.x = l * Math.cos(transforms.rotation);
-      vector2.y = l * Math.sin(transforms.rotation);
+      const l = vector22.length();
+      vector22.x = l * Math.cos(transforms.rotation);
+      vector22.y = l * Math.sin(transforms.rotation);
     }
   }
   function extractCSSText(text, styles) {
@@ -8181,7 +8181,7 @@
           relative = type === lower;
           let x1, y1, x2, y2, x3, y3, x4, y4, reflection;
           let a, b;
-          let anchor2, rx, ry, xAxisRotation, largeArcFlag, sweepFlag;
+          let anchor22, rx, ry, xAxisRotation, largeArcFlag, sweepFlag;
           switch (lower) {
             case "z":
               if (i >= last) {
@@ -8308,15 +8308,15 @@
                 x4 += x1;
                 y4 += y1;
               }
-              anchor2 = new Anchor(x4, y4);
-              anchor2.command = Commands.arc;
-              anchor2.rx = rx;
-              anchor2.ry = ry;
-              anchor2.xAxisRotation = xAxisRotation;
-              anchor2.largeArcFlag = largeArcFlag;
-              anchor2.sweepFlag = sweepFlag;
-              result = anchor2;
-              coord = anchor2;
+              anchor22 = new Anchor(x4, y4);
+              anchor22.command = Commands.arc;
+              anchor22.rx = rx;
+              anchor22.ry = ry;
+              anchor22.xAxisRotation = xAxisRotation;
+              anchor22.largeArcFlag = largeArcFlag;
+              anchor22.sweepFlag = sweepFlag;
+              result = anchor22;
+              coord = anchor22;
               control = void 0;
               break;
           }
@@ -10524,7 +10524,7 @@
         let prev, a, c, ux, uy, vx, vy, ar, bl, br, cl, x, y;
         let isOffset;
         const commands = elem._renderer.vertices;
-        const canvas2 = this.canvas;
+        const canvas22 = this.canvas;
         const ctx = this.ctx;
         const scale = elem._renderer.scale;
         const stroke = elem._stroke;
@@ -10535,15 +10535,15 @@
         const join = elem._join;
         const miter = elem._miter;
         const closed2 = elem._closed;
-        const dashes = elem.dashes;
+        const dashes2 = elem.dashes;
         const length = commands.length;
         const last = length - 1;
-        canvas2.width = Math.max(Math.ceil(elem._renderer.rect.width * scale.x), 1);
-        canvas2.height = Math.max(Math.ceil(elem._renderer.rect.height * scale.y), 1);
+        canvas22.width = Math.max(Math.ceil(elem._renderer.rect.width * scale.x), 1);
+        canvas22.height = Math.max(Math.ceil(elem._renderer.rect.height * scale.y), 1);
         const centroid = elem._renderer.rect.centroid;
         const cx = centroid.x;
         const cy = centroid.y;
-        ctx.clearRect(0, 0, canvas2.width, canvas2.height);
+        ctx.clearRect(0, 0, canvas22.width, canvas22.height);
         if (fill) {
           if (typeof fill === "string") {
             ctx.fillStyle = fill;
@@ -10575,9 +10575,9 @@
         if (typeof opacity === "number") {
           ctx.globalAlpha = opacity;
         }
-        if (dashes && dashes.length > 0) {
-          ctx.lineDashOffset = dashes.offset || 0;
-          ctx.setLineDash(dashes);
+        if (dashes2 && dashes2.length > 0) {
+          ctx.lineDashOffset = dashes2.offset || 0;
+          ctx.setLineDash(dashes2);
         }
         let d, rx, ry, xAxisRotation, largeArcFlag, sweepFlag, ax, ay;
         ctx.save();
@@ -10823,24 +10823,24 @@
     points: {
       updateCanvas: function(elem) {
         let isOffset;
-        const canvas2 = this.canvas;
+        const canvas22 = this.canvas;
         const ctx = this.ctx;
         const stroke = elem._stroke;
         const linewidth = elem._linewidth;
         const fill = elem._fill;
         const opacity = elem._renderer.opacity || elem._opacity;
-        const dashes = elem.dashes;
+        const dashes2 = elem.dashes;
         const size = elem._size;
         let dimension = size;
         if (!webgl.isHidden.test(stroke)) {
           dimension += linewidth;
         }
-        canvas2.width = getPoT(dimension);
-        canvas2.height = canvas2.width;
-        const aspect = dimension / canvas2.width;
-        const cx = canvas2.width / 2;
-        const cy = canvas2.height / 2;
-        ctx.clearRect(0, 0, canvas2.width, canvas2.height);
+        canvas22.width = getPoT(dimension);
+        canvas22.height = canvas22.width;
+        const aspect = dimension / canvas22.width;
+        const cx = canvas22.width / 2;
+        const cy = canvas22.height / 2;
+        ctx.clearRect(0, 0, canvas22.width, canvas22.height);
         if (fill) {
           if (typeof fill === "string") {
             ctx.fillStyle = fill;
@@ -10863,9 +10863,9 @@
         if (typeof opacity === "number") {
           ctx.globalAlpha = opacity;
         }
-        if (dashes && dashes.length > 0) {
-          ctx.lineDashOffset = dashes.offset || 0;
-          ctx.setLineDash(dashes);
+        if (dashes2 && dashes2.length > 0) {
+          ctx.lineDashOffset = dashes2.offset || 0;
+          ctx.setLineDash(dashes2);
         }
         ctx.save();
         ctx.translate(cx, cy);
@@ -10991,23 +10991,23 @@
     },
     text: {
       updateCanvas: function(elem) {
-        const canvas2 = this.canvas;
+        const canvas22 = this.canvas;
         const ctx = this.ctx;
         const scale = elem._renderer.scale;
         const stroke = elem._stroke;
         const linewidth = elem._linewidth * scale;
         const fill = elem._fill;
         const opacity = elem._renderer.opacity || elem._opacity;
-        const dashes = elem.dashes;
+        const dashes2 = elem.dashes;
         const decoration = elem._decoration;
-        canvas2.width = Math.max(Math.ceil(elem._renderer.rect.width * scale.x), 1);
-        canvas2.height = Math.max(Math.ceil(elem._renderer.rect.height * scale.y), 1);
+        canvas22.width = Math.max(Math.ceil(elem._renderer.rect.width * scale.x), 1);
+        canvas22.height = Math.max(Math.ceil(elem._renderer.rect.height * scale.y), 1);
         const centroid = elem._renderer.rect.centroid;
         const cx = centroid.x;
         const cy = centroid.y;
         let a, b, c, d, e, sx, sy, x1, y1, x2, y2;
         const isOffset = fill._renderer && fill._renderer.offset && stroke._renderer && stroke._renderer.offset;
-        ctx.clearRect(0, 0, canvas2.width, canvas2.height);
+        ctx.clearRect(0, 0, canvas22.width, canvas22.height);
         if (!isOffset) {
           ctx.font = [elem._style, elem._weight, elem._size + "px/" + elem._leading + "px", elem._family].join(" ");
         }
@@ -11035,9 +11035,9 @@
         if (typeof opacity === "number") {
           ctx.globalAlpha = opacity;
         }
-        if (dashes && dashes.length > 0) {
-          ctx.lineDashOffset = dashes.offset || 0;
-          ctx.setLineDash(dashes);
+        if (dashes2 && dashes2.length > 0) {
+          ctx.lineDashOffset = dashes2.offset || 0;
+          ctx.setLineDash(dashes2);
         }
         ctx.save();
         ctx.scale(scale.x, scale.y);
@@ -12014,290 +12014,23 @@
 
   // src/constants.js
   var unit = 200;
-
-  // src/connection.js
-  var Connection = class extends Two.Path {
-    _name = "connection";
-    offset = new Two.Vector();
-    constructor(source, target, name) {
-      const points = [
-        new Two.Anchor(),
-        new Two.Anchor(),
-        new Two.Anchor(),
-        new Two.Anchor()
-      ];
-      super(points);
-      const scope = this;
-      this.update = update;
-      this.source = source;
-      this.target = target;
-      this.curved = true;
-      this.linewidth = unit * 0.015;
-      this.noFill();
-      this.stroke = "black";
-      this.dashes = [this.linewidth * 2, this.linewidth * 3];
-      this.join = "round";
-      this.cap = "round";
-      if (typeof name === "string" && name.length > 0) {
-        this.name = name;
-      }
-      this.offset.bind("change", update);
-      source.position.bind("change", update);
-      target.position.bind("change", update);
-      requestAnimationFrame(update);
-      function update() {
-        points[0].copy(source.position).add(scope.offset);
-        points[1].copy(source.position).add(scope.offset);
-        points[1].x += source.width * 0.5;
-        points[2].copy(target.position);
-        points[2].x -= target.width * 0.5;
-        points[3].copy(target.position);
-      }
-    }
-    dispose() {
-      const { source, target, update } = this;
-      source.position.unbind("change", update);
-      target.position.unbind("change", update);
-      return this;
-    }
-    get name() {
-      return this._name;
-    }
-    set name(name) {
-      this._name = name;
-      this.stroke = stringToColor(name);
-    }
-  };
-
-  // src/entity.js
+  var dashes = [unit * 0.03, unit * 0.045];
+  dashes.offset = 0;
   var textStyles = {
     family: '"Inter", sans-serif',
     size: unit * 0.1,
     leading: unit * 0.12,
     fill: "white"
   };
-  var _Entity = class extends Two.Group {
-    connections = [];
-    constructor(name) {
-      super();
-      const shape = new Two.RoundedRectangle(0, 0, unit * 1.5, unit, 8);
-      const text = new Two.Text(name, 0, 0, textStyles);
-      shape.noStroke();
-      const alpha = 0.66;
-      const r = Math.random() * 255;
-      const g = Math.random() * 255;
-      const b = Math.random() * 255;
-      const dr = dilute(r, alpha);
-      const dg = dilute(g, alpha);
-      const db = dilute(b, alpha);
-      shape.fill = `rgb(${dr}, ${dg}, ${db})`;
-      shape.stroke = `rgb(${r}, ${g}, ${b})`;
-      shape.linewidth = unit * 0.015;
-      if ((r + g + b) / 3 >= 255 * 0.4) {
-        text.fill = "black";
-      }
-      this.add(shape, text);
-      _Entity.Instances.push(this);
-    }
-    static getEntityByName(name) {
-      for (let i = 0; i < _Entity.Instances.length; i++) {
-        const entity = _Entity.Instances[i];
-        if (entity.name === name) {
-          return entity;
-        }
-      }
-      return null;
-    }
-    static getInstanceIndex(entity) {
-      for (let i = 0; i < _Entity.Instances.length; i++) {
-        const e = _Entity.Instances[i];
-        if (e.id === entity.id) {
-          return i;
-        }
-      }
-      return -1;
-    }
-    connect(name, means) {
-      const target = _Entity.getEntityByName(name);
-      if (!means) {
-        means = "connection";
-      }
-      if (target) {
-        let isConnected = false;
-        for (let i = 0; i < this.connections.length; i++) {
-          const c = this.connections[i];
-          if (c.target.id === target.id && means === c.name) {
-            isConnected = true;
-            break;
-          }
-        }
-        if (!isConnected) {
-          const connection = new Connection(this, target, means);
-          const { connections } = this.parent;
-          connections.add(connection);
-          this.connections.push(connection);
-          for (let i = 0; i < this.connections.length; i++) {
-            const c = this.connections[i];
-            const pct = (i + 0.5) / this.connections.length;
-            const y = pct * this.height - this.height * 0.5;
-            c.offset.y = y;
-          }
-        }
-      } else {
-        console.warn("Entity: no target found.");
-      }
-      ;
-      return this;
-    }
-    remove() {
-      super.remove.apply(this, arguments);
-      for (let i = 0; i < this.connections.length; i++) {
-        const c = this.connections[i];
-        c.remove().dispose();
-      }
-      const index = _Entity.getInstanceIndex(this);
-      if (index >= 0) {
-        _Entity.Instances.splice(index, 1);
-      }
-      return this;
-    }
-    dispose() {
-    }
-    get width() {
-      return this.children[0].width;
-    }
-    get height() {
-      return this.children[0].height;
-    }
-    get name() {
-      return this.children[1].value;
-    }
+
+  // node_modules/two.js/src/utils/path-commands.js
+  var Commands2 = {
+    move: "M",
+    line: "L",
+    curve: "C",
+    arc: "A",
+    close: "Z"
   };
-  var Entity = _Entity;
-  __publicField(Entity, "Instances", []);
-
-  // src/wiremark.js
-  var emptyMatch = ["", ""];
-  var Wiremark =  window.Wiremark = class extends Two.Group {
-    _instructions = null;
-    entities = {};
-    constructor(instructions) {
-      super();
-      this.instructions = instructions;
-      this.connections = new Two.Group();
-      this.connections.name = "connections";
-      this.add(this.connections);
-    }
-    layout() {
-      const { entities, instructions } = this;
-      if (typeof instructions !== "string") {
-        return;
-      }
-      const state = {};
-      const lines = instructions.split(/\n/i);
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
-        if (line.length <= 0) {
-          continue;
-        }
-        const producer = (line.match(/^([^\-]+)[\-$]/) || emptyMatch)[1].trim();
-        const currency = (line.match(/\[([^\]]+)\]/) || emptyMatch)[1].trim();
-        const consumer = (line.match(/\-\>(.+)$/) || emptyMatch)[1].trim();
-        const producerExists = producer.length > 0;
-        const currencyExists = currency.length > 0;
-        const consumerExists = consumer.length > 0;
-        if (!(producer in entities)) {
-          const entity = entities[producer] = new Entity(producer);
-          entity.visible = false;
-          this.add(entity);
-        }
-        if (!(consumer in entities)) {
-          const entity = entities[consumer] = new Entity(consumer);
-          entity.visible = false;
-          this.add(entity);
-        }
-        if (producerExists && consumerExists) {
-          entities[producer].connect(consumer, currency);
-        }
-        if (producerExists)
-          state[producer] = true;
-        if (currencyExists)
-          state[currency] = true;
-        if (consumerExists)
-          state[consumer] = true;
-      }
-      let isDeleting = false;
-      let k = 0;
-      while (k < this.children.length) {
-        const child = this.children[k];
-        const name = child.name;
-        if (name in state) {
-          child.visible = true;
-          child.position.x = k * (child.width + unit * 0.25);
-          child.position.y = 2 * (k % 2) * child.height + child.height;
-          k++;
-          continue;
-        } else if (!child.name.includes("connection")) {
-          child.remove().dispose();
-          delete entities[name];
-          isDeleting = true;
-        } else {
-          k++;
-        }
-      }
-      if (isDeleting) {
-        for (let i = 0; i < this.connections.children.length; i++) {
-          const c = this.connections.children[i];
-          if (!c.source.parent || !c.target.parent) {
-            c.remove().dispose();
-          }
-        }
-      }
-      return this;
-    }
-    update(timeDelta) {
-      for (let i = 0; i < this.connections.children.length; i++) {
-        let child = this.connections.children[i];
-        child.dashes.offset -= timeDelta / 10;
-      }
-      return this;
-    }
-    dispose() {
-    }
-    get instructions() {
-      return this._instructions;
-    }
-    set instructions(instructions) {
-      this._instructions = instructions;
-      this.layout();
-    }
-  };
-
-  // src/component.js
-  var import_react = __toESM(require_react());
-
-  // node_modules/two.js/src/utils/root.js
-  var root2;
-  if (typeof window !== "undefined") {
-    root2 = window;
-  } else if (typeof global !== "undefined") {
-    root2 = global;
-  } else if (typeof self !== "undefined") {
-    root2 = self;
-  }
-
-  // node_modules/two.js/src/utils/math.js
-  var Matrix3;
-  var TWO_PI2 = Math.PI * 2;
-  var HALF_PI2 = Math.PI * 0.5;
-  function setMatrix2(matrix3) {
-    Matrix3 = matrix3;
-  }
-  var NumArray2 = root2.Float32Array || Array;
-  var floor4 = Math.floor;
-  function toFixed2(v) {
-    return floor4(v * 1e6) / 1e6;
-  }
 
   // node_modules/two.js/src/events.js
   var Events2 = class {
@@ -12409,6 +12142,1023 @@
     "listen",
     "ignore"
   ]);
+
+  // node_modules/two.js/src/collection.js
+  var Collection2 = class extends Array {
+    _events = new Events2();
+    get _bound() {
+      return this._events._bound;
+    }
+    set _bound(v) {
+      this._events._bound = v;
+    }
+    addEventListener() {
+      return this._events.addEventListener.apply(this, arguments);
+    }
+    on() {
+      return this._events.on.apply(this, arguments);
+    }
+    bind() {
+      return this._events.bind.apply(this, arguments);
+    }
+    removeEventListener() {
+      return this._events.removeEventListener.apply(this, arguments);
+    }
+    off() {
+      return this._events.off.apply(this, arguments);
+    }
+    unbind() {
+      return this._events.unbind.apply(this, arguments);
+    }
+    dispatchEvent() {
+      return this._events.dispatchEvent.apply(this, arguments);
+    }
+    trigger() {
+      return this._events.trigger.apply(this, arguments);
+    }
+    listen() {
+      return this._events.listen.apply(this, arguments);
+    }
+    ignore() {
+      return this._events.ignore.apply(this, arguments);
+    }
+    constructor() {
+      super();
+      if (arguments[0] && Array.isArray(arguments[0])) {
+        if (arguments[0].length > 0) {
+          this.push.apply(this, arguments[0]);
+        }
+      } else if (arguments.length > 0) {
+        this.push.apply(this, arguments);
+      }
+    }
+    pop() {
+      const popped = super.pop.apply(this, arguments);
+      this.trigger(Events2.Types.remove, [popped]);
+      return popped;
+    }
+    shift() {
+      const shifted = super.shift.apply(this, arguments);
+      this.trigger(Events2.Types.remove, [shifted]);
+      return shifted;
+    }
+    push() {
+      const pushed = super.push.apply(this, arguments);
+      this.trigger(Events2.Types.insert, arguments);
+      return pushed;
+    }
+    unshift() {
+      const unshifted = super.unshift.apply(this, arguments);
+      this.trigger(Events2.Types.insert, arguments);
+      return unshifted;
+    }
+    splice() {
+      const spliced = super.splice.apply(this, arguments);
+      this.trigger(Events2.Types.remove, spliced);
+      if (arguments.length > 2) {
+        const inserted = this.slice(arguments[0], arguments[0] + arguments.length - 2);
+        this.trigger(Events2.Types.insert, inserted);
+        this.trigger(Events2.Types.order);
+      }
+      return spliced;
+    }
+    sort() {
+      super.sort.apply(this, arguments);
+      this.trigger(Events2.Types.order);
+      return this;
+    }
+    reverse() {
+      super.reverse.apply(this, arguments);
+      this.trigger(Events2.Types.order);
+      return this;
+    }
+    indexOf() {
+      return super.indexOf.apply(this, arguments);
+    }
+  };
+
+  // node_modules/two.js/src/utils/root.js
+  var root2;
+  if (typeof window !== "undefined") {
+    root2 = window;
+  } else if (typeof global !== "undefined") {
+    root2 = global;
+  } else if (typeof self !== "undefined") {
+    root2 = self;
+  }
+
+  // node_modules/two.js/src/utils/math.js
+  var Matrix3;
+  var TWO_PI2 = Math.PI * 2;
+  var HALF_PI2 = Math.PI * 0.5;
+  function decomposeMatrix2(matrix4, b, c, d, e, f) {
+    let a;
+    if (arguments.length <= 1) {
+      a = matrix4.a;
+      b = matrix4.b;
+      c = matrix4.c;
+      d = matrix4.d;
+      e = matrix4.e;
+      f = matrix4.f;
+    } else {
+      a = matrix4;
+    }
+    return {
+      translateX: e,
+      translateY: f,
+      scaleX: Math.sqrt(a * a + b * b),
+      scaleY: Math.sqrt(c * c + d * d),
+      rotation: 180 * Math.atan2(b, a) / Math.PI
+    };
+  }
+  function setMatrix2(matrix4) {
+    Matrix3 = matrix4;
+  }
+  function getComputedMatrix2(object, matrix4) {
+    matrix4 = matrix4 && matrix4.identity() || new Matrix3();
+    let parent = object;
+    const matrices = [];
+    while (parent && parent._matrix) {
+      matrices.push(parent._matrix);
+      parent = parent.parent;
+    }
+    matrices.reverse();
+    for (let i = 0; i < matrices.length; i++) {
+      const m = matrices[i];
+      const e = m.elements;
+      matrix4.multiply(
+        e[0],
+        e[1],
+        e[2],
+        e[3],
+        e[4],
+        e[5],
+        e[6],
+        e[7],
+        e[8],
+        e[9]
+      );
+    }
+    return matrix4;
+  }
+  function lerp3(a, b, t) {
+    return t * (b - a) + a;
+  }
+  function mod2(v, l) {
+    while (v < 0) {
+      v += l;
+    }
+    return v % l;
+  }
+  var NumArray2 = root2.Float32Array || Array;
+  var floor4 = Math.floor;
+  function toFixed2(v) {
+    return floor4(v * 1e6) / 1e6;
+  }
+
+  // node_modules/two.js/src/vector.js
+  var proto24 = {
+    x: {
+      enumerable: true,
+      get: function() {
+        return this._x;
+      },
+      set: function(v) {
+        if (this._x !== v) {
+          this._x = v;
+          if (this._bound) {
+            this.dispatchEvent(Events2.Types.change);
+          }
+        }
+      }
+    },
+    y: {
+      enumerable: true,
+      get: function() {
+        return this._y;
+      },
+      set: function(v) {
+        if (this._y !== v) {
+          this._y = v;
+          if (this._bound) {
+            this.dispatchEvent(Events2.Types.change);
+          }
+        }
+      }
+    }
+  };
+  var _Vector2 = class extends Events2 {
+    _x = 0;
+    _y = 0;
+    constructor(x = 0, y = 0) {
+      super();
+      for (let prop in proto24) {
+        Object.defineProperty(this, prop, proto24[prop]);
+      }
+      this.x = x;
+      this.y = y;
+    }
+    static add(v1, v2) {
+      return new _Vector2(v1.x + v2.x, v1.y + v2.y);
+    }
+    static sub(v1, v2) {
+      return new _Vector2(v1.x - v2.x, v1.y - v2.y);
+    }
+    static subtract(v1, v2) {
+      return _Vector2.sub(v1, v2);
+    }
+    static ratioBetween(v1, v2) {
+      return (v1.x * v2.x + v1.y * v2.y) / (v1.length() * v2.length());
+    }
+    static angleBetween(v1, v2) {
+      if (arguments.length >= 4) {
+        const dx2 = arguments[0] - arguments[2];
+        const dy2 = arguments[1] - arguments[3];
+        return Math.atan2(dy2, dx2);
+      }
+      const dx = v1.x - v2.x;
+      const dy = v1.y - v2.y;
+      return Math.atan2(dy, dx);
+    }
+    static distanceBetween(v1, v2) {
+      return Math.sqrt(_Vector2.distanceBetweenSquared(v1, v2));
+    }
+    static distanceBetweenSquared(v1, v2) {
+      const dx = v1.x - v2.x;
+      const dy = v1.y - v2.y;
+      return dx * dx + dy * dy;
+    }
+    set(x, y) {
+      this.x = x;
+      this.y = y;
+      return this;
+    }
+    copy(v) {
+      this.x = v.x;
+      this.y = v.y;
+      return this;
+    }
+    clear() {
+      this.x = 0;
+      this.y = 0;
+      return this;
+    }
+    clone() {
+      return new _Vector2(this.x, this.y);
+    }
+    add(x, y) {
+      if (arguments.length <= 0) {
+        return this;
+      } else if (arguments.length <= 1) {
+        if (typeof x === "number") {
+          this.x += x;
+          this.y += x;
+        } else if (x && typeof x.x === "number" && typeof x.y === "number") {
+          this.x += x.x;
+          this.y += x.y;
+        }
+      } else {
+        this.x += x;
+        this.y += y;
+      }
+      return this;
+    }
+    addSelf(v) {
+      return this.add.apply(this, arguments);
+    }
+    sub(x, y) {
+      if (arguments.length <= 0) {
+        return this;
+      } else if (arguments.length <= 1) {
+        if (typeof x === "number") {
+          this.x -= x;
+          this.y -= x;
+        } else if (x && typeof x.x === "number" && typeof x.y === "number") {
+          this.x -= x.x;
+          this.y -= x.y;
+        }
+      } else {
+        this.x -= x;
+        this.y -= y;
+      }
+      return this;
+    }
+    subtract() {
+      return this.sub.apply(this, arguments);
+    }
+    subSelf(v) {
+      return this.sub.apply(this, arguments);
+    }
+    subtractSelf(v) {
+      return this.sub.apply(this, arguments);
+    }
+    multiply(x, y) {
+      if (arguments.length <= 0) {
+        return this;
+      } else if (arguments.length <= 1) {
+        if (typeof x === "number") {
+          this.x *= x;
+          this.y *= x;
+        } else if (x && typeof x.x === "number" && typeof x.y === "number") {
+          this.x *= x.x;
+          this.y *= x.y;
+        }
+      } else {
+        this.x *= x;
+        this.y *= y;
+      }
+      return this;
+    }
+    multiplySelf(v) {
+      return this.multiply.apply(this, arguments);
+    }
+    multiplyScalar(s) {
+      return this.multiply(s);
+    }
+    divide(x, y) {
+      if (arguments.length <= 0) {
+        return this;
+      } else if (arguments.length <= 1) {
+        if (typeof x === "number") {
+          this.x /= x;
+          this.y /= x;
+        } else if (x && typeof x.x === "number" && typeof x.y === "number") {
+          this.x /= x.x;
+          this.y /= x.y;
+        }
+      } else {
+        this.x /= x;
+        this.y /= y;
+      }
+      if (isNaN(this.x)) {
+        this.x = 0;
+      }
+      if (isNaN(this.y)) {
+        this.y = 0;
+      }
+      return this;
+    }
+    divideSelf(v) {
+      return this.divide.apply(this, arguments);
+    }
+    divideScalar(s) {
+      return this.divide(s);
+    }
+    negate() {
+      return this.multiply(-1);
+    }
+    dot(v) {
+      return this.x * v.x + this.y * v.y;
+    }
+    length() {
+      return Math.sqrt(this.lengthSquared());
+    }
+    lengthSquared() {
+      return this.x * this.x + this.y * this.y;
+    }
+    normalize() {
+      return this.divideScalar(this.length());
+    }
+    distanceTo(v) {
+      return Math.sqrt(this.distanceToSquared(v));
+    }
+    distanceToSquared(v) {
+      const dx = this.x - v.x;
+      const dy = this.y - v.y;
+      return dx * dx + dy * dy;
+    }
+    setLength(l) {
+      return this.normalize().multiplyScalar(l);
+    }
+    equals(v, eps) {
+      eps = typeof eps === "undefined" ? 1e-4 : eps;
+      return this.distanceTo(v) < eps;
+    }
+    lerp(v, t) {
+      const x = (v.x - this.x) * t + this.x;
+      const y = (v.y - this.y) * t + this.y;
+      return this.set(x, y);
+    }
+    isZero(eps) {
+      eps = typeof eps === "undefined" ? 1e-4 : eps;
+      return this.length() < eps;
+    }
+    toString() {
+      return this.x + ", " + this.y;
+    }
+    toObject() {
+      return { x: this.x, y: this.y };
+    }
+    rotate(radians) {
+      const x = this.x;
+      const y = this.y;
+      const cos9 = Math.cos(radians);
+      const sin9 = Math.sin(radians);
+      this.x = x * cos9 - y * sin9;
+      this.y = x * sin9 + y * cos9;
+      return this;
+    }
+  };
+  var Vector2 = _Vector2;
+  __publicField(Vector2, "zero", new _Vector2());
+  __publicField(Vector2, "left", new _Vector2(-1, 0));
+  __publicField(Vector2, "right", new _Vector2(1, 0));
+  __publicField(Vector2, "up", new _Vector2(0, -1));
+  __publicField(Vector2, "down", new _Vector2(0, 1));
+
+  // node_modules/two.js/src/anchor.js
+  var Anchor2 = class extends Vector2 {
+    controls = {
+      left: new Vector2(),
+      right: new Vector2()
+    };
+    _command = Commands2.move;
+    _relative = true;
+    _rx = 0;
+    _ry = 0;
+    _xAxisRotation = 0;
+    _largeArcFlag = 0;
+    _sweepFlag = 1;
+    constructor(x = 0, y = 0, ax = 0, ay = 0, bx = 0, by = 0, command = Commands2.move) {
+      super(x, y);
+      for (let prop in proto25) {
+        Object.defineProperty(this, prop, proto25[prop]);
+      }
+      this.command = command;
+      this.relative = true;
+      const broadcast = Anchor2.makeBroadcast(this);
+      this.controls.left.set(ax, ay).addEventListener(Events2.Types.change, broadcast);
+      this.controls.right.set(bx, by).addEventListener(Events2.Types.change, broadcast);
+    }
+    static makeBroadcast(scope) {
+      return broadcast;
+      function broadcast() {
+        if (scope._bound) {
+          scope.dispatchEvent(Events2.Types.change);
+        }
+      }
+    }
+    copy(v) {
+      this.x = v.x;
+      this.y = v.y;
+      if (typeof v.command === "string") {
+        this.command = v.command;
+      }
+      if (v.controls) {
+        if (v.controls.left) {
+          this.controls.left.copy(v.controls.left);
+        }
+        if (v.controls.right) {
+          this.controls.right.copy(v.controls.right);
+        }
+      }
+      if (typeof v.relative === "boolean") {
+        this.relative = v.relative;
+      }
+      if (typeof v.rx === "number") {
+        this.rx = v.rx;
+      }
+      if (typeof v.ry === "number") {
+        this.ry = v.ry;
+      }
+      if (typeof v.xAxisRotation === "number") {
+        this.xAxisRotation = v.xAxisRotation;
+      }
+      if (typeof v.largeArcFlag === "number") {
+        this.largeArcFlag = v.largeArcFlag;
+      }
+      if (typeof v.sweepFlag === "number") {
+        this.sweepFlag = v.sweepFlag;
+      }
+      return this;
+    }
+    clone() {
+      return new Anchor2().copy(this);
+    }
+    toObject() {
+      return {
+        x: this.x,
+        y: this.y,
+        command: this.command,
+        relative: this.relative,
+        controls: {
+          left: this.controls.left.toObject(),
+          right: this.controls.right.toObject()
+        },
+        rx: this.rx,
+        ry: this.ry,
+        xAxisRotation: this.xAxisRotation,
+        largeArcFlag: this.largeArcFlag,
+        sweepFlag: this.sweepFlag
+      };
+    }
+    toString() {
+      return JSON.stringify(this.toObject());
+    }
+  };
+  var proto25 = {
+    command: {
+      enumerable: true,
+      get: function() {
+        return this._command;
+      },
+      set: function(command) {
+        if (this._command !== command) {
+          this._command = command;
+          if (this._bound) {
+            this.dispatchEvent(Events2.Types.change);
+          }
+        }
+      }
+    },
+    relative: {
+      enumerable: true,
+      get: function() {
+        return this._relative;
+      },
+      set: function(relative) {
+        if (this._relative !== !!relative) {
+          this._relative = !!relative;
+          if (this._bound) {
+            this.dispatchEvent(Events2.Types.change);
+          }
+        }
+      }
+    },
+    rx: {
+      enumerable: true,
+      get: function() {
+        return this._rx;
+      },
+      set: function(rx) {
+        if (this._rx !== rx) {
+          this._rx = rx;
+          if (this._bound) {
+            this.dispatchEvent(Events2.Types.change);
+          }
+        }
+      }
+    },
+    ry: {
+      enumerable: true,
+      get: function() {
+        return this._ry;
+      },
+      set: function(ry) {
+        if (this._ry !== ry) {
+          this._ry = ry;
+          if (this._bound) {
+            this.dispatchEvent(Events2.Types.change);
+          }
+        }
+      }
+    },
+    xAxisRotation: {
+      enumerable: true,
+      get: function() {
+        return this._xAxisRotation;
+      },
+      set: function(xAxisRotation) {
+        if (this._xAxisRotation !== xAxisRotation) {
+          this._xAxisRotation = xAxisRotation;
+          if (this._bound) {
+            this.dispatchEvent(Events2.Types.change);
+          }
+        }
+      }
+    },
+    largeArcFlag: {
+      enumerable: true,
+      get: function() {
+        return this._largeArcFlag;
+      },
+      set: function(largeArcFlag) {
+        if (this._largeArcFlag !== largeArcFlag) {
+          this._largeArcFlag = largeArcFlag;
+          if (this._bound) {
+            this.dispatchEvent(Events2.Types.change);
+          }
+        }
+      }
+    },
+    sweepFlag: {
+      get: function() {
+        return this._sweepFlag;
+      },
+      set: function(sweepFlag) {
+        if (this._sweepFlag !== sweepFlag) {
+          this._sweepFlag = sweepFlag;
+          if (this._bound) {
+            this.dispatchEvent(Events2.Types.change);
+          }
+        }
+      }
+    }
+  };
+
+  // node_modules/two.js/src/constants.js
+  var count2 = 0;
+  var Constants2 = {
+    nextFrameID: null,
+    Types: {
+      webgl: "WebGLRenderer",
+      svg: "SVGRenderer",
+      canvas: "CanvasRenderer"
+    },
+    Version: "<%= version %>",
+    PublishDate: "<%= publishDate %>",
+    Identifier: "two-",
+    Resolution: 12,
+    AutoCalculateImportedMatrices: true,
+    Instances: [],
+    uniqueId: function() {
+      return count2++;
+    }
+  };
+
+  // node_modules/two.js/src/utils/curves.js
+  var Curve2 = {
+    CollinearityEpsilon: Math.pow(10, -30),
+    RecursionLimit: 16,
+    CuspLimit: 0,
+    Tolerance: {
+      distance: 0.25,
+      angle: 0,
+      epsilon: Number.EPSILON
+    },
+    abscissas: [
+      [0.5773502691896257],
+      [0, 0.7745966692414834],
+      [0.33998104358485626, 0.8611363115940526],
+      [0, 0.5384693101056831, 0.906179845938664],
+      [0.2386191860831969, 0.6612093864662645, 0.932469514203152],
+      [0, 0.4058451513773972, 0.7415311855993945, 0.9491079123427585],
+      [0.1834346424956498, 0.525532409916329, 0.7966664774136267, 0.9602898564975363],
+      [0, 0.3242534234038089, 0.6133714327005904, 0.8360311073266358, 0.9681602395076261],
+      [0.14887433898163122, 0.4333953941292472, 0.6794095682990244, 0.8650633666889845, 0.9739065285171717],
+      [0, 0.26954315595234496, 0.5190961292068118, 0.7301520055740494, 0.8870625997680953, 0.978228658146057],
+      [0.1252334085114689, 0.3678314989981802, 0.5873179542866175, 0.7699026741943047, 0.9041172563704749, 0.9815606342467192],
+      [0, 0.2304583159551348, 0.44849275103644687, 0.6423493394403402, 0.8015780907333099, 0.9175983992229779, 0.9841830547185881],
+      [0.10805494870734367, 0.31911236892788974, 0.5152486363581541, 0.6872929048116855, 0.827201315069765, 0.9284348836635735, 0.9862838086968123],
+      [0, 0.20119409399743451, 0.3941513470775634, 0.5709721726085388, 0.7244177313601701, 0.8482065834104272, 0.937273392400706, 0.9879925180204854],
+      [0.09501250983763744, 0.2816035507792589, 0.45801677765722737, 0.6178762444026438, 0.755404408355003, 0.8656312023878318, 0.9445750230732326, 0.9894009349916499]
+    ],
+    weights: [
+      [1],
+      [0.8888888888888888, 0.5555555555555556],
+      [0.6521451548625461, 0.34785484513745385],
+      [0.5688888888888889, 0.47862867049936647, 0.23692688505618908],
+      [0.46791393457269104, 0.3607615730481386, 0.17132449237917036],
+      [0.4179591836734694, 0.3818300505051189, 0.27970539148927664, 0.1294849661688697],
+      [0.362683783378362, 0.31370664587788727, 0.22238103445337448, 0.10122853629037626],
+      [0.3302393550012598, 0.31234707704000286, 0.26061069640293544, 0.1806481606948574, 0.08127438836157441],
+      [0.29552422471475287, 0.26926671930999635, 0.21908636251598204, 0.1494513491505806, 0.06667134430868814],
+      [0.2729250867779006, 0.26280454451024665, 0.23319376459199048, 0.18629021092773426, 0.1255803694649046, 0.05566856711617366],
+      [0.24914704581340277, 0.2334925365383548, 0.20316742672306592, 0.16007832854334622, 0.10693932599531843, 0.04717533638651183],
+      [0.2325515532308739, 0.22628318026289723, 0.2078160475368885, 0.17814598076194574, 0.13887351021978725, 0.09212149983772845, 0.04048400476531588],
+      [0.2152638534631578, 0.2051984637212956, 0.18553839747793782, 0.15720316715819355, 0.12151857068790319, 0.08015808715976021, 0.03511946033175186],
+      [0.2025782419255613, 0.19843148532711158, 0.1861610000155622, 0.16626920581699392, 0.13957067792615432, 0.10715922046717194, 0.07036604748810812, 0.03075324199611727],
+      [0.1894506104550685, 0.18260341504492358, 0.16915651939500254, 0.14959598881657674, 0.12462897125553388, 0.09515851168249279, 0.062253523938647894, 0.027152459411754096]
+    ]
+  };
+  function getComponentOnCubicBezier2(t, a, b, c, d) {
+    const k = 1 - t;
+    return k * k * k * a + 3 * k * k * t * b + 3 * k * t * t * c + t * t * t * d;
+  }
+  function subdivide2(x1, y1, x2, y2, x3, y3, x4, y4, limit) {
+    limit = limit || Curve2.RecursionLimit;
+    const amount = limit + 1;
+    if (Math.abs(x1 - x4) < 1e-3 && Math.abs(y1 - y4) < 1e-3) {
+      return [new Anchor2(x4, y4)];
+    }
+    const result = [];
+    for (let i = 0; i < amount; i++) {
+      const t = i / amount;
+      const x = getComponentOnCubicBezier2(t, x1, x2, x3, x4);
+      const y = getComponentOnCubicBezier2(t, y1, y2, y3, y4);
+      result.push(new Anchor2(x, y));
+    }
+    return result;
+  }
+  function getCurveLength3(x1, y1, x2, y2, x3, y3, x4, y4, limit) {
+    if (x1 === x2 && y1 === y2 && x3 === x4 && y3 === y4) {
+      const dx = x4 - x1;
+      const dy = y4 - y1;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+    const ax = 9 * (x2 - x3) + 3 * (x4 - x1), bx = 6 * (x1 + x3) - 12 * x2, cx = 3 * (x2 - x1), ay = 9 * (y2 - y3) + 3 * (y4 - y1), by = 6 * (y1 + y3) - 12 * y2, cy = 3 * (y2 - y1);
+    function integrand(t) {
+      const dx = (ax * t + bx) * t + cx, dy = (ay * t + by) * t + cy;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+    return integrate2(
+      integrand,
+      0,
+      1,
+      limit || Curve2.RecursionLimit
+    );
+  }
+  function getCurveBoundingBox2(x1, y1, x2, y2, x3, y3, x4, y4) {
+    const tvalues = [];
+    const bounds = [[], []];
+    let a, b, c, t, t1, t2, b2ac, sqrtb2ac;
+    for (let i = 0; i < 2; ++i) {
+      if (i == 0) {
+        b = 6 * x1 - 12 * x2 + 6 * x3;
+        a = -3 * x1 + 9 * x2 - 9 * x3 + 3 * x4;
+        c = 3 * x2 - 3 * x1;
+      } else {
+        b = 6 * y1 - 12 * y2 + 6 * y3;
+        a = -3 * y1 + 9 * y2 - 9 * y3 + 3 * y4;
+        c = 3 * y2 - 3 * y1;
+      }
+      if (Math.abs(a) < 1e-12) {
+        if (Math.abs(b) < 1e-12) {
+          continue;
+        }
+        t = -c / b;
+        if (0 < t && t < 1) {
+          tvalues.push(t);
+        }
+        continue;
+      }
+      b2ac = b * b - 4 * c * a;
+      sqrtb2ac = Math.sqrt(b2ac);
+      if (b2ac < 0) {
+        continue;
+      }
+      t1 = (-b + sqrtb2ac) / (2 * a);
+      if (0 < t1 && t1 < 1) {
+        tvalues.push(t1);
+      }
+      t2 = (-b - sqrtb2ac) / (2 * a);
+      if (0 < t2 && t2 < 1) {
+        tvalues.push(t2);
+      }
+    }
+    let j = tvalues.length;
+    let jlen = j;
+    let mt;
+    while (j--) {
+      t = tvalues[j];
+      mt = 1 - t;
+      bounds[0][j] = mt * mt * mt * x1 + 3 * mt * mt * t * x2 + 3 * mt * t * t * x3 + t * t * t * x4;
+      bounds[1][j] = mt * mt * mt * y1 + 3 * mt * mt * t * y2 + 3 * mt * t * t * y3 + t * t * t * y4;
+    }
+    bounds[0][jlen] = x1;
+    bounds[1][jlen] = y1;
+    bounds[0][jlen + 1] = x4;
+    bounds[1][jlen + 1] = y4;
+    bounds[0].length = bounds[1].length = jlen + 2;
+    return {
+      min: { x: Math.min.apply(0, bounds[0]), y: Math.min.apply(0, bounds[1]) },
+      max: { x: Math.max.apply(0, bounds[0]), y: Math.max.apply(0, bounds[1]) }
+    };
+  }
+  function integrate2(f, a, b, n) {
+    let x = Curve2.abscissas[n - 2], w = Curve2.weights[n - 2], A = 0.5 * (b - a), B = A + a, i = 0, m = n + 1 >> 1, sum = n & 1 ? w[i++] * f(B) : 0;
+    while (i < m) {
+      const Ax = A * x[i];
+      sum += w[i++] * (f(B + Ax) + f(B - Ax));
+    }
+    return A * sum;
+  }
+  function getCurveFromPoints2(points, closed2) {
+    const l = points.length, last = l - 1;
+    for (let i = 0; i < l; i++) {
+      const point = points[i];
+      const prev = closed2 ? mod2(i - 1, l) : Math.max(i - 1, 0);
+      const next = closed2 ? mod2(i + 1, l) : Math.min(i + 1, last);
+      const a = points[prev];
+      const b = point;
+      const c = points[next];
+      getControlPoints2(a, b, c);
+      b.command = i === 0 ? Commands2.move : Commands2.curve;
+    }
+  }
+  function getControlPoints2(a, b, c) {
+    const a1 = Vector2.angleBetween(a, b);
+    const a2 = Vector2.angleBetween(c, b);
+    let d1 = Vector2.distanceBetween(a, b);
+    let d2 = Vector2.distanceBetween(c, b);
+    let mid = (a1 + a2) / 2;
+    if (d1 < 1e-4 || d2 < 1e-4) {
+      if (typeof b.relative === "boolean" && !b.relative) {
+        b.controls.left.copy(b);
+        b.controls.right.copy(b);
+      }
+      return b;
+    }
+    d1 *= 0.33;
+    d2 *= 0.33;
+    if (a2 < a1) {
+      mid += HALF_PI2;
+    } else {
+      mid -= HALF_PI2;
+    }
+    b.controls.left.x = Math.cos(mid) * d1;
+    b.controls.left.y = Math.sin(mid) * d1;
+    mid -= Math.PI;
+    b.controls.right.x = Math.cos(mid) * d2;
+    b.controls.right.y = Math.sin(mid) * d2;
+    if (typeof b.relative === "boolean" && !b.relative) {
+      b.controls.left.x += b.x;
+      b.controls.left.y += b.y;
+      b.controls.right.x += b.x;
+      b.controls.right.y += b.y;
+    }
+    return b;
+  }
+
+  // node_modules/two.js/src/utils/shape.js
+  function contains2(path, t) {
+    if (t === 0 || t === 1) {
+      return true;
+    }
+    const length = path._length;
+    const target = length * t;
+    let elapsed = 0;
+    for (let i = 0; i < path._lengths.length; i++) {
+      const dist = path._lengths[i];
+      if (elapsed >= target) {
+        return target - elapsed >= 0;
+      }
+      elapsed += dist;
+    }
+    return false;
+  }
+  function getIdByLength2(path, target) {
+    const total = path._length;
+    if (target <= 0) {
+      return 0;
+    } else if (target >= total) {
+      return path._lengths.length - 1;
+    }
+    for (let i = 0, sum = 0; i < path._lengths.length; i++) {
+      if (sum + path._lengths[i] >= target) {
+        target -= sum;
+        return Math.max(i - 1, 0) + target / path._lengths[i];
+      }
+      sum += path._lengths[i];
+    }
+    return -1;
+  }
+  function getCurveLength4(a, b, limit) {
+    let x1, x2, x3, x4, y1, y2, y3, y4;
+    const right = b.controls && b.controls.right;
+    const left = a.controls && a.controls.left;
+    x1 = b.x;
+    y1 = b.y;
+    x2 = (right || b).x;
+    y2 = (right || b).y;
+    x3 = (left || a).x;
+    y3 = (left || a).y;
+    x4 = a.x;
+    y4 = a.y;
+    if (right && b._relative) {
+      x2 += b.x;
+      y2 += b.y;
+    }
+    if (left && a._relative) {
+      x3 += a.x;
+      y3 += a.y;
+    }
+    return getCurveLength3(x1, y1, x2, y2, x3, y3, x4, y4, limit);
+  }
+  function getSubdivisions2(a, b, limit) {
+    let x1, x2, x3, x4, y1, y2, y3, y4;
+    const right = b.controls && b.controls.right;
+    const left = a.controls && a.controls.left;
+    x1 = b.x;
+    y1 = b.y;
+    x2 = (right || b).x;
+    y2 = (right || b).y;
+    x3 = (left || a).x;
+    y3 = (left || a).y;
+    x4 = a.x;
+    y4 = a.y;
+    if (right && b._relative) {
+      x2 += b.x;
+      y2 += b.y;
+    }
+    if (left && a._relative) {
+      x3 += a.x;
+      y3 += a.y;
+    }
+    return subdivide2(x1, y1, x2, y2, x3, y3, x4, y4, limit);
+  }
+
+  // node_modules/two.js/src/utils/underscore.js
+  var slice2 = Array.prototype.slice;
+  function isArrayLike2(collection) {
+    if (collection === null || collection === void 0)
+      return false;
+    const length = collection.length;
+    return typeof length == "number" && length >= 0 && length < 4294967296;
+  }
+  var _2 = {
+    isNaN: function(obj) {
+      return typeof obj === "number" && obj !== +obj;
+    },
+    isElement: function(obj) {
+      return !!(obj && obj.nodeType === 1);
+    },
+    isObject: function(obj) {
+      const type = typeof obj;
+      return type === "function" || type === "object" && !!obj;
+    },
+    extend: function(base) {
+      const sources = slice2.call(arguments, 1);
+      for (let i = 0; i < sources.length; i++) {
+        const obj = sources[i];
+        for (let k in obj) {
+          base[k] = obj[k];
+        }
+      }
+      return base;
+    },
+    defaults: function(base) {
+      const sources = slice2.call(arguments, 1);
+      for (let i = 0; i < sources.length; i++) {
+        const obj = sources[i];
+        for (let k in obj) {
+          if (base[k] === void 0) {
+            base[k] = obj[k];
+          }
+        }
+      }
+      return base;
+    },
+    each: function(obj, iteratee, context) {
+      const ctx = context || this;
+      const keys = !isArrayLike2(obj) && Object.keys(obj);
+      const length = (keys || obj).length;
+      for (let i = 0; i < length; i++) {
+        const k = keys ? keys[i] : i;
+        iteratee.call(ctx, obj[k], k, obj);
+      }
+      return obj;
+    },
+    performance: root2.performance && root2.performance.now ? root2.performance : Date
+  };
+
+  // node_modules/two.js/src/element.js
+  var Element2 = class extends Events2 {
+    _flagId = false;
+    _flagClassName = false;
+    _renderer = {};
+    _id = "";
+    _className = "";
+    classList = [];
+    constructor() {
+      super();
+      for (let prop in proto26) {
+        Object.defineProperty(this, prop, proto26[prop]);
+      }
+    }
+    flagReset() {
+      this._flagId = this._flagClassName = false;
+    }
+  };
+  var proto26 = {
+    renderer: {
+      enumerable: false,
+      get: function() {
+        return this._renderer;
+      }
+    },
+    id: {
+      enumerable: true,
+      get: function() {
+        return this._id;
+      },
+      set: function(v) {
+        const id = this._id;
+        if (v === this._id) {
+          return;
+        }
+        this._id = v;
+        this._flagId = true;
+        if (this.parent) {
+          delete this.parent.children.ids[id];
+          this.parent.children.ids[this._id] = this;
+        }
+      }
+    },
+    className: {
+      enumerable: true,
+      get: function() {
+        return this._className;
+      },
+      set: function(v) {
+        if (this._className !== v) {
+          this._flagClassName = true;
+          this.classList = v.split(/\s+?/);
+          this._className = v;
+        }
+      }
+    }
+  };
 
   // node_modules/two.js/src/matrix.js
   var cos7 = Math.cos;
@@ -12735,19 +13485,3524 @@
   ]);
   setMatrix2(Matrix4);
 
+  // node_modules/two.js/src/shape.js
+  var Shape2 = class extends Element2 {
+    _flagMatrix = true;
+    _flagScale = false;
+    _matrix = null;
+    _worldMatrix = null;
+    _position = null;
+    _rotation = 0;
+    _scale = 1;
+    _skewX = 0;
+    _skewY = 0;
+    constructor() {
+      super();
+      for (let prop in proto27) {
+        Object.defineProperty(this, prop, proto27[prop]);
+      }
+      this._renderer.flagMatrix = FlagMatrix2.bind(this);
+      this.isShape = true;
+      this.id = Constants2.Identifier + Constants2.uniqueId();
+      this.matrix = new Matrix4();
+      this.worldMatrix = new Matrix4();
+      this.position = new Vector2();
+      this.rotation = 0;
+      this.scale = 1;
+      this.skewX = 0;
+      this.skewY = 0;
+    }
+    get renderer() {
+      return this._renderer;
+    }
+    set renderer(v) {
+      this._renderer = v;
+    }
+    get translation() {
+      return proto27.position.get.apply(this, arguments);
+    }
+    set translation(v) {
+      proto27.position.set.apply(this, arguments);
+    }
+    addTo(group) {
+      group.add(this);
+      return this;
+    }
+    remove() {
+      if (!this.parent) {
+        return this;
+      }
+      this.parent.remove(this);
+      return this;
+    }
+    clone(parent) {
+      const clone = new Shape2();
+      clone.position.copy(this.position);
+      clone.rotation = this.rotation;
+      clone.scale = this.scale;
+      clone.skewX = this.skewX;
+      clone.skewY = this.skewY;
+      if (this.matrix.manual) {
+        clone.matrix.copy(this.matrix);
+      }
+      if (parent) {
+        parent.add(clone);
+      }
+      return clone._update();
+    }
+    _update(bubbles) {
+      if (!this._matrix.manual && this._flagMatrix) {
+        this._matrix.identity().translate(this.position.x, this.position.y);
+        if (this._scale instanceof Vector2) {
+          this._matrix.scale(this._scale.x, this._scale.y);
+        } else {
+          this._matrix.scale(this._scale);
+        }
+        this._matrix.rotate(this.rotation);
+        this._matrix.skewX(this.skewX);
+        this._matrix.skewY(this.skewY);
+      }
+      if (bubbles) {
+        if (this.parent && this.parent._update) {
+          this.parent._update();
+        }
+      }
+      return this;
+    }
+    flagReset() {
+      this._flagMatrix = this._flagScale = false;
+      super.flagReset.call(this);
+      return this;
+    }
+  };
+  var proto27 = {
+    position: {
+      enumerable: true,
+      get: function() {
+        return this._position;
+      },
+      set: function(v) {
+        if (this._position) {
+          this._position.unbind(Events2.Types.change, this._renderer.flagMatrix);
+        }
+        this._position = v;
+        this._position.bind(Events2.Types.change, this._renderer.flagMatrix);
+        FlagMatrix2.call(this);
+      }
+    },
+    rotation: {
+      enumerable: true,
+      get: function() {
+        return this._rotation;
+      },
+      set: function(v) {
+        this._rotation = v;
+        this._flagMatrix = true;
+      }
+    },
+    scale: {
+      enumerable: true,
+      get: function() {
+        return this._scale;
+      },
+      set: function(v) {
+        if (this._scale instanceof Vector2) {
+          this._scale.unbind(Events2.Types.change, this._renderer.flagMatrix);
+        }
+        this._scale = v;
+        if (this._scale instanceof Vector2) {
+          this._scale.bind(Events2.Types.change, this._renderer.flagMatrix);
+        }
+        this._flagMatrix = true;
+        this._flagScale = true;
+      }
+    },
+    skewX: {
+      enumerable: true,
+      get: function() {
+        return this._skewX;
+      },
+      set: function(v) {
+        this._skewX = v;
+        this._flagMatrix = true;
+      }
+    },
+    skewY: {
+      enumerable: true,
+      get: function() {
+        return this._skewY;
+      },
+      set: function(v) {
+        this._skewY = v;
+        this._flagMatrix = true;
+      }
+    },
+    matrix: {
+      enumerable: true,
+      get: function() {
+        return this._matrix;
+      },
+      set: function(v) {
+        this._matrix = v;
+        this._flagMatrix = true;
+      }
+    },
+    worldMatrix: {
+      enumerable: true,
+      get: function() {
+        getComputedMatrix2(this, this._worldMatrix);
+        return this._worldMatrix;
+      },
+      set: function(v) {
+        this._worldMatrix = v;
+      }
+    }
+  };
+  function FlagMatrix2() {
+    this._flagMatrix = true;
+  }
+
+  // node_modules/two.js/src/effects/stop.js
+  var _Stop2 = class extends Element2 {
+    _flagOffset = true;
+    _flagOpacity = true;
+    _flagColor = true;
+    _offset = 0;
+    _opacity = 1;
+    _color = "#fff";
+    constructor(offset, color, opacity) {
+      super();
+      for (let prop in proto28) {
+        Object.defineProperty(this, prop, proto28[prop]);
+      }
+      this._renderer.type = "stop";
+      this.offset = typeof offset === "number" ? offset : _Stop2.Index <= 0 ? 0 : 1;
+      this.opacity = typeof opacity === "number" ? opacity : 1;
+      this.color = typeof color === "string" ? color : _Stop2.Index <= 0 ? "#fff" : "#000";
+      _Stop2.Index = (_Stop2.Index + 1) % 2;
+    }
+    clone(parent) {
+      const clone = new _Stop2();
+      _2.each(_Stop2.Properties, function(property) {
+        clone[property] = this[property];
+      }, this);
+      if (parent && parent.stops) {
+        parent.stops.push(clone);
+      }
+      return clone;
+    }
+    toObject() {
+      const result = {};
+      _2.each(_Stop2.Properties, function(k) {
+        result[k] = this[k];
+      }, this);
+      return result;
+    }
+    flagReset() {
+      this._flagOffset = this._flagColor = this._flagOpacity = false;
+      super.flagReset.call(this);
+      return this;
+    }
+  };
+  var Stop2 = _Stop2;
+  __publicField(Stop2, "Index", 0);
+  __publicField(Stop2, "Properties", ["offset", "opacity", "color"]);
+  var proto28 = {
+    offset: {
+      enumerable: true,
+      get: function() {
+        return this._offset;
+      },
+      set: function(v) {
+        this._offset = v;
+        this._flagOffset = true;
+        if (this.parent) {
+          this.parent._flagStops = true;
+        }
+      }
+    },
+    opacity: {
+      enumerable: true,
+      get: function() {
+        return this._opacity;
+      },
+      set: function(v) {
+        this._opacity = v;
+        this._flagOpacity = true;
+        if (this.parent) {
+          this.parent._flagStops = true;
+        }
+      }
+    },
+    color: {
+      enumerable: true,
+      get: function() {
+        return this._color;
+      },
+      set: function(v) {
+        this._color = v;
+        this._flagColor = true;
+        if (this.parent) {
+          this.parent._flagStops = true;
+        }
+      }
+    }
+  };
+
+  // node_modules/two.js/src/effects/gradient.js
+  var _Gradient2 = class extends Element2 {
+    _flagStops = false;
+    _flagSpread = false;
+    _flagUnits = false;
+    _spread = "";
+    _units = "";
+    constructor(stops) {
+      super();
+      for (let prop in proto29) {
+        Object.defineProperty(this, prop, proto29[prop]);
+      }
+      this._renderer.type = "gradient";
+      this.id = Constants2.Identifier + Constants2.uniqueId();
+      this.classList = [];
+      this._renderer.flagStops = FlagStops2.bind(this);
+      this._renderer.bindStops = BindStops2.bind(this);
+      this._renderer.unbindStops = UnbindStops2.bind(this);
+      this.spread = "pad";
+      this.units = "objectBoundingBox";
+      if (stops) {
+        this.stops = stops;
+      }
+    }
+    clone(parent) {
+      const stops = this.stops.map(function(s) {
+        return s.clone();
+      });
+      const clone = new _Gradient2(stops);
+      _2.each(_Gradient2.Properties, function(k) {
+        clone[k] = this[k];
+      }, this);
+      if (parent) {
+        parent.add(clone);
+      }
+      return clone;
+    }
+    toObject() {
+      const result = {
+        stops: this.stops.map(function(s) {
+          return s.toObject();
+        })
+      };
+      _2.each(_Gradient2.Properties, function(k) {
+        result[k] = this[k];
+      }, this);
+      return result;
+    }
+    _update() {
+      if (this._flagSpread || this._flagStops) {
+        this.trigger(Events2.Types.change);
+      }
+      return this;
+    }
+    flagReset() {
+      this._flagSpread = this._flagUnits = this._flagStops = false;
+      super.flagReset.call(this);
+      return this;
+    }
+  };
+  var Gradient2 = _Gradient2;
+  __publicField(Gradient2, "Stop", Stop2);
+  __publicField(Gradient2, "Properties", ["spread", "stops", "renderer", "units"]);
+  var proto29 = {
+    spread: {
+      enumerable: true,
+      get: function() {
+        return this._spread;
+      },
+      set: function(v) {
+        this._spread = v;
+        this._flagSpread = true;
+      }
+    },
+    units: {
+      enumerable: true,
+      get: function() {
+        return this._units;
+      },
+      set: function(v) {
+        this._units = v;
+        this._flagUnits = true;
+      }
+    },
+    stops: {
+      enumerable: true,
+      get: function() {
+        return this._stops;
+      },
+      set: function(stops) {
+        const bindStops = this._renderer.bindStops;
+        const unbindStops = this._renderer.unbindStops;
+        if (this._stops) {
+          this._stops.unbind(Events2.Types.insert, bindStops).unbind(Events2.Types.remove, unbindStops);
+        }
+        this._stops = new Collection2((stops || []).slice(0));
+        this._stops.bind(Events2.Types.insert, bindStops).bind(Events2.Types.remove, unbindStops);
+        bindStops(this._stops);
+      }
+    }
+  };
+  function FlagStops2() {
+    this._flagStops = true;
+  }
+  function BindStops2(items) {
+    let i = items.length;
+    while (i--) {
+      items[i].bind(Events2.Types.change, this._renderer.flagStops);
+      items[i].parent = this;
+    }
+    this._renderer.flagStops();
+  }
+  function UnbindStops2(items) {
+    let i = items.length;
+    while (i--) {
+      items[i].unbind(Events2.Types.change, this._renderer.flagStops);
+      delete items[i].parent;
+    }
+    this._renderer.flagStops();
+  }
+
+  // node_modules/two.js/src/effects/linear-gradient.js
+  var _LinearGradient2 = class extends Gradient2 {
+    _flagEndPoints = false;
+    _left = null;
+    _right = null;
+    constructor(x1, y1, x2, y2, stops) {
+      super(stops);
+      for (let prop in proto30) {
+        Object.defineProperty(this, prop, proto30[prop]);
+      }
+      this._renderer.type = "linear-gradient";
+      this._renderer.flagEndPoints = FlagEndPoints2.bind(this);
+      this.left = new Vector2();
+      this.right = new Vector2();
+      if (typeof x1 === "number") {
+        this.left.x = x1;
+      }
+      if (typeof y1 === "number") {
+        this.left.y = y1;
+      }
+      if (typeof x2 === "number") {
+        this.right.x = x2;
+      }
+      if (typeof y2 === "number") {
+        this.right.y = y2;
+      }
+    }
+    clone(parent) {
+      const stops = this.stops.map(function(stop) {
+        return stop.clone();
+      });
+      const clone = new _LinearGradient2(
+        this.left._x,
+        this.left._y,
+        this.right._x,
+        this.right._y,
+        stops
+      );
+      _2.each(Gradient2.Properties, function(k) {
+        clone[k] = this[k];
+      }, this);
+      if (parent) {
+        parent.add(clone);
+      }
+      return clone;
+    }
+    toObject() {
+      const result = super.toObject.call(this);
+      result.left = this.left.toObject();
+      result.right = this.right.toObject();
+      return result;
+    }
+    _update() {
+      if (this._flagEndPoints || this._flagSpread || this._flagStops) {
+        this.trigger(Events2.Types.change);
+      }
+      return this;
+    }
+    flagReset() {
+      this._flagEndPoints = false;
+      super.flagReset.call(this);
+      return this;
+    }
+  };
+  var LinearGradient2 = _LinearGradient2;
+  __publicField(LinearGradient2, "Properties", ["left", "right"]);
+  __publicField(LinearGradient2, "Stop", Stop2);
+  var proto30 = {
+    left: {
+      enumerable: true,
+      get: function() {
+        return this._left;
+      },
+      set: function(v) {
+        if (this._left instanceof Vector2) {
+          this._left.unbind(Events2.Types.change, this._renderer.flagEndPoints);
+        }
+        this._left = v;
+        this._left.bind(Events2.Types.change, this._renderer.flagEndPoints);
+        this._flagEndPoints = true;
+      }
+    },
+    right: {
+      enumerable: true,
+      get: function() {
+        return this._right;
+      },
+      set: function(v) {
+        if (this._right instanceof Vector2) {
+          this._right.unbind(Events2.Types.change, this._renderer.flagEndPoints);
+        }
+        this._right = v;
+        this._right.bind(Events2.Types.change, this._renderer.flagEndPoints);
+        this._flagEndPoints = true;
+      }
+    }
+  };
+  function FlagEndPoints2() {
+    this._flagEndPoints = true;
+  }
+
+  // node_modules/two.js/src/effects/radial-gradient.js
+  var _RadialGradient2 = class extends Gradient2 {
+    _flagRadius = false;
+    _flagCenter = false;
+    _flagFocal = false;
+    _radius = 0;
+    _center = null;
+    _focal = null;
+    constructor(cx, cy, r, stops, fx, fy) {
+      super(stops);
+      for (let prop in proto31) {
+        Object.defineProperty(this, prop, proto31[prop]);
+      }
+      this._renderer.type = "radial-gradient";
+      this._renderer.flagCenter = FlagCenter2.bind(this);
+      this._renderer.flagFocal = FlagFocal2.bind(this);
+      this.center = new Vector2();
+      this.radius = typeof r === "number" ? r : 1;
+      this.focal = new Vector2();
+      if (typeof cx === "number") {
+        this.center.x = cx;
+      }
+      if (typeof cy === "number") {
+        this.center.y = cy;
+      }
+      this.focal.copy(this.center);
+      if (typeof fx === "number") {
+        this.focal.x = fx;
+      }
+      if (typeof fy === "number") {
+        this.focal.y = fy;
+      }
+    }
+    clone(parent) {
+      const stops = this.stops.map(function(stop) {
+        return stop.clone();
+      });
+      const clone = new _RadialGradient2(
+        this.center._x,
+        this.center._y,
+        this._radius,
+        stops,
+        this.focal._x,
+        this.focal._y
+      );
+      _2.each(Gradient2.Properties.concat(_RadialGradient2.Properties), function(k) {
+        clone[k] = this[k];
+      }, this);
+      if (parent) {
+        parent.add(clone);
+      }
+      return clone;
+    }
+    toObject() {
+      const result = super.toObject.call(this);
+      _2.each(_RadialGradient2.Properties, function(k) {
+        result[k] = this[k];
+      }, this);
+      result.center = this.center.toObject();
+      result.focal = this.focal.toObject();
+      return result;
+    }
+    _update() {
+      if (this._flagRadius || this._flatCenter || this._flagFocal || this._flagSpread || this._flagStops) {
+        this.trigger(Events2.Types.change);
+      }
+      return this;
+    }
+    flagReset() {
+      this._flagRadius = this._flagCenter = this._flagFocal = false;
+      super.flagReset.call(this);
+      return this;
+    }
+  };
+  var RadialGradient2 = _RadialGradient2;
+  __publicField(RadialGradient2, "Stop", Stop2);
+  __publicField(RadialGradient2, "Properties", ["center", "radius", "focal"]);
+  var proto31 = {
+    radius: {
+      enumerable: true,
+      get: function() {
+        return this._radius;
+      },
+      set: function(v) {
+        this._radius = v;
+        this._flagRadius = true;
+      }
+    },
+    center: {
+      enumerable: true,
+      get: function() {
+        return this._center;
+      },
+      set: function(v) {
+        if (this._center) {
+          this._center.unbind(Events2.Types.change, this._renderer.flagCenter);
+        }
+        this._center = v;
+        this._center.bind(Events2.Types.change, this._renderer.flagCenter);
+        this._flagCenter = true;
+      }
+    },
+    focal: {
+      enumerable: true,
+      get: function() {
+        return this._focal;
+      },
+      set: function(v) {
+        if (this._focal) {
+          this._focal.unbind(Events2.Types.change, this._renderer.flagFocal);
+        }
+        this._focal = v;
+        this._focal.bind(Events2.Types.change, this._renderer.flagFocal);
+        this._flagFocal = true;
+      }
+    }
+  };
+  function FlagCenter2() {
+    this._flagCenter = true;
+  }
+  function FlagFocal2() {
+    this._flagFocal = true;
+  }
+
+  // node_modules/two.js/src/utils/error.js
+  var TwoError2 = class extends Error {
+    name = "Two.js";
+    message;
+    constructor(message) {
+      super();
+      this.message = message;
+    }
+  };
+
+  // node_modules/two.js/src/utils/device-pixel-ratio.js
+  var devicePixelRatio2 = root2.devicePixelRatio || 1;
+  function getBackingStoreRatio2(ctx) {
+    return ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1;
+  }
+  function getRatio2(ctx) {
+    return devicePixelRatio2 / getBackingStoreRatio2(ctx);
+  }
+
+  // node_modules/two.js/src/children.js
+  var Children2 = class extends Collection2 {
+    ids = {};
+    constructor(children) {
+      children = Array.isArray(children) ? children : Array.prototype.slice.call(arguments);
+      super(children);
+      this.attach(children);
+      this.on(Events2.Types.insert, this.attach);
+      this.on(Events2.Types.remove, this.detach);
+    }
+    attach(children) {
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i];
+        if (child && child.id) {
+          this.ids[child.id] = child;
+        }
+      }
+      return this;
+    }
+    detach(children) {
+      for (let i = 0; i < children.length; i++) {
+        delete this.ids[children[i].id];
+      }
+      return this;
+    }
+  };
+
+  // node_modules/two.js/src/group.js
+  var min5 = Math.min;
+  var max5 = Math.max;
+  var _Group2 = class extends Shape2 {
+    _flagAdditions = false;
+    _flagSubtractions = false;
+    _flagOrder = false;
+    _flagOpacity = true;
+    _flagBeginning = false;
+    _flagEnding = false;
+    _flagLength = false;
+    _flagMask = false;
+    _fill = "#fff";
+    _stroke = "#000";
+    _linewidth = 1;
+    _opacity = 1;
+    _visible = true;
+    _cap = "round";
+    _join = "round";
+    _miter = 4;
+    _closed = true;
+    _curved = false;
+    _automatic = true;
+    _beginning = 0;
+    _ending = 1;
+    _length = 0;
+    _mask = null;
+    constructor(children) {
+      super();
+      for (let prop in proto32) {
+        Object.defineProperty(this, prop, proto32[prop]);
+      }
+      this._renderer.type = "group";
+      this.additions = [];
+      this.subtractions = [];
+      this.children = Array.isArray(children) ? children : Array.prototype.slice.call(arguments);
+    }
+    static InsertChildren(children) {
+      for (let i = 0; i < children.length; i++) {
+        replaceParent2.call(this, children[i], this);
+      }
+    }
+    static RemoveChildren(children) {
+      for (let i = 0; i < children.length; i++) {
+        replaceParent2.call(this, children[i]);
+      }
+    }
+    static OrderChildren(children) {
+      this._flagOrder = true;
+    }
+    clone(parent) {
+      const clone = new _Group2();
+      const children = this.children.map(function(child) {
+        return child.clone();
+      });
+      clone.add(children);
+      clone.opacity = this.opacity;
+      if (this.mask) {
+        clone.mask = this.mask;
+      }
+      clone.translation.copy(this.translation);
+      clone.rotation = this.rotation;
+      clone.scale = this.scale;
+      clone.className = this.className;
+      if (this.matrix.manual) {
+        clone.matrix.copy(this.matrix);
+      }
+      if (parent) {
+        parent.add(clone);
+      }
+      return clone._update();
+    }
+    toObject() {
+      const result = {
+        children: [],
+        translation: this.translation.toObject(),
+        rotation: this.rotation,
+        scale: this.scale instanceof Vector2 ? this.scale.toObject() : this.scale,
+        opacity: this.opacity,
+        className: this.className,
+        mask: this.mask ? this.mask.toObject() : null
+      };
+      if (this.matrix.manual) {
+        result.matrix = this.matrix.toObject();
+      }
+      _2.each(this.children, function(child, i) {
+        result.children[i] = child.toObject();
+      }, this);
+      return result;
+    }
+    corner() {
+      const rect = this.getBoundingClientRect(true);
+      for (let i = 0; i < this.children.length; i++) {
+        const child = this.children[i];
+        child.translation.x -= rect.left;
+        child.translation.y -= rect.top;
+      }
+      if (this.mask) {
+        this.mask.translation.x -= rect.left;
+        this.mask.translation.y -= rect.top;
+      }
+      return this;
+    }
+    center() {
+      const rect = this.getBoundingClientRect(true);
+      const cx = rect.left + rect.width / 2 - this.translation.x;
+      const cy = rect.top + rect.height / 2 - this.translation.y;
+      for (let i = 0; i < this.children.length; i++) {
+        const child = this.children[i];
+        if (child.isShape) {
+          child.translation.x -= cx;
+          child.translation.y -= cy;
+        }
+      }
+      if (this.mask) {
+        this.mask.translation.x -= cx;
+        this.mask.translation.y -= cy;
+      }
+      return this;
+    }
+    getById(id) {
+      let found = null;
+      function search(node) {
+        if (node.id === id) {
+          return node;
+        } else if (node.children) {
+          for (let i = 0; i < node.children.length; i++) {
+            found = search(node.children[i]);
+            if (found) {
+              return found;
+            }
+          }
+        }
+        return null;
+      }
+      return search(this);
+    }
+    getByClassName(className) {
+      const found = [];
+      function search(node) {
+        if (Array.prototype.indexOf.call(node.classList, className) >= 0) {
+          found.push(node);
+        }
+        if (node.children) {
+          for (let i = 0; i < node.children.length; i++) {
+            const child = node.children[i];
+            search(child);
+          }
+        }
+        return found;
+      }
+      return search(this);
+    }
+    getByType(type) {
+      const found = [];
+      function search(node) {
+        if (node instanceof type) {
+          found.push(node);
+        }
+        if (node.children) {
+          for (let i = 0; i < node.children.length; i++) {
+            const child = node.children[i];
+            search(child);
+          }
+        }
+        return found;
+      }
+      return search(this);
+    }
+    add(objects) {
+      if (!(objects instanceof Array)) {
+        objects = Array.prototype.slice.call(arguments);
+      } else {
+        objects = objects.slice();
+      }
+      for (let i = 0; i < objects.length; i++) {
+        const child = objects[i];
+        if (!(child && child.id)) {
+          continue;
+        }
+        const index = Array.prototype.indexOf.call(this.children, child);
+        if (index >= 0) {
+          this.children.splice(index, 1);
+        }
+        this.children.push(child);
+      }
+      return this;
+    }
+    remove(objects) {
+      const l = arguments.length, grandparent = this.parent;
+      if (l <= 0 && grandparent) {
+        grandparent.remove(this);
+        return this;
+      }
+      if (!(objects instanceof Array)) {
+        objects = Array.prototype.slice.call(arguments);
+      } else {
+        objects = objects.slice();
+      }
+      for (let i = 0; i < objects.length; i++) {
+        const object = objects[i];
+        if (!object || !this.children.ids[object.id]) {
+          continue;
+        }
+        const index = this.children.indexOf(object);
+        if (index >= 0) {
+          this.children.splice(index, 1);
+        }
+      }
+      return this;
+    }
+    getBoundingClientRect(shallow) {
+      let rect, matrix4, a, b, c, d, tc, lc, rc, bc;
+      this._update(true);
+      let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
+      const regex4 = /texture|gradient/i;
+      matrix4 = shallow ? this._matrix : getComputedMatrix2(this);
+      for (let i = 0; i < this.children.length; i++) {
+        const child = this.children[i];
+        if (!child.visible || regex4.test(child._renderer.type)) {
+          continue;
+        }
+        rect = child.getBoundingClientRect(shallow);
+        tc = typeof rect.top !== "number" || _2.isNaN(rect.top) || !isFinite(rect.top);
+        lc = typeof rect.left !== "number" || _2.isNaN(rect.left) || !isFinite(rect.left);
+        rc = typeof rect.right !== "number" || _2.isNaN(rect.right) || !isFinite(rect.right);
+        bc = typeof rect.bottom !== "number" || _2.isNaN(rect.bottom) || !isFinite(rect.bottom);
+        if (tc || lc || rc || bc) {
+          continue;
+        }
+        top = min5(rect.top, top);
+        left = min5(rect.left, left);
+        right = max5(rect.right, right);
+        bottom = max5(rect.bottom, bottom);
+      }
+      if (shallow) {
+        a = matrix4.multiply(left, top, 1);
+        b = matrix4.multiply(left, bottom, 1);
+        c = matrix4.multiply(right, top, 1);
+        d = matrix4.multiply(right, bottom, 1);
+        top = min5(a.y, b.y, c.y, d.y);
+        left = min5(a.x, b.x, c.x, d.x);
+        right = max5(a.x, b.x, c.x, d.x);
+        bottom = max5(a.y, b.y, c.y, d.y);
+      }
+      return {
+        top,
+        left,
+        right,
+        bottom,
+        width: right - left,
+        height: bottom - top
+      };
+    }
+    noFill() {
+      this.children.forEach(function(child) {
+        child.noFill();
+      });
+      return this;
+    }
+    noStroke() {
+      this.children.forEach(function(child) {
+        child.noStroke();
+      });
+      return this;
+    }
+    subdivide() {
+      const args = arguments;
+      this.children.forEach(function(child) {
+        child.subdivide.apply(child, args);
+      });
+      return this;
+    }
+    _update() {
+      let i, l, child;
+      if (this._flagBeginning || this._flagEnding) {
+        const beginning = Math.min(this._beginning, this._ending);
+        const ending = Math.max(this._beginning, this._ending);
+        const length = this.length;
+        let sum = 0;
+        const bd = beginning * length;
+        const ed = ending * length;
+        for (i = 0; i < this.children.length; i++) {
+          child = this.children[i];
+          l = child.length;
+          if (bd > sum + l) {
+            child.beginning = 1;
+            child.ending = 1;
+          } else if (ed < sum) {
+            child.beginning = 0;
+            child.ending = 0;
+          } else if (bd > sum && bd < sum + l) {
+            child.beginning = (bd - sum) / l;
+            child.ending = 1;
+          } else if (ed > sum && ed < sum + l) {
+            child.beginning = 0;
+            child.ending = (ed - sum) / l;
+          } else {
+            child.beginning = 0;
+            child.ending = 1;
+          }
+          sum += l;
+        }
+      }
+      return super._update.apply(this, arguments);
+    }
+    flagReset() {
+      if (this._flagAdditions) {
+        this.additions.length = 0;
+        this._flagAdditions = false;
+      }
+      if (this._flagSubtractions) {
+        this.subtractions.length = 0;
+        this._flagSubtractions = false;
+      }
+      this._flagOrder = this._flagMask = this._flagOpacity = this._flagBeginning = this._flagEnding = false;
+      super.flagReset.call(this);
+      return this;
+    }
+  };
+  var Group2 = _Group2;
+  __publicField(Group2, "Children", Children2);
+  __publicField(Group2, "Properties", [
+    "fill",
+    "stroke",
+    "linewidth",
+    "cap",
+    "join",
+    "miter",
+    "closed",
+    "curved",
+    "automatic"
+  ]);
+  var proto32 = {
+    visible: {
+      enumerable: true,
+      get: function() {
+        return this._visible;
+      },
+      set: function(v) {
+        this._flagVisible = this._visible !== v || this._flagVisible;
+        this._visible = v;
+      }
+    },
+    opacity: {
+      enumerable: true,
+      get: function() {
+        return this._opacity;
+      },
+      set: function(v) {
+        this._flagOpacity = this._opacity !== v || this._flagOpacity;
+        this._opacity = v;
+      }
+    },
+    beginning: {
+      enumerable: true,
+      get: function() {
+        return this._beginning;
+      },
+      set: function(v) {
+        this._flagBeginning = this._beginning !== v || this._flagBeginning;
+        this._beginning = v;
+      }
+    },
+    ending: {
+      enumerable: true,
+      get: function() {
+        return this._ending;
+      },
+      set: function(v) {
+        this._flagEnding = this._ending !== v || this._flagEnding;
+        this._ending = v;
+      }
+    },
+    length: {
+      enumerable: true,
+      get: function() {
+        if (this._flagLength || this._length <= 0) {
+          this._length = 0;
+          if (!this.children) {
+            return this._length;
+          }
+          for (let i = 0; i < this.children.length; i++) {
+            const child = this.children[i];
+            this._length += child.length;
+          }
+        }
+        return this._length;
+      }
+    },
+    fill: {
+      enumerable: true,
+      get: function() {
+        return this._fill;
+      },
+      set: function(v) {
+        this._fill = v;
+        for (let i = 0; i < this.children.length; i++) {
+          const child = this.children[i];
+          child.fill = v;
+        }
+      }
+    },
+    stroke: {
+      enumerable: true,
+      get: function() {
+        return this._stroke;
+      },
+      set: function(v) {
+        this._stroke = v;
+        for (let i = 0; i < this.children.length; i++) {
+          const child = this.children[i];
+          child.stroke = v;
+        }
+      }
+    },
+    linewidth: {
+      enumerable: true,
+      get: function() {
+        return this._linewidth;
+      },
+      set: function(v) {
+        this._linewidth = v;
+        for (let i = 0; i < this.children.length; i++) {
+          const child = this.children[i];
+          child.linewidth = v;
+        }
+      }
+    },
+    join: {
+      enumerable: true,
+      get: function() {
+        return this._join;
+      },
+      set: function(v) {
+        this._join = v;
+        for (let i = 0; i < this.children.length; i++) {
+          const child = this.children[i];
+          child.join = v;
+        }
+      }
+    },
+    miter: {
+      enumerable: true,
+      get: function() {
+        return this._miter;
+      },
+      set: function(v) {
+        this._miter = v;
+        for (let i = 0; i < this.children.length; i++) {
+          const child = this.children[i];
+          child.miter = v;
+        }
+      }
+    },
+    cap: {
+      enumerable: true,
+      get: function() {
+        return this._cap;
+      },
+      set: function(v) {
+        this._cap = v;
+        for (let i = 0; i < this.children.length; i++) {
+          const child = this.children[i];
+          child.cap = v;
+        }
+      }
+    },
+    closed: {
+      enumerable: true,
+      get: function() {
+        return this._closed;
+      },
+      set: function(v) {
+        this._closed = v;
+        for (let i = 0; i < this.children.length; i++) {
+          const child = this.children[i];
+          child.closed = v;
+        }
+      }
+    },
+    curved: {
+      enumerable: true,
+      get: function() {
+        return this._curved;
+      },
+      set: function(v) {
+        this._curved = v;
+        for (let i = 0; i < this.children.length; i++) {
+          const child = this.children[i];
+          child.curved = v;
+        }
+      }
+    },
+    automatic: {
+      enumerable: true,
+      get: function() {
+        return this._automatic;
+      },
+      set: function(v) {
+        this._automatic = v;
+        for (let i = 0; i < this.children.length; i++) {
+          const child = this.children[i];
+          child.automatic = v;
+        }
+      }
+    },
+    children: {
+      enumerable: true,
+      get: function() {
+        return this._children;
+      },
+      set: function(children) {
+        const insertChildren = Group2.InsertChildren.bind(this);
+        const removeChildren = Group2.RemoveChildren.bind(this);
+        const orderChildren = Group2.OrderChildren.bind(this);
+        if (this._children) {
+          this._children.unbind();
+          if (this._children.length > 0) {
+            removeChildren(this._children);
+          }
+        }
+        this._children = new Children2(children);
+        this._children.bind(Events2.Types.insert, insertChildren);
+        this._children.bind(Events2.Types.remove, removeChildren);
+        this._children.bind(Events2.Types.order, orderChildren);
+        if (children.length > 0) {
+          insertChildren(children);
+        }
+      }
+    },
+    mask: {
+      enumerable: true,
+      get: function() {
+        return this._mask;
+      },
+      set: function(v) {
+        this._mask = v;
+        this._flagMask = true;
+        if (_2.isObject(v) && !v.clip) {
+          v.clip = true;
+        }
+      }
+    }
+  };
+  function replaceParent2(child, newParent) {
+    const parent = child.parent;
+    let index;
+    if (parent === newParent) {
+      add();
+      return;
+    }
+    if (parent && parent.children.ids[child.id]) {
+      index = Array.prototype.indexOf.call(parent.children, child);
+      parent.children.splice(index, 1);
+      splice();
+    }
+    if (newParent) {
+      add();
+      return;
+    }
+    splice();
+    if (parent._flagAdditions && parent.additions.length === 0) {
+      parent._flagAdditions = false;
+    }
+    if (parent._flagSubtractions && parent.subtractions.length === 0) {
+      parent._flagSubtractions = false;
+    }
+    delete child.parent;
+    function add() {
+      if (newParent.subtractions.length > 0) {
+        index = Array.prototype.indexOf.call(newParent.subtractions, child);
+        if (index >= 0) {
+          newParent.subtractions.splice(index, 1);
+        }
+      }
+      if (newParent.additions.length > 0) {
+        index = Array.prototype.indexOf.call(newParent.additions, child);
+        if (index >= 0) {
+          newParent.additions.splice(index, 1);
+        }
+      }
+      child.parent = newParent;
+      newParent.additions.push(child);
+      newParent._flagAdditions = true;
+    }
+    function splice() {
+      index = Array.prototype.indexOf.call(parent.additions, child);
+      if (index >= 0) {
+        parent.additions.splice(index, 1);
+      }
+      index = Array.prototype.indexOf.call(parent.subtractions, child);
+      if (index < 0) {
+        parent.subtractions.push(child);
+        parent._flagSubtractions = true;
+      }
+    }
+  }
+
+  // node_modules/two.js/src/renderers/canvas.js
+  var matrix3 = new Matrix4();
+  var emptyArray2 = [];
+  var max6 = Math.max;
+  var min6 = Math.min;
+  var abs2 = Math.abs;
+  var sin8 = Math.sin;
+  var cos8 = Math.cos;
+  var acos2 = Math.acos;
+  var sqrt2 = Math.sqrt;
+  var canvas2 = {
+    isHidden: /(undefined|none|transparent)/i,
+    alignments: {
+      left: "start",
+      middle: "center",
+      right: "end"
+    },
+    shim: function(elem, name) {
+      elem.tagName = elem.nodeName = name || "canvas";
+      elem.nodeType = 1;
+      elem.getAttribute = function(prop) {
+        return this[prop];
+      };
+      elem.setAttribute = function(prop, val) {
+        this[prop] = val;
+        return this;
+      };
+      return elem;
+    },
+    group: {
+      renderChild: function(child) {
+        canvas2[child._renderer.type].render.call(child, this.ctx, true, this.clip);
+      },
+      render: function(ctx) {
+        if (!this._visible) {
+          return this;
+        }
+        this._update();
+        const matrix4 = this._matrix.elements;
+        const parent = this.parent;
+        this._renderer.opacity = this._opacity * (parent && parent._renderer ? parent._renderer.opacity : 1);
+        const mask = this._mask;
+        const defaultMatrix = isDefaultMatrix2(matrix4);
+        const shouldIsolate = !defaultMatrix || !!mask;
+        if (!this._renderer.context) {
+          this._renderer.context = {};
+        }
+        this._renderer.context.ctx = ctx;
+        if (shouldIsolate) {
+          ctx.save();
+          if (!defaultMatrix) {
+            ctx.transform(
+              matrix4[0],
+              matrix4[3],
+              matrix4[1],
+              matrix4[4],
+              matrix4[2],
+              matrix4[5]
+            );
+          }
+        }
+        if (mask) {
+          canvas2[mask._renderer.type].render.call(mask, ctx, true);
+        }
+        if (this._opacity > 0 && this._scale !== 0) {
+          for (let i = 0; i < this.children.length; i++) {
+            const child = this.children[i];
+            canvas2[child._renderer.type].render.call(child, ctx);
+          }
+        }
+        if (shouldIsolate) {
+          ctx.restore();
+        }
+        return this.flagReset();
+      }
+    },
+    path: {
+      render: function(ctx, forced, parentClipped) {
+        let matrix4, stroke, linewidth, fill, opacity, visible, cap, join, miter, closed2, commands, length, last, prev, a, b, c, d, ux, uy, vx, vy, ar, bl, br, cl, x, y, mask, clip, defaultMatrix, isOffset, dashes2, po;
+        po = this.parent && this.parent._renderer ? this.parent._renderer.opacity : 1;
+        mask = this._mask;
+        clip = this._clip;
+        opacity = this._opacity * (po || 1);
+        visible = this._visible;
+        if (!forced && (!visible || clip || opacity === 0)) {
+          return this;
+        }
+        this._update();
+        matrix4 = this._matrix.elements;
+        stroke = this._stroke;
+        linewidth = this._linewidth;
+        fill = this._fill;
+        cap = this._cap;
+        join = this._join;
+        miter = this._miter;
+        closed2 = this._closed;
+        commands = this._renderer.vertices;
+        length = commands.length;
+        last = length - 1;
+        defaultMatrix = isDefaultMatrix2(matrix4);
+        dashes2 = this.dashes;
+        if (!defaultMatrix) {
+          ctx.save();
+          ctx.transform(matrix4[0], matrix4[3], matrix4[1], matrix4[4], matrix4[2], matrix4[5]);
+        }
+        if (mask) {
+          canvas2[mask._renderer.type].render.call(mask, ctx, true);
+        }
+        if (fill) {
+          if (typeof fill === "string") {
+            ctx.fillStyle = fill;
+          } else {
+            canvas2[fill._renderer.type].render.call(fill, ctx, this);
+            ctx.fillStyle = fill._renderer.effect;
+          }
+        }
+        if (stroke) {
+          if (typeof stroke === "string") {
+            ctx.strokeStyle = stroke;
+          } else {
+            canvas2[stroke._renderer.type].render.call(stroke, ctx, this);
+            ctx.strokeStyle = stroke._renderer.effect;
+          }
+          if (linewidth) {
+            ctx.lineWidth = linewidth;
+          }
+          if (miter) {
+            ctx.miterLimit = miter;
+          }
+          if (join) {
+            ctx.lineJoin = join;
+          }
+          if (!closed2 && cap) {
+            ctx.lineCap = cap;
+          }
+        }
+        if (typeof opacity === "number") {
+          ctx.globalAlpha = opacity;
+        }
+        if (dashes2 && dashes2.length > 0) {
+          ctx.lineDashOffset = dashes2.offset || 0;
+          ctx.setLineDash(dashes2);
+        }
+        ctx.beginPath();
+        let rx, ry, xAxisRotation, largeArcFlag, sweepFlag, ax, ay;
+        for (let i = 0; i < length; i++) {
+          b = commands[i];
+          x = b.x;
+          y = b.y;
+          switch (b.command) {
+            case Commands2.close:
+              ctx.closePath();
+              break;
+            case Commands2.arc:
+              rx = b.rx;
+              ry = b.ry;
+              xAxisRotation = b.xAxisRotation;
+              largeArcFlag = b.largeArcFlag;
+              sweepFlag = b.sweepFlag;
+              prev = closed2 ? mod2(i - 1, length) : max6(i - 1, 0);
+              a = commands[prev];
+              ax = a.x;
+              ay = a.y;
+              canvas2.renderSvgArcCommand(
+                ctx,
+                ax,
+                ay,
+                rx,
+                ry,
+                largeArcFlag,
+                sweepFlag,
+                xAxisRotation,
+                x,
+                y
+              );
+              break;
+            case Commands2.curve:
+              prev = closed2 ? mod2(i - 1, length) : Math.max(i - 1, 0);
+              a = commands[prev];
+              ar = a.controls && a.controls.right || Vector2.zero;
+              bl = b.controls && b.controls.left || Vector2.zero;
+              if (a._relative) {
+                vx = ar.x + a.x;
+                vy = ar.y + a.y;
+              } else {
+                vx = ar.x;
+                vy = ar.y;
+              }
+              if (b._relative) {
+                ux = bl.x + b.x;
+                uy = bl.y + b.y;
+              } else {
+                ux = bl.x;
+                uy = bl.y;
+              }
+              ctx.bezierCurveTo(vx, vy, ux, uy, x, y);
+              if (i >= last && closed2) {
+                c = d;
+                br = b.controls && b.controls.right || Vector2.zero;
+                cl = c.controls && c.controls.left || Vector2.zero;
+                if (b._relative) {
+                  vx = br.x + b.x;
+                  vy = br.y + b.y;
+                } else {
+                  vx = br.x;
+                  vy = br.y;
+                }
+                if (c._relative) {
+                  ux = cl.x + c.x;
+                  uy = cl.y + c.y;
+                } else {
+                  ux = cl.x;
+                  uy = cl.y;
+                }
+                x = c.x;
+                y = c.y;
+                ctx.bezierCurveTo(vx, vy, ux, uy, x, y);
+              }
+              break;
+            case Commands2.line:
+              ctx.lineTo(x, y);
+              break;
+            case Commands2.move:
+              d = b;
+              ctx.moveTo(x, y);
+              break;
+          }
+        }
+        if (closed2) {
+          ctx.closePath();
+        }
+        if (!clip && !parentClipped) {
+          if (!canvas2.isHidden.test(fill)) {
+            isOffset = fill._renderer && fill._renderer.offset;
+            if (isOffset) {
+              ctx.save();
+              ctx.translate(
+                -fill._renderer.offset.x,
+                -fill._renderer.offset.y
+              );
+              ctx.scale(fill._renderer.scale.x, fill._renderer.scale.y);
+            }
+            ctx.fill();
+            if (isOffset) {
+              ctx.restore();
+            }
+          }
+          if (!canvas2.isHidden.test(stroke)) {
+            isOffset = stroke._renderer && stroke._renderer.offset;
+            if (isOffset) {
+              ctx.save();
+              ctx.translate(
+                -stroke._renderer.offset.x,
+                -stroke._renderer.offset.y
+              );
+              ctx.scale(stroke._renderer.scale.x, stroke._renderer.scale.y);
+              ctx.lineWidth = linewidth / stroke._renderer.scale.x;
+            }
+            ctx.stroke();
+            if (isOffset) {
+              ctx.restore();
+            }
+          }
+        }
+        if (!defaultMatrix) {
+          ctx.restore();
+        }
+        if (clip && !parentClipped) {
+          ctx.clip();
+        }
+        if (dashes2 && dashes2.length > 0) {
+          ctx.setLineDash(emptyArray2);
+        }
+        return this.flagReset();
+      }
+    },
+    points: {
+      render: function(ctx, forced, parentClipped) {
+        let me, stroke, linewidth, fill, opacity, visible, size, commands, length, b, x, y, defaultMatrix, isOffset, dashes2, po;
+        po = this.parent && this.parent._renderer ? this.parent._renderer.opacity : 1;
+        opacity = this._opacity * (po || 1);
+        visible = this._visible;
+        if (!forced && (!visible || opacity === 0)) {
+          return this;
+        }
+        this._update();
+        me = this._matrix.elements;
+        stroke = this._stroke;
+        linewidth = this._linewidth;
+        fill = this._fill;
+        commands = this._renderer.collection;
+        length = commands.length;
+        defaultMatrix = isDefaultMatrix2(me);
+        dashes2 = this.dashes;
+        size = this._size;
+        if (!defaultMatrix) {
+          ctx.save();
+          ctx.transform(me[0], me[3], me[1], me[4], me[2], me[5]);
+        }
+        if (fill) {
+          if (typeof fill === "string") {
+            ctx.fillStyle = fill;
+          } else {
+            canvas2[fill._renderer.type].render.call(fill, ctx, this);
+            ctx.fillStyle = fill._renderer.effect;
+          }
+        }
+        if (stroke) {
+          if (typeof stroke === "string") {
+            ctx.strokeStyle = stroke;
+          } else {
+            canvas2[stroke._renderer.type].render.call(stroke, ctx, this);
+            ctx.strokeStyle = stroke._renderer.effect;
+          }
+          if (linewidth) {
+            ctx.lineWidth = linewidth;
+          }
+        }
+        if (typeof opacity === "number") {
+          ctx.globalAlpha = opacity;
+        }
+        if (dashes2 && dashes2.length > 0) {
+          ctx.lineDashOffset = dashes2.offset || 0;
+          ctx.setLineDash(dashes2);
+        }
+        ctx.beginPath();
+        let radius = size * 0.5, m;
+        if (!this._sizeAttenuation) {
+          getComputedMatrix2(this, matrix3);
+          m = matrix3.elements;
+          m = decomposeMatrix2(m[0], m[3], m[1], m[4], m[2], m[5]);
+          radius /= Math.max(m.scaleX, m.scaleY);
+        }
+        for (let i = 0; i < length; i++) {
+          b = commands[i];
+          x = b.x;
+          y = b.y;
+          ctx.moveTo(x + radius, y);
+          ctx.arc(x, y, radius, 0, TWO_PI2);
+        }
+        if (!parentClipped) {
+          if (!canvas2.isHidden.test(fill)) {
+            isOffset = fill._renderer && fill._renderer.offset;
+            if (isOffset) {
+              ctx.save();
+              ctx.translate(
+                -fill._renderer.offset.x,
+                -fill._renderer.offset.y
+              );
+              ctx.scale(fill._renderer.scale.x, fill._renderer.scale.y);
+            }
+            ctx.fill();
+            if (isOffset) {
+              ctx.restore();
+            }
+          }
+          if (!canvas2.isHidden.test(stroke)) {
+            isOffset = stroke._renderer && stroke._renderer.offset;
+            if (isOffset) {
+              ctx.save();
+              ctx.translate(
+                -stroke._renderer.offset.x,
+                -stroke._renderer.offset.y
+              );
+              ctx.scale(stroke._renderer.scale.x, stroke._renderer.scale.y);
+              ctx.lineWidth = linewidth / stroke._renderer.scale.x;
+            }
+            ctx.stroke();
+            if (isOffset) {
+              ctx.restore();
+            }
+          }
+        }
+        if (!defaultMatrix) {
+          ctx.restore();
+        }
+        if (dashes2 && dashes2.length > 0) {
+          ctx.setLineDash(emptyArray2);
+        }
+        return this.flagReset();
+      }
+    },
+    text: {
+      render: function(ctx, forced, parentClipped) {
+        const po = this.parent && this.parent._renderer ? this.parent._renderer.opacity : 1;
+        const opacity = this._opacity * po;
+        const visible = this._visible;
+        const mask = this._mask;
+        const clip = this._clip;
+        if (!forced && (!visible || clip || opacity === 0)) {
+          return this;
+        }
+        this._update();
+        const matrix4 = this._matrix.elements;
+        const stroke = this._stroke;
+        const linewidth = this._linewidth;
+        const fill = this._fill;
+        const decoration = this._decoration;
+        const defaultMatrix = isDefaultMatrix2(matrix4);
+        const isOffset = fill._renderer && fill._renderer.offset && stroke._renderer && stroke._renderer.offset;
+        const dashes2 = this.dashes;
+        const alignment = canvas2.alignments[this._alignment] || this._alignment;
+        const baseline = this._baseline;
+        let a, b, c, d, e, sx, sy, x1, y1, x2, y2;
+        if (!defaultMatrix) {
+          ctx.save();
+          ctx.transform(matrix4[0], matrix4[3], matrix4[1], matrix4[4], matrix4[2], matrix4[5]);
+        }
+        if (mask) {
+          canvas2[mask._renderer.type].render.call(mask, ctx, true);
+        }
+        if (!isOffset) {
+          ctx.font = [this._style, this._weight, this._size + "px/" + this._leading + "px", this._family].join(" ");
+        }
+        ctx.textAlign = alignment;
+        ctx.textBaseline = baseline;
+        if (fill) {
+          if (typeof fill === "string") {
+            ctx.fillStyle = fill;
+          } else {
+            canvas2[fill._renderer.type].render.call(fill, ctx, this);
+            ctx.fillStyle = fill._renderer.effect;
+          }
+        }
+        if (stroke) {
+          if (typeof stroke === "string") {
+            ctx.strokeStyle = stroke;
+          } else {
+            canvas2[stroke._renderer.type].render.call(stroke, ctx, this);
+            ctx.strokeStyle = stroke._renderer.effect;
+          }
+          if (linewidth) {
+            ctx.lineWidth = linewidth;
+          }
+        }
+        if (typeof opacity === "number") {
+          ctx.globalAlpha = opacity;
+        }
+        if (dashes2 && dashes2.length > 0) {
+          ctx.lineDashOffset = dashes2.offset || 0;
+          ctx.setLineDash(dashes2);
+        }
+        if (!clip && !parentClipped) {
+          if (!canvas2.isHidden.test(fill)) {
+            if (fill._renderer && fill._renderer.offset) {
+              sx = fill._renderer.scale.x;
+              sy = fill._renderer.scale.y;
+              ctx.save();
+              ctx.translate(
+                -fill._renderer.offset.x,
+                -fill._renderer.offset.y
+              );
+              ctx.scale(sx, sy);
+              a = this._size / fill._renderer.scale.y;
+              b = this._leading / fill._renderer.scale.y;
+              ctx.font = [
+                this._style,
+                this._weight,
+                a + "px/",
+                b + "px",
+                this._family
+              ].join(" ");
+              c = fill._renderer.offset.x / fill._renderer.scale.x;
+              d = fill._renderer.offset.y / fill._renderer.scale.y;
+              ctx.fillText(this.value, c, d);
+              ctx.restore();
+            } else {
+              ctx.fillText(this.value, 0, 0);
+            }
+          }
+          if (!canvas2.isHidden.test(stroke)) {
+            if (stroke._renderer && stroke._renderer.offset) {
+              sx = stroke._renderer.scale.x;
+              sy = stroke._renderer.scale.y;
+              ctx.save();
+              ctx.translate(
+                -stroke._renderer.offset.x,
+                -stroke._renderer.offset.y
+              );
+              ctx.scale(sx, sy);
+              a = this._size / stroke._renderer.scale.y;
+              b = this._leading / stroke._renderer.scale.y;
+              ctx.font = [
+                this._style,
+                this._weight,
+                a + "px/",
+                b + "px",
+                this._family
+              ].join(" ");
+              c = stroke._renderer.offset.x / stroke._renderer.scale.x;
+              d = stroke._renderer.offset.y / stroke._renderer.scale.y;
+              e = linewidth / stroke._renderer.scale.x;
+              ctx.lineWidth = e;
+              ctx.strokeText(this.value, c, d);
+              ctx.restore();
+            } else {
+              ctx.strokeText(this.value, 0, 0);
+            }
+          }
+        }
+        if (/(underline|strikethrough)/i.test(decoration)) {
+          const metrics = ctx.measureText(this.value);
+          let scalar = 1;
+          switch (decoration) {
+            case "underline":
+              y1 = metrics.actualBoundingBoxAscent;
+              y2 = metrics.actualBoundingBoxAscent;
+              break;
+            case "strikethrough":
+              y1 = 0;
+              y2 = 0;
+              scalar = 0.5;
+              break;
+          }
+          switch (baseline) {
+            case "top":
+              y1 += this._size * scalar;
+              y2 += this._size * scalar;
+              break;
+            case "baseline":
+            case "bottom":
+              y1 -= this._size * scalar;
+              y2 -= this._size * scalar;
+              break;
+          }
+          switch (alignment) {
+            case "left":
+            case "start":
+              x1 = 0;
+              x2 = metrics.width;
+              break;
+            case "right":
+            case "end":
+              x1 = -metrics.width;
+              x2 = 0;
+              break;
+            default:
+              x1 = -metrics.width / 2;
+              x2 = metrics.width / 2;
+          }
+          ctx.lineWidth = Math.max(Math.floor(this._size / 15), 1);
+          ctx.strokeStyle = ctx.fillStyle;
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
+        }
+        if (!defaultMatrix) {
+          ctx.restore();
+        }
+        if (clip && !parentClipped) {
+          ctx.clip();
+        }
+        if (dashes2 && dashes2.length > 0) {
+          ctx.setLineDash(emptyArray2);
+        }
+        return this.flagReset();
+      }
+    },
+    "linear-gradient": {
+      render: function(ctx, parent) {
+        if (!parent) {
+          return;
+        }
+        this._update();
+        if (!this._renderer.effect || this._flagEndPoints || this._flagStops || this._flagUnits) {
+          let rect;
+          let lx = this.left._x;
+          let ly = this.left._y;
+          let rx = this.right._x;
+          let ry = this.right._y;
+          if (/objectBoundingBox/i.test(this._units)) {
+            rect = parent.getBoundingClientRect(true);
+            lx = (lx - 0.5) * rect.width;
+            ly = (ly - 0.5) * rect.height;
+            rx = (rx - 0.5) * rect.width;
+            ry = (ry - 0.5) * rect.height;
+          }
+          this._renderer.effect = ctx.createLinearGradient(lx, ly, rx, ry);
+          for (let i = 0; i < this.stops.length; i++) {
+            const stop = this.stops[i];
+            this._renderer.effect.addColorStop(stop._offset, stop._color);
+          }
+        }
+        return this.flagReset();
+      }
+    },
+    "radial-gradient": {
+      render: function(ctx, parent) {
+        if (!parent) {
+          return;
+        }
+        this._update();
+        if (!this._renderer.effect || this._flagCenter || this._flagFocal || this._flagRadius || this._flagStops || this._flagUnits) {
+          let rect;
+          let cx = this.center._x;
+          let cy = this.center._y;
+          let fx = this.focal._x;
+          let fy = this.focal._y;
+          let radius = this._radius;
+          if (/objectBoundingBox/i.test(this._units)) {
+            rect = parent.getBoundingClientRect(true);
+            cx = cx * rect.width * 0.5;
+            cy = cy * rect.height * 0.5;
+            fx = fx * rect.width * 0.5;
+            fy = fy * rect.height * 0.5;
+            radius *= Math.min(rect.width, rect.height) * 0.5;
+          }
+          this._renderer.effect = ctx.createRadialGradient(
+            cx,
+            cy,
+            0,
+            fx,
+            fy,
+            radius
+          );
+          for (let i = 0; i < this.stops.length; i++) {
+            const stop = this.stops[i];
+            this._renderer.effect.addColorStop(stop._offset, stop._color);
+          }
+        }
+        return this.flagReset();
+      }
+    },
+    texture: {
+      render: function(ctx) {
+        this._update();
+        const image = this.image;
+        if (!this._renderer.effect || (this._flagLoaded || this._flagImage || this._flagVideo || this._flagRepeat) && this.loaded) {
+          this._renderer.effect = ctx.createPattern(this.image, this._repeat);
+        }
+        if (this._flagOffset || this._flagLoaded || this._flagScale) {
+          if (!(this._renderer.offset instanceof Vector2)) {
+            this._renderer.offset = new Vector2();
+          }
+          this._renderer.offset.x = -this._offset.x;
+          this._renderer.offset.y = -this._offset.y;
+          if (image) {
+            this._renderer.offset.x += image.width / 2;
+            this._renderer.offset.y += image.height / 2;
+            if (this._scale instanceof Vector2) {
+              this._renderer.offset.x *= this._scale.x;
+              this._renderer.offset.y *= this._scale.y;
+            } else {
+              this._renderer.offset.x *= this._scale;
+              this._renderer.offset.y *= this._scale;
+            }
+          }
+        }
+        if (this._flagScale || this._flagLoaded) {
+          if (!(this._renderer.scale instanceof Vector2)) {
+            this._renderer.scale = new Vector2();
+          }
+          if (this._scale instanceof Vector2) {
+            this._renderer.scale.copy(this._scale);
+          } else {
+            this._renderer.scale.set(this._scale, this._scale);
+          }
+        }
+        return this.flagReset();
+      }
+    },
+    renderSvgArcCommand: function(ctx, ax, ay, rx, ry, largeArcFlag, sweepFlag, xAxisRotation, x, y) {
+      xAxisRotation = xAxisRotation * Math.PI / 180;
+      rx = abs2(rx);
+      ry = abs2(ry);
+      const dx2 = (ax - x) / 2;
+      const dy2 = (ay - y) / 2;
+      const x1p = cos8(xAxisRotation) * dx2 + sin8(xAxisRotation) * dy2;
+      const y1p = -sin8(xAxisRotation) * dx2 + cos8(xAxisRotation) * dy2;
+      const x1ps = x1p * x1p;
+      const y1ps = y1p * y1p;
+      let rxs = rx * rx;
+      let rys = ry * ry;
+      const cr = x1ps / rxs + y1ps / rys;
+      if (cr > 1) {
+        const s = sqrt2(cr);
+        rx = s * rx;
+        ry = s * ry;
+        rxs = rx * rx;
+        rys = ry * ry;
+      }
+      const dq = rxs * y1ps + rys * x1ps;
+      const pq = (rxs * rys - dq) / dq;
+      let q = sqrt2(max6(0, pq));
+      if (largeArcFlag === sweepFlag)
+        q = -q;
+      const cxp = q * rx * y1p / ry;
+      const cyp = -q * ry * x1p / rx;
+      const cx = cos8(xAxisRotation) * cxp - sin8(xAxisRotation) * cyp + (ax + x) / 2;
+      const cy = sin8(xAxisRotation) * cxp + cos8(xAxisRotation) * cyp + (ay + y) / 2;
+      const startAngle = svgAngle2(1, 0, (x1p - cxp) / rx, (y1p - cyp) / ry);
+      const delta = svgAngle2(
+        (x1p - cxp) / rx,
+        (y1p - cyp) / ry,
+        (-x1p - cxp) / rx,
+        (-y1p - cyp) / ry
+      ) % TWO_PI2;
+      const endAngle = startAngle + delta;
+      const clockwise = sweepFlag === 0;
+      renderArcEstimate2(
+        ctx,
+        cx,
+        cy,
+        rx,
+        ry,
+        startAngle,
+        endAngle,
+        clockwise,
+        xAxisRotation
+      );
+    }
+  };
+  var Renderer4 = class extends Events2 {
+    constructor(params) {
+      super();
+      const smoothing = params.smoothing !== false;
+      this.domElement = params.domElement || document.createElement("canvas");
+      this.ctx = this.domElement.getContext("2d");
+      this.overdraw = params.overdraw || false;
+      if (typeof this.ctx.imageSmoothingEnabled !== "undefined") {
+        this.ctx.imageSmoothingEnabled = smoothing;
+      }
+      this.scene = new Group2();
+      this.scene.parent = this;
+    }
+    setSize(width, height, ratio) {
+      this.width = width;
+      this.height = height;
+      this.ratio = typeof ratio === "undefined" ? getRatio2(this.ctx) : ratio;
+      this.domElement.width = width * this.ratio;
+      this.domElement.height = height * this.ratio;
+      if (this.domElement.style) {
+        _2.extend(this.domElement.style, {
+          width: width + "px",
+          height: height + "px"
+        });
+      }
+      return this.trigger(Events2.Types.resize, width, height, ratio);
+    }
+    render() {
+      const isOne = this.ratio === 1;
+      if (!isOne) {
+        this.ctx.save();
+        this.ctx.scale(this.ratio, this.ratio);
+      }
+      if (!this.overdraw) {
+        this.ctx.clearRect(0, 0, this.width, this.height);
+      }
+      canvas2.group.render.call(this.scene, this.ctx);
+      if (!isOne) {
+        this.ctx.restore();
+      }
+      return this;
+    }
+  };
+  __publicField(Renderer4, "Utils", canvas2);
+  function renderArcEstimate2(ctx, ox, oy, rx, ry, startAngle, endAngle, clockwise, xAxisRotation) {
+    const delta = endAngle - startAngle;
+    const epsilon = Curve2.Tolerance.epsilon;
+    const samePoints = Math.abs(delta) < epsilon;
+    let deltaAngle = mod2(delta, TWO_PI2);
+    if (deltaAngle < epsilon) {
+      if (samePoints) {
+        deltaAngle = 0;
+      } else {
+        deltaAngle = TWO_PI2;
+      }
+    }
+    if (clockwise === true && !samePoints) {
+      if (deltaAngle === TWO_PI2) {
+        deltaAngle = -TWO_PI2;
+      } else {
+        deltaAngle = deltaAngle - TWO_PI2;
+      }
+    }
+    for (let i = 0; i < Constants2.Resolution; i++) {
+      const t = i / (Constants2.Resolution - 1);
+      const angle = startAngle + t * deltaAngle;
+      let x = ox + rx * Math.cos(angle);
+      let y = oy + ry * Math.sin(angle);
+      if (xAxisRotation !== 0) {
+        const cos9 = Math.cos(xAxisRotation);
+        const sin9 = Math.sin(xAxisRotation);
+        const tx = x - ox;
+        const ty = y - oy;
+        x = tx * cos9 - ty * sin9 + ox;
+        y = tx * sin9 + ty * cos9 + oy;
+      }
+      ctx.lineTo(x, y);
+    }
+  }
+  function svgAngle2(ux, uy, vx, vy) {
+    const dot = ux * vx + uy * vy;
+    const len = sqrt2(ux * ux + uy * uy) * sqrt2(vx * vx + vy * vy);
+    let ang = acos2(max6(-1, min6(1, dot / len)));
+    if (ux * vy - uy * vx < 0) {
+      ang = -ang;
+    }
+    return ang;
+  }
+  function isDefaultMatrix2(m) {
+    return m[0] == 1 && m[3] == 0 && m[1] == 0 && m[4] == 1 && m[2] == 0 && m[5] == 0;
+  }
+
+  // node_modules/two.js/src/utils/canvas-shim.js
+  var CanvasShim2 = {
+    Image: null,
+    isHeadless: false,
+    shim: function(canvas3, Image) {
+      Renderer4.Utils.shim(canvas3);
+      if (typeof Image !== "undefined") {
+        CanvasShim2.Image = Image;
+      }
+      CanvasShim2.isHeadless = true;
+      return canvas3;
+    }
+  };
+
+  // node_modules/two.js/src/registry.js
+  var Registry2 = class {
+    map = {};
+    constructor() {
+    }
+    add(id, obj) {
+      this.map[id] = obj;
+      return this;
+    }
+    remove(id) {
+      delete this.map[id];
+      return this;
+    }
+    get(id) {
+      return this.map[id];
+    }
+    contains(id) {
+      return id in this.map;
+    }
+  };
+
+  // node_modules/two.js/src/effects/texture.js
+  var anchor2;
+  var regex3 = {
+    video: /\.(mp4|webm|ogg)$/i,
+    image: /\.(jpe?g|png|gif|tiff|webp)$/i,
+    effect: /texture|gradient/i
+  };
+  if (root2.document) {
+    anchor2 = document.createElement("a");
+  }
+  var _Texture2 = class extends Element2 {
+    _flagSrc = false;
+    _flagImage = false;
+    _flagVideo = false;
+    _flagLoaded = false;
+    _flagRepeat = false;
+    _flagOffset = false;
+    _flagScale = false;
+    _src = "";
+    _image = null;
+    _loaded = false;
+    _repeat = "no-repeat";
+    _scale = 1;
+    _offset = null;
+    constructor(src, callback) {
+      super();
+      this._renderer = {};
+      for (let prop in proto33) {
+        Object.defineProperty(this, prop, proto33[prop]);
+      }
+      this._renderer.type = "texture";
+      this._renderer.flagOffset = FlagOffset2.bind(this);
+      this._renderer.flagScale = FlagScale2.bind(this);
+      this.id = Constants2.Identifier + Constants2.uniqueId();
+      this.classList = [];
+      this.loaded = false;
+      this.repeat = "no-repeat";
+      this.offset = new Vector2();
+      if (typeof callback === "function") {
+        const loaded = function() {
+          this.unbind(Events2.Types.load, loaded);
+          if (typeof callback === "function") {
+            callback();
+          }
+        }.bind(this);
+        this.bind(Events2.Types.load, loaded);
+      }
+      if (typeof src === "string") {
+        this.src = src;
+      } else if (typeof src === "object") {
+        const elemString = Object.prototype.toString.call(src);
+        if (elemString === "[object HTMLImageElement]" || elemString === "[object HTMLCanvasElement]" || elemString === "[object HTMLVideoElement]" || elemString === "[object Image]") {
+          this.image = src;
+        }
+      }
+      this._update();
+    }
+    static getAbsoluteURL(path) {
+      if (!anchor2) {
+        return path;
+      }
+      anchor2.href = path;
+      return anchor2.href;
+    }
+    static loadHeadlessBuffer(texture, loaded) {
+      texture.image.onload = loaded;
+      texture.image.src = texture.src;
+    }
+    static getTag(image) {
+      return image && image.nodeName && image.nodeName.toLowerCase() || "img";
+    }
+    static getImage(src) {
+      const absoluteSrc = _Texture2.getAbsoluteURL(src);
+      if (_Texture2.ImageRegistry.contains(absoluteSrc)) {
+        return _Texture2.ImageRegistry.get(absoluteSrc);
+      }
+      let image;
+      if (CanvasShim2.Image) {
+        image = new CanvasShim2.Image();
+        Renderer4.Utils.shim(image, "img");
+      } else if (root2.document) {
+        if (regex3.video.test(absoluteSrc)) {
+          image = document.createElement("video");
+        } else {
+          image = document.createElement("img");
+        }
+      } else {
+        console.warn("Two.js: no prototypical image defined for Two.Texture");
+      }
+      image.crossOrigin = "anonymous";
+      return image;
+    }
+    static load(texture, callback) {
+      let image = texture.image;
+      let tag = _Texture2.getTag(image);
+      if (texture._flagImage) {
+        if (/canvas/i.test(tag)) {
+          _Texture2.Register.canvas(texture, callback);
+        } else {
+          texture._src = !CanvasShim2.isHeadless && image.getAttribute("two-src") || image.src;
+          _Texture2.Register[tag](texture, callback);
+        }
+      }
+      if (texture._flagSrc) {
+        if (!image) {
+          image = _Texture2.getImage(texture.src);
+          texture.image = image;
+        }
+        tag = _Texture2.getTag(image);
+        _Texture2.Register[tag](texture, callback);
+      }
+    }
+    clone() {
+      const clone = new _Texture2(this.src);
+      clone.repeat = this.repeat;
+      clone.offset.copy(this.origin);
+      clone.scale = this.scale;
+      return clone;
+    }
+    toObject() {
+      return {
+        src: this.src,
+        repeat: this.repeat,
+        origin: this.origin.toObject(),
+        scale: typeof this.scale === "number" ? this.scale : this.scale.toObject()
+      };
+    }
+    _update() {
+      if (this._flagSrc || this._flagImage) {
+        this.trigger(Events2.Types.change);
+        if (this._flagSrc || this._flagImage) {
+          this.loaded = false;
+          _Texture2.load(this, function() {
+            this.loaded = true;
+            this.trigger(Events2.Types.change).trigger(Events2.Types.load);
+          }.bind(this));
+        }
+      }
+      if (this._image && this._image.readyState >= 4) {
+        this._flagVideo = true;
+      }
+      return this;
+    }
+    flagReset() {
+      this._flagSrc = this._flagImage = this._flagLoaded = this._flagRepeat = this._flagVideo = this._flagScale = this._flagOffset = false;
+      super.flagReset.call(this);
+      return this;
+    }
+  };
+  var Texture2 = _Texture2;
+  __publicField(Texture2, "Properties", [
+    "src",
+    "loaded",
+    "repeat",
+    "scale",
+    "offset",
+    "image"
+  ]);
+  __publicField(Texture2, "RegularExpressions", regex3);
+  __publicField(Texture2, "ImageRegistry", new Registry2());
+  __publicField(Texture2, "Register", {
+    canvas: function(texture, callback) {
+      texture._src = "#" + texture.id;
+      _Texture2.ImageRegistry.add(texture.src, texture.image);
+      if (typeof callback === "function") {
+        callback();
+      }
+    },
+    img: function(texture, callback) {
+      const image = texture.image;
+      const loaded = function(e) {
+        if (!CanvasShim2.isHeadless && image.removeEventListener && typeof image.removeEventListener === "function") {
+          image.removeEventListener("load", loaded, false);
+          image.removeEventListener("error", error, false);
+        }
+        if (typeof callback === "function") {
+          callback();
+        }
+      };
+      const error = function(e) {
+        if (!CanvasShim2.isHeadless && typeof image.removeEventListener === "function") {
+          image.removeEventListener("load", loaded, false);
+          image.removeEventListener("error", error, false);
+        }
+        throw new TwoError2("unable to load " + texture.src);
+      };
+      if (typeof image.width === "number" && image.width > 0 && typeof image.height === "number" && image.height > 0) {
+        loaded();
+      } else if (!CanvasShim2.isHeadless && typeof image.addEventListener === "function") {
+        image.addEventListener("load", loaded, false);
+        image.addEventListener("error", error, false);
+      }
+      texture._src = _Texture2.getAbsoluteURL(texture._src);
+      if (!CanvasShim2.isHeadless && image && image.getAttribute("two-src")) {
+        return;
+      }
+      if (!CanvasShim2.isHeadless) {
+        image.setAttribute("two-src", texture.src);
+      }
+      _Texture2.ImageRegistry.add(texture.src, image);
+      if (CanvasShim2.isHeadless) {
+        _Texture2.loadHeadlessBuffer(texture, loaded);
+      } else {
+        texture.image.src = texture.src;
+      }
+    },
+    video: function(texture, callback) {
+      if (CanvasShim2.isHeadless) {
+        throw new TwoError2("video textures are not implemented in headless environments.");
+      }
+      const loaded = function(e) {
+        texture.image.removeEventListener("canplaythrough", loaded, false);
+        texture.image.removeEventListener("error", error, false);
+        texture.image.width = texture.image.videoWidth;
+        texture.image.height = texture.image.videoHeight;
+        if (typeof callback === "function") {
+          callback();
+        }
+      };
+      const error = function(e) {
+        texture.image.removeEventListener("canplaythrough", loaded, false);
+        texture.image.removeEventListener("error", error, false);
+        throw new TwoError2("unable to load " + texture.src);
+      };
+      texture._src = _Texture2.getAbsoluteURL(texture._src);
+      if (!texture.image.getAttribute("two-src")) {
+        texture.image.setAttribute("two-src", texture.src);
+        _Texture2.ImageRegistry.add(texture.src, texture.image);
+      }
+      if (texture.image.readyState >= 4) {
+        loaded();
+      } else {
+        texture.image.addEventListener("canplaythrough", loaded, false);
+        texture.image.addEventListener("error", error, false);
+        texture.image.src = texture.src;
+        texture.image.load();
+      }
+    }
+  });
+  var proto33 = {
+    src: {
+      enumerable: true,
+      get: function() {
+        return this._src;
+      },
+      set: function(v) {
+        this._src = v;
+        this._flagSrc = true;
+      }
+    },
+    loaded: {
+      enumerable: true,
+      get: function() {
+        return this._loaded;
+      },
+      set: function(v) {
+        this._loaded = v;
+        this._flagLoaded = true;
+      }
+    },
+    repeat: {
+      enumerable: true,
+      get: function() {
+        return this._repeat;
+      },
+      set: function(v) {
+        this._repeat = v;
+        this._flagRepeat = true;
+      }
+    },
+    image: {
+      enumerable: true,
+      get: function() {
+        return this._image;
+      },
+      set: function(image) {
+        const tag = Texture2.getTag(image);
+        let index;
+        switch (tag) {
+          case "canvas":
+            index = "#" + image.id;
+            break;
+          default:
+            index = image.src;
+        }
+        if (Texture2.ImageRegistry.contains(index)) {
+          this._image = Texture2.ImageRegistry.get(image.src);
+        } else {
+          this._image = image;
+        }
+        this._flagImage = true;
+      }
+    },
+    offset: {
+      enumerable: true,
+      get: function() {
+        return this._offset;
+      },
+      set: function(v) {
+        if (this._offset) {
+          this._offset.unbind(Events2.Types.change, this._renderer.flagOffset);
+        }
+        this._offset = v;
+        this._offset.bind(Events2.Types.change, this._renderer.flagOffset);
+        this._flagOffset = true;
+      }
+    },
+    scale: {
+      enumerable: true,
+      get: function() {
+        return this._scale;
+      },
+      set: function(v) {
+        if (this._scale instanceof Vector2) {
+          this._scale.unbind(Events2.Types.change, this._renderer.flagScale);
+        }
+        this._scale = v;
+        if (this._scale instanceof Vector2) {
+          this._scale.bind(Events2.Types.change, this._renderer.flagScale);
+        }
+        this._flagScale = true;
+      }
+    }
+  };
+  function FlagOffset2() {
+    this._flagOffset = true;
+  }
+  function FlagScale2() {
+    this._flagScale = true;
+  }
+
+  // node_modules/two.js/src/path.js
+  var min7 = Math.min;
+  var max7 = Math.max;
+  var ceil3 = Math.ceil;
+  var floor5 = Math.floor;
+  var vector2 = new Vector2();
+  var _Path2 = class extends Shape2 {
+    _flagVertices = true;
+    _flagLength = true;
+    _flagFill = true;
+    _flagStroke = true;
+    _flagLinewidth = true;
+    _flagOpacity = true;
+    _flagVisible = true;
+    _flagCap = true;
+    _flagJoin = true;
+    _flagMiter = true;
+    _flagMask = false;
+    _flagClip = false;
+    _length = 0;
+    _fill = "#fff";
+    _stroke = "#000";
+    _linewidth = 1;
+    _opacity = 1;
+    _visible = true;
+    _cap = "round";
+    _join = "round";
+    _miter = 4;
+    _closed = true;
+    _curved = false;
+    _automatic = true;
+    _beginning = 0;
+    _ending = 1;
+    _mask = null;
+    _clip = false;
+    _dashes = null;
+    constructor(vertices, closed2, curved, manual) {
+      super();
+      for (let prop in proto34) {
+        Object.defineProperty(this, prop, proto34[prop]);
+      }
+      this._renderer.type = "path";
+      this._renderer.flagVertices = FlagVertices2.bind(this);
+      this._renderer.bindVertices = BindVertices2.bind(this);
+      this._renderer.unbindVertices = UnbindVertices2.bind(this);
+      this._renderer.flagFill = FlagFill3.bind(this);
+      this._renderer.flagStroke = FlagStroke3.bind(this);
+      this._renderer.vertices = [];
+      this._renderer.collection = [];
+      this.closed = !!closed2;
+      this.curved = !!curved;
+      this.beginning = 0;
+      this.ending = 1;
+      this.fill = "#fff";
+      this.stroke = "#000";
+      this.linewidth = 1;
+      this.opacity = 1;
+      this.className = "";
+      this.visible = true;
+      this.cap = "butt";
+      this.join = "miter";
+      this.miter = 4;
+      this.vertices = vertices;
+      this.automatic = !manual;
+      this.dashes = [];
+      this.dashes.offset = 0;
+    }
+    clone(parent) {
+      const clone = new _Path2();
+      for (let j = 0; j < this.vertices.length; j++) {
+        clone.vertices.push(this.vertices[j].clone());
+      }
+      for (let i = 0; i < _Path2.Properties.length; i++) {
+        const k = _Path2.Properties[i];
+        clone[k] = this[k];
+      }
+      clone.className = this.className;
+      clone.translation.copy(this.translation);
+      clone.rotation = this.rotation;
+      clone.scale = this.scale;
+      clone.skewX = this.skewX;
+      clone.skewY = this.skewY;
+      if (this.matrix.manual) {
+        clone.matrix.copy(this.matrix);
+      }
+      if (parent) {
+        parent.add(clone);
+      }
+      return clone._update();
+    }
+    toObject() {
+      const result = {
+        vertices: this.vertices.map(function(v) {
+          return v.toObject();
+        })
+      };
+      _2.each(_Path2.Properties, function(k) {
+        if (typeof this[k] !== "undefined") {
+          if (this[k].toObject) {
+            result[k] = this[k].toObject();
+          } else {
+            result[k] = this[k];
+          }
+        }
+      }, this);
+      result.className = this.className;
+      result.translation = this.translation.toObject();
+      result.rotation = this.rotation;
+      result.scale = this.scale instanceof Vector2 ? this.scale.toObject() : this.scale;
+      result.skewX = this.skewX;
+      result.skewY = this.skewY;
+      if (this.matrix.manual) {
+        result.matrix = this.matrix.toObject();
+      }
+      return result;
+    }
+    noFill() {
+      this.fill = "transparent";
+      return this;
+    }
+    noStroke() {
+      this.stroke = void 0;
+      return this;
+    }
+    corner() {
+      const rect = this.getBoundingClientRect(true);
+      const hw = rect.width / 2;
+      const hh = rect.height / 2;
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      for (let i = 0; i < this.vertices.length; i++) {
+        const v = this.vertices[i];
+        v.x -= cx;
+        v.y -= cy;
+        v.x += hw;
+        v.y += hh;
+      }
+      if (this.mask) {
+        this.mask.translation.x -= cx;
+        this.mask.translation.x += hw;
+        this.mask.translation.y -= cy;
+        this.mask.translation.y += hh;
+      }
+      return this;
+    }
+    center() {
+      const rect = this.getBoundingClientRect(true);
+      const cx = rect.left + rect.width / 2 - this.translation.x;
+      const cy = rect.top + rect.height / 2 - this.translation.y;
+      for (let i = 0; i < this.vertices.length; i++) {
+        const v = this.vertices[i];
+        v.x -= cx;
+        v.y -= cy;
+      }
+      if (this.mask) {
+        this.mask.translation.x -= cx;
+        this.mask.translation.y -= cy;
+      }
+      return this;
+    }
+    getBoundingClientRect(shallow) {
+      let matrix4, border, l, i, v0, v1, c0x, c0y, c1x, c1y, a, b, c, d;
+      let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
+      this._update(true);
+      matrix4 = shallow ? this._matrix : getComputedMatrix2(this);
+      border = (this.linewidth || 0) / 2;
+      l = this._renderer.vertices.length;
+      if (l <= 0) {
+        return {
+          width: 0,
+          height: 0
+        };
+      }
+      for (i = 0; i < l; i++) {
+        v1 = this._renderer.vertices[i];
+        v0 = this._renderer.vertices[(i + l - 1) % l];
+        if (v0.controls && v1.controls) {
+          c0x = v0.controls.right.x;
+          c0y = v0.controls.right.y;
+          if (v0.relative) {
+            c0x += v0.x;
+            c0y += v0.y;
+          }
+          c1x = v1.controls.left.x;
+          c1y = v1.controls.left.y;
+          if (v1.relative) {
+            c1x += v1.x;
+            c1y += v1.y;
+          }
+          const bb = getCurveBoundingBox2(
+            v0.x,
+            v0.y,
+            c0x,
+            c0y,
+            c1x,
+            c1y,
+            v1.x,
+            v1.y
+          );
+          top = min7(bb.min.y - border, top);
+          left = min7(bb.min.x - border, left);
+          right = max7(bb.max.x + border, right);
+          bottom = max7(bb.max.y + border, bottom);
+        } else {
+          if (i <= 1) {
+            top = min7(v0.y - border, top);
+            left = min7(v0.x - border, left);
+            right = max7(v0.x + border, right);
+            bottom = max7(v0.y + border, bottom);
+          }
+          top = min7(v1.y - border, top);
+          left = min7(v1.x - border, left);
+          right = max7(v1.x + border, right);
+          bottom = max7(v1.y + border, bottom);
+        }
+      }
+      a = matrix4.multiply(left, top, 1);
+      b = matrix4.multiply(left, bottom, 1);
+      c = matrix4.multiply(right, top, 1);
+      d = matrix4.multiply(right, bottom, 1);
+      top = min7(a.y, b.y, c.y, d.y);
+      left = min7(a.x, b.x, c.x, d.x);
+      right = max7(a.x, b.x, c.x, d.x);
+      bottom = max7(a.y, b.y, c.y, d.y);
+      return {
+        top,
+        left,
+        right,
+        bottom,
+        width: right - left,
+        height: bottom - top
+      };
+    }
+    getPointAt(t, obj) {
+      let ia, ib, result;
+      let x, x1, x2, x3, x4, y, y1, y2, y3, y4, left, right;
+      let target = this.length * Math.min(Math.max(t, 0), 1);
+      const length = this.vertices.length;
+      const last = length - 1;
+      let a = null;
+      let b = null;
+      for (let i = 0, l = this._lengths.length, sum = 0; i < l; i++) {
+        if (sum + this._lengths[i] >= target) {
+          if (this._closed) {
+            ia = mod2(i, length);
+            ib = mod2(i - 1, length);
+            if (i === 0) {
+              ia = ib;
+              ib = i;
+            }
+          } else {
+            ia = i;
+            ib = Math.min(Math.max(i - 1, 0), last);
+          }
+          a = this.vertices[ia];
+          b = this.vertices[ib];
+          target -= sum;
+          if (this._lengths[i] !== 0) {
+            t = target / this._lengths[i];
+          } else {
+            t = 0;
+          }
+          break;
+        }
+        sum += this._lengths[i];
+      }
+      if (a === null || b === null) {
+        return null;
+      }
+      if (!a) {
+        return b;
+      } else if (!b) {
+        return a;
+      }
+      right = b.controls && b.controls.right;
+      left = a.controls && a.controls.left;
+      x1 = b.x;
+      y1 = b.y;
+      x2 = (right || b).x;
+      y2 = (right || b).y;
+      x3 = (left || a).x;
+      y3 = (left || a).y;
+      x4 = a.x;
+      y4 = a.y;
+      if (right && b.relative) {
+        x2 += b.x;
+        y2 += b.y;
+      }
+      if (left && a.relative) {
+        x3 += a.x;
+        y3 += a.y;
+      }
+      x = getComponentOnCubicBezier2(t, x1, x2, x3, x4);
+      y = getComponentOnCubicBezier2(t, y1, y2, y3, y4);
+      const t1x = lerp3(x1, x2, t);
+      const t1y = lerp3(y1, y2, t);
+      const t2x = lerp3(x2, x3, t);
+      const t2y = lerp3(y2, y3, t);
+      const t3x = lerp3(x3, x4, t);
+      const t3y = lerp3(y3, y4, t);
+      const brx = lerp3(t1x, t2x, t);
+      const bry = lerp3(t1y, t2y, t);
+      const alx = lerp3(t2x, t3x, t);
+      const aly = lerp3(t2y, t3y, t);
+      if (_2.isObject(obj)) {
+        obj.x = x;
+        obj.y = y;
+        if (obj instanceof Anchor2) {
+          obj.controls.left.x = brx;
+          obj.controls.left.y = bry;
+          obj.controls.right.x = alx;
+          obj.controls.right.y = aly;
+          if (!(typeof obj.relative === "boolean") || obj.relative) {
+            obj.controls.left.x -= x;
+            obj.controls.left.y -= y;
+            obj.controls.right.x -= x;
+            obj.controls.right.y -= y;
+          }
+        }
+        obj.t = t;
+        return obj;
+      }
+      result = new Anchor2(
+        x,
+        y,
+        brx - x,
+        bry - y,
+        alx - x,
+        aly - y,
+        this._curved ? Commands2.curve : Commands2.line
+      );
+      result.t = t;
+      return result;
+    }
+    plot() {
+      if (this.curved) {
+        getCurveFromPoints2(this._collection, this.closed);
+        return this;
+      }
+      for (let i = 0; i < this._collection.length; i++) {
+        this._collection[i].command = i === 0 ? Commands2.move : Commands2.line;
+      }
+      return this;
+    }
+    subdivide(limit) {
+      this._update();
+      const last = this.vertices.length - 1;
+      const closed2 = this._closed || this.vertices[last]._command === Commands2.close;
+      let b = this.vertices[last];
+      let points = [], verts;
+      _2.each(this.vertices, function(a, i) {
+        if (i <= 0 && !closed2) {
+          b = a;
+          return;
+        }
+        if (a.command === Commands2.move) {
+          points.push(new Anchor2(b.x, b.y));
+          if (i > 0) {
+            points[points.length - 1].command = Commands2.line;
+          }
+          b = a;
+          return;
+        }
+        verts = getSubdivisions2(a, b, limit);
+        points = points.concat(verts);
+        _2.each(verts, function(v, i2) {
+          if (i2 <= 0 && b.command === Commands2.move) {
+            v.command = Commands2.move;
+          } else {
+            v.command = Commands2.line;
+          }
+        });
+        if (i >= last) {
+          if (this._closed && this._automatic) {
+            b = a;
+            verts = getSubdivisions2(a, b, limit);
+            points = points.concat(verts);
+            _2.each(verts, function(v, i2) {
+              if (i2 <= 0 && b.command === Commands2.move) {
+                v.command = Commands2.move;
+              } else {
+                v.command = Commands2.line;
+              }
+            });
+          } else if (closed2) {
+            points.push(new Anchor2(a.x, a.y));
+          }
+          points[points.length - 1].command = closed2 ? Commands2.close : Commands2.line;
+        }
+        b = a;
+      }, this);
+      this._automatic = false;
+      this._curved = false;
+      this.vertices = points;
+      return this;
+    }
+    _updateLength(limit, silent) {
+      if (!silent) {
+        this._update();
+      }
+      const length = this.vertices.length;
+      const last = length - 1;
+      const closed2 = false;
+      let b = this.vertices[last];
+      let sum = 0;
+      if (typeof this._lengths === "undefined") {
+        this._lengths = [];
+      }
+      _2.each(this.vertices, function(a, i) {
+        if (i <= 0 && !closed2 || a.command === Commands2.move) {
+          b = a;
+          this._lengths[i] = 0;
+          return;
+        }
+        this._lengths[i] = getCurveLength4(a, b, limit);
+        sum += this._lengths[i];
+        if (i >= last && closed2) {
+          b = this.vertices[(i + 1) % length];
+          this._lengths[i + 1] = getCurveLength4(a, b, limit);
+          sum += this._lengths[i + 1];
+        }
+        b = a;
+      }, this);
+      this._length = sum;
+      this._flagLength = false;
+      return this;
+    }
+    _update() {
+      if (this._flagVertices) {
+        if (this._automatic) {
+          this.plot();
+        }
+        if (this._flagLength) {
+          this._updateLength(void 0, true);
+        }
+        const l = this._collection.length;
+        const closed2 = this._closed;
+        const beginning = Math.min(this._beginning, this._ending);
+        const ending = Math.max(this._beginning, this._ending);
+        const bid = getIdByLength2(this, beginning * this._length);
+        const eid = getIdByLength2(this, ending * this._length);
+        const low = ceil3(bid);
+        const high = floor5(eid);
+        let left, right, prev, next, v, i;
+        this._renderer.vertices.length = 0;
+        for (i = 0; i < l; i++) {
+          if (this._renderer.collection.length <= i) {
+            this._renderer.collection.push(new Anchor2());
+          }
+          if (i > high && !right) {
+            v = this._renderer.collection[i].copy(this._collection[i]);
+            this.getPointAt(ending, v);
+            v.command = this._renderer.collection[i].command;
+            this._renderer.vertices.push(v);
+            right = v;
+            prev = this._collection[i - 1];
+            if (prev && prev.controls) {
+              if (v.relative) {
+                v.controls.right.clear();
+              } else {
+                v.controls.right.copy(v);
+              }
+              if (prev.relative) {
+                this._renderer.collection[i - 1].controls.right.copy(prev.controls.right).lerp(Vector2.zero, 1 - v.t);
+              } else {
+                this._renderer.collection[i - 1].controls.right.copy(prev.controls.right).lerp(prev, 1 - v.t);
+              }
+            }
+          } else if (i >= low && i <= high) {
+            v = this._renderer.collection[i].copy(this._collection[i]);
+            this._renderer.vertices.push(v);
+            if (i === high && contains2(this, ending)) {
+              right = v;
+              if (!closed2 && right.controls) {
+                if (right.relative) {
+                  right.controls.right.clear();
+                } else {
+                  right.controls.right.copy(right);
+                }
+              }
+            } else if (i === low && contains2(this, beginning)) {
+              left = v;
+              left.command = Commands2.move;
+              if (!closed2 && left.controls) {
+                if (left.relative) {
+                  left.controls.left.clear();
+                } else {
+                  left.controls.left.copy(left);
+                }
+              }
+            }
+          }
+        }
+        if (low > 0 && !left) {
+          i = low - 1;
+          v = this._renderer.collection[i].copy(this._collection[i]);
+          this.getPointAt(beginning, v);
+          v.command = Commands2.move;
+          this._renderer.vertices.unshift(v);
+          next = this._collection[i + 1];
+          if (next && next.controls) {
+            v.controls.left.clear();
+            if (next.relative) {
+              this._renderer.collection[i + 1].controls.left.copy(next.controls.left).lerp(Vector2.zero, v.t);
+            } else {
+              vector2.copy(next);
+              this._renderer.collection[i + 1].controls.left.copy(next.controls.left).lerp(next, v.t);
+            }
+          }
+        }
+      }
+      Shape2.prototype._update.apply(this, arguments);
+      return this;
+    }
+    flagReset() {
+      this._flagVertices = this._flagLength = this._flagFill = this._flagStroke = this._flagLinewidth = this._flagOpacity = this._flagVisible = this._flagCap = this._flagJoin = this._flagMiter = this._flagClip = false;
+      Shape2.prototype.flagReset.call(this);
+      return this;
+    }
+  };
+  var Path2 = _Path2;
+  __publicField(Path2, "Properties", [
+    "fill",
+    "stroke",
+    "linewidth",
+    "opacity",
+    "visible",
+    "cap",
+    "join",
+    "miter",
+    "closed",
+    "curved",
+    "automatic",
+    "beginning",
+    "ending"
+  ]);
+  __publicField(Path2, "Utils", {
+    getCurveLength: getCurveLength4
+  });
+  var proto34 = {
+    linewidth: {
+      enumerable: true,
+      get: function() {
+        return this._linewidth;
+      },
+      set: function(v) {
+        this._linewidth = v;
+        this._flagLinewidth = true;
+      }
+    },
+    opacity: {
+      enumerable: true,
+      get: function() {
+        return this._opacity;
+      },
+      set: function(v) {
+        this._opacity = v;
+        this._flagOpacity = true;
+      }
+    },
+    visible: {
+      enumerable: true,
+      get: function() {
+        return this._visible;
+      },
+      set: function(v) {
+        this._visible = v;
+        this._flagVisible = true;
+      }
+    },
+    cap: {
+      enumerable: true,
+      get: function() {
+        return this._cap;
+      },
+      set: function(v) {
+        this._cap = v;
+        this._flagCap = true;
+      }
+    },
+    join: {
+      enumerable: true,
+      get: function() {
+        return this._join;
+      },
+      set: function(v) {
+        this._join = v;
+        this._flagJoin = true;
+      }
+    },
+    miter: {
+      enumerable: true,
+      get: function() {
+        return this._miter;
+      },
+      set: function(v) {
+        this._miter = v;
+        this._flagMiter = true;
+      }
+    },
+    fill: {
+      enumerable: true,
+      get: function() {
+        return this._fill;
+      },
+      set: function(f) {
+        if (this._fill instanceof Gradient2 || this._fill instanceof LinearGradient2 || this._fill instanceof RadialGradient2 || this._fill instanceof Texture2) {
+          this._fill.unbind(Events2.Types.change, this._renderer.flagFill);
+        }
+        this._fill = f;
+        this._flagFill = true;
+        if (this._fill instanceof Gradient2 || this._fill instanceof LinearGradient2 || this._fill instanceof RadialGradient2 || this._fill instanceof Texture2) {
+          this._fill.bind(Events2.Types.change, this._renderer.flagFill);
+        }
+      }
+    },
+    stroke: {
+      enumerable: true,
+      get: function() {
+        return this._stroke;
+      },
+      set: function(f) {
+        if (this._stroke instanceof Gradient2 || this._stroke instanceof LinearGradient2 || this._stroke instanceof RadialGradient2 || this._stroke instanceof Texture2) {
+          this._stroke.unbind(Events2.Types.change, this._renderer.flagStroke);
+        }
+        this._stroke = f;
+        this._flagStroke = true;
+        if (this._stroke instanceof Gradient2 || this._stroke instanceof LinearGradient2 || this._stroke instanceof RadialGradient2 || this._stroke instanceof Texture2) {
+          this._stroke.bind(Events2.Types.change, this._renderer.flagStroke);
+        }
+      }
+    },
+    length: {
+      get: function() {
+        if (this._flagLength) {
+          this._updateLength();
+        }
+        return this._length;
+      }
+    },
+    closed: {
+      enumerable: true,
+      get: function() {
+        return this._closed;
+      },
+      set: function(v) {
+        this._closed = !!v;
+        this._flagVertices = true;
+      }
+    },
+    curved: {
+      enumerable: true,
+      get: function() {
+        return this._curved;
+      },
+      set: function(v) {
+        this._curved = !!v;
+        this._flagVertices = true;
+      }
+    },
+    automatic: {
+      enumerable: true,
+      get: function() {
+        return this._automatic;
+      },
+      set: function(v) {
+        if (v === this._automatic) {
+          return;
+        }
+        this._automatic = !!v;
+        const method = this._automatic ? "ignore" : "listen";
+        _2.each(this.vertices, function(v2) {
+          v2[method]();
+        });
+      }
+    },
+    beginning: {
+      enumerable: true,
+      get: function() {
+        return this._beginning;
+      },
+      set: function(v) {
+        this._beginning = v;
+        this._flagVertices = true;
+      }
+    },
+    ending: {
+      enumerable: true,
+      get: function() {
+        return this._ending;
+      },
+      set: function(v) {
+        this._ending = v;
+        this._flagVertices = true;
+      }
+    },
+    vertices: {
+      enumerable: true,
+      get: function() {
+        return this._collection;
+      },
+      set: function(vertices) {
+        const bindVertices = this._renderer.bindVertices;
+        const unbindVertices = this._renderer.unbindVertices;
+        if (this._collection) {
+          this._collection.unbind(Events2.Types.insert, bindVertices).unbind(Events2.Types.remove, unbindVertices);
+        }
+        if (vertices instanceof Collection2) {
+          this._collection = vertices;
+        } else {
+          this._collection = new Collection2(vertices || []);
+        }
+        this._collection.bind(Events2.Types.insert, bindVertices).bind(Events2.Types.remove, unbindVertices);
+        bindVertices(this._collection);
+      }
+    },
+    mask: {
+      enumerable: true,
+      get: function() {
+        return this._mask;
+      },
+      set: function(v) {
+        this._mask = v;
+        this._flagMask = true;
+        if (_2.isObject(v) && !v.clip) {
+          v.clip = true;
+        }
+      }
+    },
+    clip: {
+      enumerable: true,
+      get: function() {
+        return this._clip;
+      },
+      set: function(v) {
+        this._clip = v;
+        this._flagClip = true;
+      }
+    },
+    dashes: {
+      enumerable: true,
+      get: function() {
+        return this._dashes;
+      },
+      set: function(v) {
+        if (typeof v.offset !== "number") {
+          v.offset = this.dashes && this._dashes.offset || 0;
+        }
+        this._dashes = v;
+      }
+    }
+  };
+  function FlagVertices2() {
+    this._flagVertices = true;
+    this._flagLength = true;
+    if (this.parent) {
+      this.parent._flagLength = true;
+    }
+  }
+  function BindVertices2(items) {
+    let i = items.length;
+    while (i--) {
+      items[i].bind(Events2.Types.change, this._renderer.flagVertices);
+    }
+    this._renderer.flagVertices();
+  }
+  function UnbindVertices2(items) {
+    let i = items.length;
+    while (i--) {
+      items[i].unbind(Events2.Types.change, this._renderer.flagVertices);
+    }
+    this._renderer.flagVertices();
+  }
+  function FlagFill3() {
+    this._flagFill = true;
+  }
+  function FlagStroke3() {
+    this._flagStroke = true;
+  }
+
+  // src/connection.js
+  var HALF_PI3 = Math.PI * 0.5;
+  var Connection = class extends Two.Group {
+    _name = "connection";
+    offset = new Two.Vector();
+    constructor(source, target, name) {
+      const points = [
+        new Two.Anchor(),
+        new Two.Anchor(),
+        new Two.Anchor(),
+        new Two.Anchor()
+      ];
+      super();
+      const scope = this;
+      this.update = update;
+      this.source = source;
+      this.target = target;
+      let label;
+      const path = this.path = new Path2(points);
+      path.curved = true;
+      path.linewidth = unit * 0.015;
+      path.noFill();
+      path.stroke = "black";
+      path.dashes = dashes;
+      path.join = "round";
+      path.cap = "round";
+      if (typeof name === "string" && name.length > 0) {
+        label = this.label = new Two.Text(name, 0, 0, textStyles);
+        label.size *= 0.75;
+        this.name = name;
+        this.add(label);
+      }
+      this.offset.bind("change", update);
+      source.position.bind("change", update);
+      target.position.bind("change", update);
+      this.add(path);
+      requestAnimationFrame(update);
+      function update() {
+        points[0].copy(source.position).add(scope.offset);
+        points[1].copy(source.position).add(scope.offset);
+        points[1].x += source.width * 0.5;
+        points[2].copy(target.position);
+        points[2].x -= target.width * 0.5;
+        points[3].copy(target.position);
+        if (label) {
+          const a = path.getPointAt(0.45);
+          const b = path.getPointAt(0.55);
+          const angle = Two.Vector.angleBetween(b, a);
+          const ox = label.size * Math.cos(angle - HALF_PI3);
+          const oy = label.size * Math.sin(angle - HALF_PI3);
+          label.position.x = 0.5 * (b.x - a.x) + a.x + ox;
+          label.position.y = 0.5 * (b.y - a.y) + a.y + oy;
+          label.rotation = angle;
+        }
+      }
+    }
+    dispose() {
+      const { source, target, update } = this;
+      source.position.unbind("change", update);
+      target.position.unbind("change", update);
+      return this;
+    }
+    get name() {
+      return this._name;
+    }
+    set name(name) {
+      this._name = name;
+      const color = stringToColor(name);
+      this.label.fill = this.path.stroke = color;
+    }
+  };
+
+  // src/entity.js
+  var _Entity = class extends Two.Group {
+    connections = [];
+    constructor(name) {
+      super();
+      const shape = new Two.RoundedRectangle(0, 0, unit * 1.5, unit, 8);
+      const text = new Two.Text(name, 0, 0, textStyles);
+      shape.noStroke();
+      const alpha = 0.66;
+      const r = Math.random() * 255;
+      const g = Math.random() * 255;
+      const b = Math.random() * 255;
+      const dr = dilute(r, alpha);
+      const dg = dilute(g, alpha);
+      const db = dilute(b, alpha);
+      shape.fill = `rgb(${dr}, ${dg}, ${db})`;
+      shape.stroke = `rgb(${r}, ${g}, ${b})`;
+      shape.linewidth = unit * 0.015;
+      if ((r + g + b) / 3 >= 255 * 0.4) {
+        text.fill = "black";
+      }
+      this.add(shape, text);
+      _Entity.Instances.push(this);
+    }
+    static getEntityByName(name) {
+      for (let i = 0; i < _Entity.Instances.length; i++) {
+        const entity = _Entity.Instances[i];
+        if (entity.name === name) {
+          return entity;
+        }
+      }
+      return null;
+    }
+    static getInstanceIndex(entity) {
+      for (let i = 0; i < _Entity.Instances.length; i++) {
+        const e = _Entity.Instances[i];
+        if (e.id === entity.id) {
+          return i;
+        }
+      }
+      return -1;
+    }
+    static getRoot(item) {
+      while (item.parent && !item.isWiremark) {
+        item = item.parent;
+      }
+      return item;
+    }
+    connect(name, means) {
+      const target = _Entity.getEntityByName(name);
+      if (!means) {
+        means = "connection";
+      }
+      if (target) {
+        let isConnected = false;
+        for (let i = 0; i < this.connections.length; i++) {
+          const c = this.connections[i];
+          if (c.target.id === target.id && means === c.name) {
+            isConnected = true;
+            break;
+          }
+        }
+        if (!isConnected) {
+          const connection = new Connection(this, target, means);
+          const { connections } = _Entity.getRoot(this);
+          connections.add(connection);
+          this.connections.push(connection);
+          for (let i = 0; i < this.connections.length; i++) {
+            const c = this.connections[i];
+            const pct = (i + 0.5) / this.connections.length;
+            const y = pct * this.height - this.height * 0.5;
+            c.offset.y = y;
+          }
+        }
+      } else {
+        console.warn("Entity: no target found.");
+      }
+      ;
+      return this;
+    }
+    reset() {
+      for (let i = 0; i < this.connections.length; i++) {
+        this.connections[i].remove().dispose();
+      }
+      this.connections.length = 0;
+      return this;
+    }
+    remove() {
+      super.remove.apply(this, arguments);
+      for (let i = 0; i < this.connections.length; i++) {
+        const c = this.connections[i];
+        c.remove().dispose();
+      }
+      const index = _Entity.getInstanceIndex(this);
+      if (index >= 0) {
+        _Entity.Instances.splice(index, 1);
+      }
+      return this;
+    }
+    dispose() {
+    }
+    get width() {
+      return this.children[0].width;
+    }
+    get height() {
+      return this.children[0].height;
+    }
+    get name() {
+      return this.children[1].value;
+    }
+    set name(name) {
+      this.children[1].value = name;
+    }
+  };
+  var Entity = _Entity;
+  __publicField(Entity, "Instances", []);
+
+  // src/wiremark.js
+  var emptyMatch = ["", ""];
+  var Wiremark =  window.Wiremark = class extends Two.Group {
+    _instructions = null;
+    constructor(instructions) {
+      super();
+      this.isWiremark = true;
+      this.instructions = instructions;
+      this.connections = new Two.Group();
+      this.connections.name = "connections";
+      this.entities = new Two.Group();
+      this.entities.name = "entities";
+      this.entities.registry = {};
+      this.add(this.connections, this.entities);
+    }
+    layout() {
+      const { entities, instructions } = this;
+      if (typeof instructions !== "string") {
+        return;
+      }
+      const state = { entities: [], connections: {} };
+      const lines = instructions.split(/\n/i);
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        if (line.length <= 0) {
+          continue;
+        }
+        const producer = (line.match(/^([^\-]+)[\-$]/) || emptyMatch)[1].trim();
+        const currency = (line.match(/\[([^\]]+)\]/) || emptyMatch)[1].trim();
+        const consumer = (line.match(/\-\>(.+)$/) || emptyMatch)[1].trim();
+        const producerExists = producer.length > 0;
+        const currencyExists = currency.length > 0;
+        const consumerExists = consumer.length > 0;
+        if (producerExists) {
+          if (state.entities.indexOf(producer) < 0) {
+            state.entities.push(producer);
+          }
+        }
+        if (consumerExists) {
+          if (state.entities.indexOf(consumer) < 0) {
+            state.entities.push(consumer);
+          }
+        }
+        if (producerExists && consumerExists) {
+          if (!(producer in state.connections)) {
+            state.connections[producer] = [];
+          }
+          state.connections[producer].push({
+            name: currencyExists ? currency : "connection",
+            target: consumer
+          });
+        }
+      }
+      const length = Math.max(
+        entities.children.length,
+        state.entities.length
+      );
+      for (let i = 0; i < length; i++) {
+        const name = state.entities[i];
+        let entity = entities.children[i];
+        if (entity) {
+          if (state.entities.indexOf(entity.name) < 0) {
+            if (typeof name === "undefined") {
+              delete entities.registry[entity.name];
+              entity.remove().dispose();
+              entity = null;
+            } else {
+              entity.name = name;
+              entities.registry[name] = entity;
+            }
+          }
+        } else if (typeof name !== "undefined") {
+          entity = new Entity(name);
+          entity.position.x = i * entity.width + unit * 0.25;
+          entity.position.y = 2 * (i % 2) * entity.height + entity.height;
+          entities.add(entity);
+          entities.registry[name] = entity;
+        }
+      }
+      for (let i = 0; i < entities.children.length; i++) {
+        const entity = entities.children[i];
+        const connections = state.connections[entity.name];
+        entity.reset();
+        if (typeof connections !== "undefined" && connections.length > 0) {
+          for (let j = 0; j < connections.length; j++) {
+            const { name, target } = connections[j];
+            entity.connect(target, name);
+          }
+        }
+      }
+      return this;
+    }
+    update(timeDelta) {
+      dashes.offset -= timeDelta / 10;
+      return this;
+    }
+    dispose() {
+    }
+    get instructions() {
+      return this._instructions;
+    }
+    set instructions(instructions) {
+      this._instructions = instructions;
+      this.layout();
+    }
+  };
+
+  // src/component.js
+  var import_react = __toESM(require_react());
+
   // node_modules/two.js/extras/jsm/zui.js
   var Surface = class {
     constructor(object) {
       this.object = object;
     }
-    limits(min5, max5) {
-      const min_exists = typeof min5 !== "undefined";
-      const max_exists = typeof max5 !== "undefined";
+    limits(min8, max8) {
+      const min_exists = typeof min8 !== "undefined";
+      const max_exists = typeof max8 !== "undefined";
       if (!max_exists && !min_exists) {
         return { min: this.min, max: this.max };
       }
-      this.min = min_exists ? min5 : this.min;
-      this.max = max_exists ? max5 : this.max;
+      this.min = min_exists ? min8 : this.min;
+      this.max = max_exists ? max8 : this.max;
       return this;
     }
     apply(px, py, s) {
@@ -12775,8 +17030,8 @@
       this.updateSurface();
       this.add(new Surface(group));
     }
-    static Clamp(v, min5, max5) {
-      return Math.min(Math.max(v, min5), max5);
+    static Clamp(v, min8, max8) {
+      return Math.min(Math.max(v, min8), max8);
     }
     static TranslateMatrix(m, x, y) {
       m.elements[2] += x;
@@ -12795,21 +17050,21 @@
       this.addLimits(limits.min, limits.max);
       return this;
     }
-    addLimits(min5, max5) {
-      if (typeof min5 !== "undefined") {
+    addLimits(min8, max8) {
+      if (typeof min8 !== "undefined") {
         if (this.limits.scale.min) {
-          this.limits.scale.min = Math.max(min5, this.limits.scale.min);
+          this.limits.scale.min = Math.max(min8, this.limits.scale.min);
         } else {
-          this.limits.scale.min = min5;
+          this.limits.scale.min = min8;
         }
       }
-      if (typeof max5 === "undefined") {
+      if (typeof max8 === "undefined") {
         return this;
       }
       if (this.limits.scale.max) {
-        this.limits.scale.max = Math.min(max5, this.limits.scale.max);
+        this.limits.scale.max = Math.min(max8, this.limits.scale.max);
       } else {
-        this.limits.scale.max = max5;
+        this.limits.scale.max = max8;
       }
       return this;
     }
@@ -12973,8 +17228,9 @@
           setGrabbing("grabbing");
           mouse.x = e.clientX;
           mouse.y = e.clientY;
-          for (let name in wiremark.entities) {
-            const child = wiremark.entities[name];
+          const { registry } = wiremark.entities;
+          for (let name in registry) {
+            const child = registry[name];
             const rect = child.getBoundingClientRect();
             if (mouse.x > rect.left && mouse.x < rect.right && mouse.y > rect.top && mouse.y < rect.bottom) {
               moving = child;
@@ -13040,8 +17296,9 @@
           var touch = e.touches[0];
           mouse.x = touch.clientX;
           mouse.y = touch.clientY;
-          for (let name in wiremark.entities) {
-            const child = wiremark.entities[name];
+          const { registry } = wiremark.entities;
+          for (let name in registry) {
+            const child = registry[name];
             const rect = child.getBoundingClientRect();
             if (mouse.x > rect.left && mouse.x < rect.right && mouse.y > rect.top && mouse.y < rect.bottom) {
               moving = child;
