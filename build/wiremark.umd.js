@@ -17499,6 +17499,7 @@ __publicField(ZUI, "Limit", {
 });
 
 // src/component.js
+var eventParams = { passive: false };
 function Component(props) {
   const refs = (0, import_react.useRef)({});
   const domElement = (0, import_react.useRef)();
@@ -17527,7 +17528,7 @@ function Component(props) {
         const { domElement: domElement2, names, handler } = events[i];
         for (let j = 0; j < names.length; j++) {
           const name = names[j];
-          domElement2.removeEventListener(name, handler, false);
+          domElement2.removeEventListener(name, handler, eventParams);
         }
       }
       wiremark.remove().dispose();
@@ -17537,19 +17538,19 @@ function Component(props) {
       const domElement2 = two.renderer.domElement;
       const zui2 = new ZUI(stage);
       const mouse = new import_two4.default.Vector();
-      let touches = {};
+      let touches = [];
       let moving = null;
       let distance = 0;
       zui2.addLimits(0.06, 8);
       if (window.navigator.maxTouchPoints <= 0) {
-        domElement2.addEventListener("mousedown", mousedown, false);
-        domElement2.addEventListener("mousewheel", mousewheel, false);
-        domElement2.addEventListener("wheel", mousewheel, false);
+        domElement2.addEventListener("mousedown", mousedown, eventParams);
+        domElement2.addEventListener("mousewheel", mousewheel, eventParams);
+        domElement2.addEventListener("wheel", mousewheel, eventParams);
       } else {
-        domElement2.addEventListener("touchstart", touchstart, { passive: false });
-        domElement2.addEventListener("touchmove", touchmove, { passive: false });
-        domElement2.addEventListener("touchend", touchend, { passive: false });
-        domElement2.addEventListener("touchcancel", touchend, { passive: false });
+        domElement2.addEventListener("touchstart", touchstart, eventParams);
+        domElement2.addEventListener("touchmove", touchmove, eventParams);
+        domElement2.addEventListener("touchend", touchend, eventParams);
+        domElement2.addEventListener("touchcancel", touchend, eventParams);
       }
       return {
         zui: zui2,
@@ -17645,18 +17646,7 @@ function Component(props) {
         e.preventDefault();
         setGrabbing("");
         moving = null;
-        for (let identifier in touches) {
-          let isTouching = false;
-          for (let i = 0; i < e.touches.length; i++) {
-            const touch2 = e.touches[i];
-            if (identifier === touch2.identifier) {
-              isTouching = true;
-            }
-          }
-          if (!isTouching) {
-            delete touches[identifier];
-          }
-        }
+        touches = [];
         var touch = e.touches[0];
         if (touch) {
           mouse.x = touch.clientX;
@@ -17694,10 +17684,10 @@ function Component(props) {
       function pinchstart(e) {
         for (var i = 0; i < e.touches.length; i++) {
           var touch = e.touches[i];
-          touches[touch.identifier] = touch;
+          touches[i] = touch;
         }
-        var a = e.touches[0];
-        var b = e.touches[1];
+        var a = touches[0];
+        var b = touches[1];
         var dx = b.clientX - a.clientX;
         var dy = b.clientY - a.clientY;
         distance = Math.sqrt(dx * dx + dy * dy);
@@ -17707,10 +17697,10 @@ function Component(props) {
       function pinchmove(e) {
         for (var i = 0; i < e.touches.length; i++) {
           var touch = e.touches[i];
-          touches[touch.identifier] = touch;
+          touches[i] = touch;
         }
-        var a = e.touches[0];
-        var b = e.touches[1];
+        var a = touches[0];
+        var b = touches[1];
         var dx = b.clientX - a.clientX;
         var dy = b.clientY - a.clientY;
         var d = Math.sqrt(dx * dx + dy * dy);
