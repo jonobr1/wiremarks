@@ -64,10 +64,10 @@ export function Component(props) {
       domElement.addEventListener('mousewheel', mousewheel, false);
       domElement.addEventListener('wheel', mousewheel, false);
   
-      domElement.addEventListener('touchstart', touchstart, false);
-      domElement.addEventListener('touchmove', touchmove, false);
-      domElement.addEventListener('touchend', touchend, false);
-      domElement.addEventListener('touchcancel', touchend, false);
+      domElement.addEventListener('touchstart', touchstart, { passive: false });
+      domElement.addEventListener('touchmove', touchmove, { passive: false });
+      domElement.addEventListener('touchend', touchend, { passive: false });
+      domElement.addEventListener('touchcancel', touchend, { passive: false });
   
       return {
         zui,
@@ -144,6 +144,7 @@ export function Component(props) {
       }
   
       function touchstart(e) {
+        e.preventDefault();
         switch (e.touches.length) {
           case 2:
             pinchstart(e);
@@ -155,6 +156,7 @@ export function Component(props) {
       }
   
       function touchmove(e) {
+        e.preventDefault();
         switch (e.touches.length) {
           case 2:
             pinchmove(e);
@@ -166,6 +168,7 @@ export function Component(props) {
       }
   
       function touchend(e) {
+        e.preventDefault();
         setGrabbing('');
         moving = null;
         touches = {};
