@@ -17620,6 +17620,7 @@ function Component(props) {
         zui2.zoomBy(dy, e.clientX, e.clientY);
       }
       function touchstart(e) {
+        e.preventDefault();
         switch (e.touches.length) {
           case 2:
             pinchstart(e);
@@ -17641,9 +17642,21 @@ function Component(props) {
         }
       }
       function touchend(e) {
+        e.preventDefault();
         setGrabbing("");
         moving = null;
-        touches = {};
+        for (let identifier in touches) {
+          let isTouching = false;
+          for (let i = 0; i < e.touches.length; i++) {
+            const touch2 = e.touches[i];
+            if (identifier === touch2.identifier) {
+              isTouching = true;
+            }
+          }
+          if (!isTouching) {
+            delete touches[identifier];
+          }
+        }
         var touch = e.touches[0];
         if (touch) {
           mouse.x = touch.clientX;
@@ -17683,8 +17696,8 @@ function Component(props) {
           var touch = e.touches[i];
           touches[touch.identifier] = touch;
         }
-        var a = touches[0];
-        var b = touches[1];
+        var a = e.touches[0];
+        var b = e.touches[1];
         var dx = b.clientX - a.clientX;
         var dy = b.clientY - a.clientY;
         distance = Math.sqrt(dx * dx + dy * dy);
@@ -17696,8 +17709,8 @@ function Component(props) {
           var touch = e.touches[i];
           touches[touch.identifier] = touch;
         }
-        var a = touches[0];
-        var b = touches[1];
+        var a = e.touches[0];
+        var b = e.touches[1];
         var dx = b.clientX - a.clientX;
         var dy = b.clientY - a.clientY;
         var d = Math.sqrt(dx * dx + dy * dy);
