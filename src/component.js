@@ -3,6 +3,8 @@ import Two from 'two.js';
 import { Wiremark } from './wiremark.js';
 import { ZUI } from 'two.js/extras/jsm/zui.js';
 
+const eventParams = { passive: false };
+
 export function Component(props) {
 
   const refs = useRef({});
@@ -42,7 +44,7 @@ export function Component(props) {
         const { domElement, names, handler } = events[i];
         for (let j = 0; j < names.length; j++) {
           const name = names[j];
-          domElement.removeEventListener(name, handler, false);
+          domElement.removeEventListener(name, handler, eventParams);
         }
       }
       wiremark.remove().dispose();
@@ -54,21 +56,23 @@ export function Component(props) {
       const domElement = two.renderer.domElement;
       const zui = new ZUI(stage);
       const mouse = new Two.Vector();
-      let touches = {};
+      let touches = [];
       let moving = null;
       let distance = 0;
   
       zui.addLimits(0.06, 8);
   
-      domElement.addEventListener('mousedown', mousedown, false);
-      domElement.addEventListener('mousewheel', mousewheel, false);
-      domElement.addEventListener('wheel', mousewheel, false);
-  
-      domElement.addEventListener('touchstart', touchstart, { passive: false });
-      domElement.addEventListener('touchmove', touchmove, { passive: false });
-      domElement.addEventListener('touchend', touchend, { passive: false });
-      domElement.addEventListener('touchcancel', touchend, { passive: false });
-  
+      if (window.navigator.maxTouchPoints <= 0) {
+        domElement.addEventListener('mousedown', mousedown, eventParams);
+        domElement.addEventListener('mousewheel', mousewheel, eventParams);
+        domElement.addEventListener('wheel', mousewheel, eventParams);
+      } else {
+        domElement.addEventListener('touchstart', touchstart, eventParams);
+        domElement.addEventListener('touchmove', touchmove, eventParams);
+        domElement.addEventListener('touchend', touchend, eventParams);
+        domElement.addEventListener('touchcancel', touchend, eventParams);
+      }
+
       return {
         zui,
         events: [
@@ -171,7 +175,7 @@ export function Component(props) {
         e.preventDefault();
         setGrabbing('');
         moving = null;
-        touches = {};
+        touches = [];
         var touch = e.touches[ 0 ];
         if (touch) {  // Pass through for panning after pinching
           mouse.x = touch.clientX;
@@ -213,7 +217,7 @@ export function Component(props) {
       function pinchstart(e) {
         for (var i = 0; i < e.touches.length; i++) {
           var touch = e.touches[ i ];
-          touches[ touch.identifier ] = touch;
+          touches[ i ] = touch;
         }
         var a = touches[ 0 ];
         var b = touches[ 1 ];
@@ -227,7 +231,7 @@ export function Component(props) {
       function pinchmove(e) {
         for (var i = 0; i < e.touches.length; i++) {
           var touch = e.touches[ i ];
-          touches[ touch.identifier ] = touch;
+          touches[ i ] = touch;
         }
         var a = touches[ 0 ];
         var b = touches[ 1 ];
