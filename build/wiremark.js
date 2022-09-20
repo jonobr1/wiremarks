@@ -17263,7 +17263,6 @@
           zui2.zoomBy(dy, e.clientX, e.clientY);
         }
         function touchstart(e) {
-          e.preventDefault();
           switch (e.touches.length) {
             case 2:
               pinchstart(e);
@@ -17285,7 +17284,6 @@
           }
         }
         function touchend(e) {
-          e.preventDefault();
           setGrabbing("");
           moving = null;
           touches = {};
