@@ -391,10 +391,10 @@ function Component(props) {
       domElement2.addEventListener("mousedown", mousedown, false);
       domElement2.addEventListener("mousewheel", mousewheel, false);
       domElement2.addEventListener("wheel", mousewheel, false);
-      domElement2.addEventListener("touchstart", touchstart, false);
-      domElement2.addEventListener("touchmove", touchmove, false);
-      domElement2.addEventListener("touchend", touchend, false);
-      domElement2.addEventListener("touchcancel", touchend, false);
+      domElement2.addEventListener("touchstart", touchstart, { passive: false });
+      domElement2.addEventListener("touchmove", touchmove, { passive: false });
+      domElement2.addEventListener("touchend", touchend, { passive: false });
+      domElement2.addEventListener("touchcancel", touchend, { passive: false });
       return {
         zui: zui2,
         events: [
@@ -464,6 +464,7 @@ function Component(props) {
         zui2.zoomBy(dy, e.clientX, e.clientY);
       }
       function touchstart(e) {
+        e.preventDefault();
         switch (e.touches.length) {
           case 2:
             pinchstart(e);
@@ -474,6 +475,7 @@ function Component(props) {
         }
       }
       function touchmove(e) {
+        e.preventDefault();
         switch (e.touches.length) {
           case 2:
             pinchmove(e);
@@ -484,6 +486,7 @@ function Component(props) {
         }
       }
       function touchend(e) {
+        e.preventDefault();
         setGrabbing("");
         moving = null;
         touches = {};

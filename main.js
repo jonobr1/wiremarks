@@ -38269,10 +38269,10 @@
         domElement3.addEventListener("mousedown", mousedown, false);
         domElement3.addEventListener("mousewheel", mousewheel, false);
         domElement3.addEventListener("wheel", mousewheel, false);
-        domElement3.addEventListener("touchstart", touchstart, false);
-        domElement3.addEventListener("touchmove", touchmove, false);
-        domElement3.addEventListener("touchend", touchend, false);
-        domElement3.addEventListener("touchcancel", touchend, false);
+        domElement3.addEventListener("touchstart", touchstart, { passive: false });
+        domElement3.addEventListener("touchmove", touchmove, { passive: false });
+        domElement3.addEventListener("touchend", touchend, { passive: false });
+        domElement3.addEventListener("touchcancel", touchend, { passive: false });
         return {
           zui: zui2,
           events: [
@@ -38342,6 +38342,7 @@
           zui2.zoomBy(dy, e.clientX, e.clientY);
         }
         function touchstart(e) {
+          e.preventDefault();
           switch (e.touches.length) {
             case 2:
               pinchstart(e);
@@ -38352,6 +38353,7 @@
           }
         }
         function touchmove(e) {
+          e.preventDefault();
           switch (e.touches.length) {
             case 2:
               pinchmove(e);
@@ -38362,6 +38364,7 @@
           }
         }
         function touchend(e) {
+          e.preventDefault();
           setGrabbing("");
           moving = null;
           touches = {};
