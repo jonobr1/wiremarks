@@ -81,6 +81,9 @@ export class Wiremark extends Two.Group {
     const length = Math.max(entities.children.length,
       state.entities.length);
 
+    // TODO: Prune and remove entities.registry[name]
+    // that don't exist in the state anymore.
+
     for (let i = 0; i < length; i++) {
 
       const name = state.entities[i];
