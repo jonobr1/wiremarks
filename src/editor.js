@@ -5,12 +5,13 @@ export default function Editor(props) {
 
   const domElement = useRef();
 
-  const [text, setText] =  useState('');
+  const [text, setText] =  useState(window.localStorage.getItem('wiremarks-state') || '');
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(setup, []);
+  useEffect(store, [text]);
 
   function setup() {
     resize();
@@ -31,6 +32,12 @@ export default function Editor(props) {
     const value = e.target.value;
     setText(value);
   }
+
+  function store() {
+    window.localStorage.setItem('wiremarks-state', text);
+  }
+
+  //
 
   function open() {
     setIsOpen(true);
@@ -56,7 +63,7 @@ export default function Editor(props) {
         </div>
         <div className="panel">
           <div className="close button" onClick={ close }>✕</div>
-          <textarea onChange={ update } />
+          <textarea onChange={ update } defaultValue={ text } />
         </div>
       </div>
     </div>
