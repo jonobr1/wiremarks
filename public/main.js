@@ -38455,11 +38455,12 @@
   // src/editor.js
   function Editor(props) {
     const domElement2 = (0, import_react2.useRef)();
-    const [text, setText] = (0, import_react2.useState)("");
+    const [text, setText] = (0, import_react2.useState)(window.localStorage.getItem("wiremarks-state") || "");
     const [width, setWidth] = (0, import_react2.useState)(window.innerWidth);
     const [height, setHeight] = (0, import_react2.useState)(window.innerHeight);
     const [isOpen, setIsOpen] = (0, import_react2.useState)(false);
     (0, import_react2.useEffect)(setup, []);
+    (0, import_react2.useEffect)(store, [text]);
     function setup() {
       resize();
       window.addEventListener("resize", resize, false);
@@ -38475,6 +38476,9 @@
     function update(e) {
       const value = e.target.value;
       setText(value);
+    }
+    function store() {
+      window.localStorage.setItem("wiremarks-state", text);
     }
     function open() {
       setIsOpen(true);
@@ -38508,7 +38512,8 @@
       className: "close button",
       onClick: close
     }, "\u2715"), /* @__PURE__ */ import_react2.default.createElement("textarea", {
-      onChange: update
+      onChange: update,
+      defaultValue: text
     }))));
   }
 
