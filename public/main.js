@@ -37986,7 +37986,7 @@
       const lines = instructions.split(/\n/i);
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
-        if (line.length <= 0) {
+        if (line.length <= 0 || /^\#/.test(line)) {
           continue;
         }
         const producer = (line.match(/^([^\-]+)[\-$]/) || emptyMatch)[1].trim();
@@ -38234,7 +38234,7 @@
     (0, import_react.useEffect)(resize, [props.width, props.height]);
     function mount() {
       const two = new Two({
-        type: Two.Types.canvas,
+        type: Two.Types.svg,
         autostart: true
       }).appendTo(domElement2.current);
       const wiremark = new Wiremark();
@@ -38453,9 +38453,39 @@
   }
 
   // src/editor.js
+  var defaultPrompt = `
+# Welcome!
+
+# Wiremarks is a simple interface to compose
+# wireframes and organizational structures
+# through text. Connect things with an arrow
+# like so:
+# Grandmother -> Mother
+
+# Each line of text is a connection.
+# Mother -> Daughter
+
+# And you can label connections by using
+# brackets like so:
+# Grid -[Electricity]-> Home
+
+# Lastly, starting a line with a hashtag
+# makes your text a comment and will not
+# be compiled into any connections.
+# Remove a hashtag above to see the
+# Mother / Daughter connection.
+
+# When you close the instructions, you
+# can drag each entity and move around
+# to fine tune your composition. You
+# can even save it out as an SVG and
+# import into Figma or other design tools.
+
+# Happy wire marking!
+`;
   function Editor(props) {
     const domElement2 = (0, import_react2.useRef)();
-    const [text, setText] = (0, import_react2.useState)(window.localStorage.getItem("wiremarks-state") || "");
+    const [text, setText] = (0, import_react2.useState)(window.localStorage.getItem("wiremarks-state") || defaultPrompt);
     const [width, setWidth] = (0, import_react2.useState)(window.innerWidth);
     const [height, setHeight] = (0, import_react2.useState)(window.innerHeight);
     const [isOpen, setIsOpen] = (0, import_react2.useState)(false);
@@ -38492,6 +38522,18 @@
       const textarea = domElement2.current.querySelector(selector);
       textarea.focus();
     }
+    function download() {
+      var canvas3 = document.querySelector("svg");
+      var serializer = new XMLSerializer();
+      var source = serializer.serializeToString(canvas3);
+      var a = document.createElement("a");
+      a.href = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(source)}`;
+      a.download = "wiremarks.svg";
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
     return /* @__PURE__ */ import_react2.default.createElement("div", {
       ref: domElement2,
       className: ["editor", isOpen ? "writing" : ""].join(" ")
@@ -38507,12 +38549,16 @@
       className: "open button",
       onClick: open
     }, "Open Instructions"), /* @__PURE__ */ import_react2.default.createElement("div", {
+      className: "download button",
+      onClick: download
+    }, "Download"), /* @__PURE__ */ import_react2.default.createElement("div", {
       className: "panel"
     }, /* @__PURE__ */ import_react2.default.createElement("div", {
       className: "close button",
       onClick: close
     }, "\u2715"), /* @__PURE__ */ import_react2.default.createElement("textarea", {
       onChange: update,
+      spellcheck: "false",
       defaultValue: text
     }))));
   }
