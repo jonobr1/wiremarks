@@ -16904,7 +16904,7 @@
       const lines = instructions.split(/\n/i);
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
-        if (line.length <= 0) {
+        if (line.length <= 0 || /^\#/.test(line)) {
           continue;
         }
         const producer = (line.match(/^([^\-]+)[\-$]/) || emptyMatch)[1].trim();
@@ -17155,7 +17155,7 @@
     (0, import_react.useEffect)(resize, [props.width, props.height]);
     function mount() {
       const two = new Two({
-        type: Two.Types.canvas,
+        type: Two.Types.svg,
         autostart: true
       }).appendTo(domElement.current);
       const wiremark = new Wiremark();

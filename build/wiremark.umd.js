@@ -17257,7 +17257,7 @@ var Wiremark = class extends import_two3.default.Group {
     const lines = instructions.split(/\n/i);
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
-      if (line.length <= 0) {
+      if (line.length <= 0 || /^\#/.test(line)) {
         continue;
       }
       const producer = (line.match(/^([^\-]+)[\-$]/) || emptyMatch)[1].trim();
@@ -17509,7 +17509,7 @@ function Component(props) {
   (0, import_react.useEffect)(resize, [props.width, props.height]);
   function mount() {
     const two = new import_two4.default({
-      type: import_two4.default.Types.canvas,
+      type: import_two4.default.Types.svg,
       autostart: true
     }).appendTo(domElement.current);
     const wiremark = new Wiremark();
