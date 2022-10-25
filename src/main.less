@@ -52,13 +52,22 @@ div#react {
       box-sizing: border-box;
       padding: @line-height;
 
-      .open.button,
+      .button,
       .panel {
         pointer-events: all;
       }
 
-      .open.button {
-        margin: @line-height;
+      .button {
+        margin: 0;
+        padding: @line-height;
+        border: 1px solid #ccc;
+        border-radius: @font-size * 0.25;
+        + .button {
+          margin-left: @line-height;
+        }
+      }
+      .download {
+        background: #eee;
       }
       .panel {
 
@@ -93,6 +102,7 @@ div#react {
           right: @line-height;
           font-size: 200%;
           line-height: 100%;
+          border: 0;
         }
       }
     }
@@ -103,7 +113,8 @@ div#react {
 
     &.writing {
       div.ui {
-        .open.button {
+        .open.button,
+        .download.button {
           display: none;
         }
         .panel {

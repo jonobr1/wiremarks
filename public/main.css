@@ -43,12 +43,21 @@ div#react div.editor div.ui {
   box-sizing: border-box;
   padding: 20px;
 }
-div#react div.editor div.ui .open.button,
+div#react div.editor div.ui .button,
 div#react div.editor div.ui .panel {
   pointer-events: all;
 }
-div#react div.editor div.ui .open.button {
-  margin: 20px;
+div#react div.editor div.ui .button {
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4.25px;
+}
+div#react div.editor div.ui .button + .button {
+  margin-left: 20px;
+}
+div#react div.editor div.ui .download {
+  background: #eee;
 }
 div#react div.editor div.ui .panel {
   position: absolute;
@@ -81,12 +90,14 @@ div#react div.editor div.ui .panel .close {
   right: 20px;
   font-size: 200%;
   line-height: 100%;
+  border: 0;
 }
 div#react div.editor .button {
   display: inline-block;
   cursor: pointer;
 }
-div#react div.editor.writing div.ui .open.button {
+div#react div.editor.writing div.ui .open.button,
+div#react div.editor.writing div.ui .download.button {
   display: none;
 }
 div#react div.editor.writing div.ui .panel {

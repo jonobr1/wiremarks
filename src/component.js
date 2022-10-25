@@ -18,7 +18,7 @@ export function Component(props) {
   function mount() {
 
     const two = new Two({
-      type: Two.Types.canvas,
+      type: Two.Types.svg,
       autostart: true
     }).appendTo(domElement.current);
 
