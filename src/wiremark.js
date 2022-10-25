@@ -45,7 +45,7 @@ export class Wiremark extends Two.Group {
     for (let i = 0; i < lines.length; i++) {
 
       const line = lines[i];
-      if (line.length <= 0) { continue }
+      if (line.length <= 0 || /^\#/.test(line)) { continue }
 
       const producer = (line.match(/^([^\-]+)[\-$]/) || emptyMatch)[1].trim();
       const currency = (line.match(/\[([^\]]+)\]/) || emptyMatch)[1].trim();
