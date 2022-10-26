@@ -38488,7 +38488,7 @@
     const [text, setText] = (0, import_react2.useState)(window.localStorage.getItem("wiremarks-state") || defaultPrompt);
     const [width, setWidth] = (0, import_react2.useState)(window.innerWidth);
     const [height, setHeight] = (0, import_react2.useState)(window.innerHeight);
-    const [isOpen, setIsOpen] = (0, import_react2.useState)(false);
+    const [isOpen, setIsOpen] = (0, import_react2.useState)(true);
     (0, import_react2.useEffect)(setup, []);
     (0, import_react2.useEffect)(store, [text]);
     function setup() {
@@ -38558,7 +38558,7 @@
       onClick: close
     }, "\u2715"), /* @__PURE__ */ import_react2.default.createElement("textarea", {
       onChange: update,
-      spellcheck: "false",
+      spellCheck: "false",
       defaultValue: text
     }))));
   }

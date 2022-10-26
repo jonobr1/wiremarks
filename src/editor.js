@@ -39,7 +39,7 @@ export default function Editor(props) {
   const [text, setText] =  useState(window.localStorage.getItem('wiremarks-state') || defaultPrompt);
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(setup, []);
   useEffect(store, [text]);
@@ -110,7 +110,7 @@ export default function Editor(props) {
         </div>
         <div className="panel">
           <div className="close button" onClick={ close }>✕</div>
-          <textarea onChange={ update } spellcheck="false" defaultValue={ text } />
+          <textarea onChange={ update } spellCheck="false" defaultValue={ text } />
         </div>
       </div>
     </div>
