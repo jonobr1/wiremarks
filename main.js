@@ -38558,7 +38558,7 @@
       onClick: close
     }, "\u2715"), /* @__PURE__ */ import_react2.default.createElement("textarea", {
       onChange: update,
-      spellcheck: "false",
+      spellCheck: "false",
       defaultValue: text
     }))));
   }
